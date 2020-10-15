@@ -1,0 +1,226 @@
+@charset utf-8;
+
+/*-------------------------------------------------------------
+        Icon - Profile Groups
+----------------------------------------------------------------*/
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('/resources/_fonts/icomoon_arrows/icomoon.eot');
+	src:url('/resources/_fonts/icomoon_arrows/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('/resources/_fonts/icomoon_arrows/icomoon.woff') format('woff'),
+		url('/resources/_fonts/icomoon_arrows/icomoon.ttf') format('truetype'),
+		url('/resources/_fonts/icomoon_arrows/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* http://icomoon.io/ */
+
+
+/*-------------------------------------------------------------
+        Profile
+----------------------------------------------------------------*/
+
+.profile,
+.profile-assets{
+    margin: 10.0em 0;
+    display: block;
+}
+.profile img{
+    border-radius: 100%;
+    margin: 0 auto;
+    position: relative;
+    width: 30%;
+    height: auto;
+    min-width: 200px;
+    margin: 0 0 0 15%;
+}
+.profile-assets h3{
+    color: #393939;
+    font-family: 'Roboto', sans-serif;
+    font-size: 4.5em;
+    line-height: 1.5em;
+}
+.profile-assets h2{
+    color: #2754eb;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7em;
+    line-height: 1.5em;
+}
+.profile-assets p {
+    color: #393939;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.9em;
+    line-height: 1.4em;
+    margin: 1em 0 0 0;
+}
+
+.btn-follow {
+  width: 6em;
+  margin-left:1em;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  position: relative;
+  float: right;
+}
+.btn-msg {
+  width: 6em;
+  margin-left:1em;
+  background-color: #393939;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  position: relative;
+  float: right;
+}
+..btn-follow,.btn-msg  {border-radius: 4px;}
+
+
+/*-------------------------------------------------------------
+        Profile Groups
+----------------------------------------------------------------*/
+
+
+.profile-group {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.profile-group .select {
+	cursor: pointer;
+}
+
+.profile-group h3 {
+    font-family: 'Roboto',sans-serif;
+    color: #393939;
+    line-height: 1.9em;
+	margin: 0 0 0.3em;
+	padding: 1em 0 0.5em;
+	border-bottom: 1px solid #ddd;
+	font-size: 2.75em;
+	font-weight: 300;
+}
+
+.profile-group .content p {
+	font-family: 'Roboto',sans-serif;
+    font-size: 1.5em;
+}
+
+/* Arrow icons */
+.profile-group > li > .select:before{
+	font-family: 'icomoon';
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	color: #ddd;
+	margin-right: 0.5em;
+	-webkit-font-smoothing: antialiased;
+}
+
+.profile-group > li > .select:before {
+	font-size: 75%;
+}
+
+.profile-group > li > .select:before {
+	content: "\36";
+}
+.profile-group > li > .select:hover:before {
+	content: "\35";
+	color: inherit;
+}
+.profile-group > li.ntopen > .select:before,
+.no-js .profile-group > li > .select:before {
+	content: "\34";
+	color: inherit;
+}
+/* Fechado */
+.profile-group .content {
+	height: 0;
+	overflow: hidden;
+}
+/* Aberto */
+.profile-group .open > .content,
+.no-js .profile-group .content {
+	height: auto;
+}
+
+@media screen and (max-width: 32em) {
+
+	.profile-group {
+		font-size: 70%;
+	}
+
+}
+
+
+
+.content img {
+    margin: 0 auto;
+    min-width: 100px;
+    width:180px;
+    position:relative;
+    top:50%;
+    left:25%;
+    padding: 20% 0 0 0;
+}
+.col-3:nth-child(2),
+.col-3:nth-child(3){
+    background: #F3F3F3;
+    -webkit-box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+}
+
+
+
+/*
+.profile-counter {
+    display: table-cell;
+    text-align: center;
+    padding: 0 3em 0 0;
+    background: #F3F3F3;
+    -webkit-box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.75);
+}
+*/
+.profile-counter p,
+.profile-ranking p{
+     color: #393939;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    line-height: 2.9em;
+    text-transform: uppercase;
+    padding-left: 0.7em;
+    margin-bottom: 1.0em;
+    text-align: center;
+}
+
+.profile-counter span,
+.profile-ranking span{
+   font-family: 'Roboto', sans-serif;
+    font-size: 3.3em;
+    line-height: 0.9em;
+    color: #2754eb;
+    position: relative;
+    display: block;
+}
+
+
+
+
+
+
+.c-input-terms{
+    font-family: 'Roboto', sans-serif;
+    color: #2754eb;
+}
