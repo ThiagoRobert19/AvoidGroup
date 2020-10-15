@@ -164,7 +164,7 @@
 					</div><!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="<c:url value='/resources/images/resources/user.png'/>" alt="">
+							<img src="<c:url value='/resources/images/resources/user3.png'/>" alt="" width="40" height="40">
 							<a href="#" title="">John</a>
 							<i class="la la-sort-down"></i>
 						</div>
