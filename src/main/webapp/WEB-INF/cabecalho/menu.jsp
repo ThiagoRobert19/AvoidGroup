@@ -1,150 +1,212 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark nav-fix">
-		<div class="container">
 
-			<a class="navbar-brand mr-auto" href="<c:url value='/'/>"> <span
-				class="icon-avoid"><img
-					src="<c:url value='/resources/_css/iconfonts/logo.svg'/>" alt=""></span>
-				<span class="sr-only"><fmt:message key="menu.logo" /></span>
-			</a>
-			<a class="navbar-brand mr-auto" href="<c:url value='/esport/pegapartida'/>"> <span
-				class="icon-avoid"></span>
-				Partida</span>
-			</a>
-
-			<div class="hidden-md-up">
-				<a class="navbar-toggler collapsed" data-toggle="collapse"
-					href="#collapsingNavbarInverse" aria-expanded="false"
-					aria-controls="collapsingNavbarInverse">
-					<div class="sr-only">Mobile Nav</div>
-				</a>
-			</div>
-
-			<div id="collapsingNavbarInverse"
-				class="collapse navbar-toggleable-custom" role="tabpanel"
-				aria-labelledby="collapsingNavbarInverse">
-				<ul class="nav navbar-nav float-right">
-
-					<!--li class="nav-item dropdown hidden-md-down textselect-off"><a
-						class="nav-link dropdown-toggle nav-dropdown-user"
-						id="dropdownMenuInverse2" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <img class="bnd"
-							width="32px" alt=""
-							src="<c:url value='/resources/bandeiras/${cultura.locale}.png'/>">
-							<span class="icon-caret-down"></span>
-					</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-user dropdown-menu-animated"
-							aria-labelledby="dropdownMenuInverse2">
-
-
-							<c:if test="${cultura.locale.country!='BR' }">
-								<a href="<c:url value='/language/change/pt/BR'/>"
-									class="dropdown-item text-uppercase"> <img class="bnd"
-									width="32px" alt=""
-									src="<c:url value='/resources/bandeiras/pt_BR.png'/>">
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+					
+						<a href="index.html" title=""><img src="<c:url value='/resources/images/logo.png'/>" alt=""></a>
+					</div><!--logo end-->
+					<div class="search-bar">
+						<form>
+							<input type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="la la-search"></i></button>
+						</form>
+					</div><!--search-bar end-->
+					<nav>
+						<ul>
+							<li>
+							
+								<a href="index.html" title="">
+									<span><img src="<c:url value='/resources/images/icon1.png'/>" alt=""></span>
+									Home
 								</a>
-							</c:if>
-							<c:if test="${cultura.locale.country!='ES' }">
-								<a href="<c:url value='/language/change/es/ES'/>"
-									class="dropdown-item text-uppercase"> <img class="bnd"
-									width="32px" alt=""
-									src="<c:url value='/resources/bandeiras/es_ES.png'/>">
+							</li>
+							<li>
+								<a href="companies.html" title="">
+									<span><img src="<c:url value='/resources/images/icon2.png'/>" alt=""></span>
+									Companies
 								</a>
-							</c:if>
-							<c:if test="${cultura.locale.country!='US' }">
-								<a href="<c:url value='/language/change/en/US'/>"
-									class="dropdown-item text-uppercase"> <img class="bnd"
-									width="32px" alt=""
-									src="<c:url value='/resources/bandeiras/en_US.png'/>">
+								<ul>
+									<li><a href="companies.html" title="">Companies</a></li>
+									<li><a href="company-profile.html" title="">Company Profile</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="projects.html" title="">
+									<span><img src="<c:url value='/resources/images/icon3.png'/>" alt=""></span>
+									Projects
 								</a>
-							</c:if>
-
-						</div></li-->
-
-					<li class="nav-item nav-item-toggable active"><a
-						class="nav-link" href="<c:url value='/'/>" rel="nofollow"><fmt:message
-								key="menu.home" /> <span class="sr-only">(current)</span> </a></li>
-					<li class="nav-item nav-item-toggable active"><a
-						class="nav-link" href="<c:url value='/chat'/>" rel="nofollow">CHAT
-
-
-					</a></li>
-					<li class="nav-item nav-item-toggable"><a class="nav-link"
-						href="<c:url value='/profile/view'/>" rel="nofollow"><fmt:message
-								key="menu.profile" /></a></li>
-					<li class="nav-item nav-item-toggable"><a class="nav-link"
-						href="<c:url value='/esport/matches/today'/>"><fmt:message
-								key="menu.esports" /></a></li>
-
-					<li class="nav-item nav-item-toggable"><a class="nav-link"
-						href="<c:url value='/amateurtournament/viewbyuser'/>"
-						rel="nofollow"><fmt:message key="menu.tournament" /></a></li>
-					<!--li class="nav-item nav-item-toggable"><a class="nav-link"
-						href="<c:url value='/portal/general'/>" rel="nofollow"><fmt:message
-								key="menu.forum" /></a></li-->
-					<li class="nav-item nav-item-toggable"><a class="nav-link"
-						href="<c:url value='/user/logout'/>"><fmt:message
-								key="menu.logout" /></a></li>
-
-					<!-- #################### -->
-					<li class="nav-item dropdown nav-dropdown-search hidden-md-down">
-						<a class="nav-link dropdown-toggle" id="dropdownMenuInverse1"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span class="icon-search"></span>
-					</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-search"
-							aria-labelledby="dropdownMenuInverse1">
-							<form class="navbar-form"
-								action="<c:url value='/search/general'/>" method="post">
-								<input class="form-control navbar-search-input" type="text"
-									name="name"
-									placeholder="Type your search &amp; hit Enter&hellip;">
-
-							</form>
+							</li>
+							<li>
+								<a href="profiles.html" title="">
+									<span><img src="<c:url value='/resources/images/icon4.png'/>" alt=""></span>
+									Profiles
+								</a>
+								<ul>
+									<li><a href="user-profile.html" title="">User Profile</a></li>
+									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="jobs.html" title="">
+									<span><img src="<c:url value='/resources/images/icon5.png'/>" alt=""></span>
+									Jobs
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="not-box-openm">
+									<span><img src="<c:url value='/resources/images/icon6.png'/>" alt=""></span>
+									Messages
+								</a>
+								<div class="notification-box msg" id="message">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a href="#" title="">Clear all</a>
+									</div>
+									<div class="nott-list">
+									<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img1.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a> </h3>
+							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img2.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
+							  					<p>Lorem ipsum dolor sit amet.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img3.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
+							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="view-all-nots">
+						  					<a href="messages.html" title="">View All Messsages</a>
+						  				</div>
+									</div><!--nott-list end-->
+								</div><!--notification-box end-->
+							</li>
+							<li>
+							
+								<a href="#" title="" class="not-box-open">
+									<span><img src="<c:url value='/resources/images/icon7.png'/>" alt=""></span>
+									Notification
+								</a>
+								<div class="notification-box noti" id="notification">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a href="#" title="">Clear all</a>
+									</div>
+									<div class="nott-list">
+										<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img1.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img2.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img3.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="<c:url value='/resources/images/resources/ny-img2.png'/>" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+							  					<span>2 min ago</span>
+							  				</div><!--notification-info -->
+						  				</div>
+						  				<div class="view-all-nots">
+						  					<a href="#" title="">View All Notification</a>
+						  				</div>
+									</div><!--nott-list end-->
+								</div><!--notification-box end-->
+							</li>
+						</ul>
+						
+					</nav><!--nav end-->
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div><!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+							<img src="<c:url value='/resources/images/resources/user.png'/>" alt="">
+							<a href="#" title="">John</a>
+							<i class="la la-sort-down"></i>
 						</div>
-					</li>
-
-
-					<li class="nav-item dropdown hidden-md-down textselect-off"><a
-						class="nav-link dropdown-toggle nav-dropdown-user"
-						id="dropdownMenuInverse2" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <img
-							src="${profileLogado.photo}" height="40" width="40" alt="Avatar"
-							class="rounded-circle"> <span class="icon-caret-down"></span>
-					</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-user dropdown-menu-animated"
-							aria-labelledby="dropdownMenuInverse2">
-							<div class="media">
-								<div class="media-left">
-
-									<!-- img src="${profileLogado.photo}" height="60" width="60"
-										alt="Avatar" class="rounded-circle d-flex mr-2"-->
-								</div>
-								<div class="media-body align-self-center">
-									<h5 class="mt-0 mb-1">${profileLogado.nickName}</h5>
-									<h6 class="mb-0">${clienteLogado.email}</h6>
-								</div>
-							</div>
-
-
-							<a href="#" class="dropdown-item text-uppercase"><fmt:message
-									key="menu.post" /></a> <a href="<c:url value='/team/findAll'/>"
-								class="dropdown-item text-uppercase"><fmt:message
-									key="menu.team" /></a> <a
-								href="<c:url value='/subscription/view'/>"
-								class="dropdown-item text-uppercase"><fmt:message
-									key="menu.subscription" /></a>
-						</div></li>
-
-				</ul>
+						<div class="user-account-settingss" id="users">
+							<h3>Online Status</h3>
+							<ul class="on-off-status">
+								<li>
+									<div class="fgt-sec">
+										<input type="radio" name="cc" id="c5">
+										<label for="c5">
+											<span></span>
+										</label>
+										<small>Online</small>
+									</div>
+								</li>
+								<li>
+									<div class="fgt-sec">
+										<input type="radio" name="cc" id="c6">
+										<label for="c6">
+											<span></span>
+										</label>
+										<small>Offline</small>
+									</div>
+								</li>
+							</ul>
+							<h3>Custom Status</h3>
+							<div class="search_form">
+								<form>
+									<input type="text" name="search">
+									<button type="submit">Ok</button>
+								</form>
+							</div><!--search_form end-->
+							<h3>Setting</h3>
+							<ul class="us-links">
+								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="#" title="">Privacy</a></li>
+								<li><a href="#" title="">Faqs</a></li>
+								<li><a href="#" title="">Terms & Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+						</div><!--user-account-settingss end-->
+					</div>
+				</div><!--header-data end-->
 			</div>
-		</div>
-	</nav>
-	<hr class="invisible">
-
-</header>
+		</header><!--header end-->	

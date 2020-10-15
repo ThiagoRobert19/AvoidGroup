@@ -31,8 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 import com.avoidgroup.dao.GenericDao;
-import com.avoidgroup.model.ProfileEntity;
-import com.avoidgroup.model.UserEntity;
+
 
 @Component("Common")
 public class Common {
@@ -140,7 +139,7 @@ public class Common {
 		Transport.send(msg);
 
 	}
-
+/*
 	public boolean checkProfile(UserEntity user) {
 		GenericDao<ProfileEntity> pdao = new GenericDao<ProfileEntity>();
 
@@ -168,7 +167,7 @@ public class Common {
 		}
 
 	}
-
+*/
 	public Date RandomDateRound(Date min) throws ParseException {
 
 		Calendar calMin = Calendar.getInstance();

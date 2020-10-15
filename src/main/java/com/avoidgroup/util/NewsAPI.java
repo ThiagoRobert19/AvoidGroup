@@ -26,11 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import com.avoidgroup.model.NewsEntity;
-
 
 public class NewsAPI {
-
+/*
 	static final String API_KEY = "KTXRMvC8XKGpgY2tIYJySOpLGdFoYNUl";
 
 	public String getNews() throws JSONException {
@@ -114,5 +112,5 @@ public class NewsAPI {
 		} finally {
 			is.close();
 		}
-	}
+	}*/
 }

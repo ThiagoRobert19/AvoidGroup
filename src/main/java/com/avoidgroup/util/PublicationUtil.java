@@ -11,14 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.avoidgroup.dao.GenericDao;
-import com.avoidgroup.model.GeneralCommentEntity;
-import com.avoidgroup.model.GeneralLikeEntity;
-import com.avoidgroup.model.GeneralPublicationEntity;
-import com.avoidgroup.model.ProfileEntity;
+
 
 public class PublicationUtil {
 
-	public List<GeneralPublicationEntity> getPublicationNoFriend(Integer id) throws ParseException {
+/*	public List<GeneralPublicationEntity> getPublicationNoFriend(Integer id) throws ParseException {
 		GenericDao<GeneralPublicationEntity> daoPublication = new GenericDao<GeneralPublicationEntity>();
 		GenericDao<GeneralLikeEntity> daoLike = new GenericDao<GeneralLikeEntity>();
 		GenericDao<GeneralCommentEntity> daoComment = new GenericDao<GeneralCommentEntity>();
@@ -185,5 +182,5 @@ public class PublicationUtil {
 		}
 		return listPubFinalEND;
 	}
-
+*/
 }

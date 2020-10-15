@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 import com.avoidgroup.dao.GenericDao;
 
-import com.avoidgroup.model.ProfileEntity;
+
 
 @Component
 @EnableScheduling

@@ -12,10 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.avoidgroup.model.AboutFeaturedEntity;
 
 public class InfoSteam {
-
+/*
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -172,5 +171,5 @@ public class InfoSteam {
 			return null;
 		}
 	}
-
+*/
 }

@@ -12,9 +12,6 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import com.avoidgroup.dao.GenericDao;
-import com.avoidgroup.model.GeneralPublicationEntity;
-import com.avoidgroup.model.NewsEntity;
-import com.avoidgroup.model.UserEntity;
 
 public class mainTeste {
 
