@@ -6,7 +6,7 @@
 
 
 
-			<img src="<c:url value='/resources/images/wd-logo.png'/>" alt="">
+			<img src="<c:url value='/resources/images/logo1.png'/>" alt="">
 			<h3>InAvonts</h3>
 			<span>Pay only for the Hours worked</span>
 			<div class="sign_link">

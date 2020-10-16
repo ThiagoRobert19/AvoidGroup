@@ -6,7 +6,7 @@
 				<div class="header-data">
 					<div class="logo">
 					
-						<a href="index.html" title=""><img src="<c:url value='/resources/images/logo.png'/>" alt=""></a>
+						<a href="index.html" title=""><img src="<c:url value='/resources/images/logo1.png'/>" alt=""></a>
 					</div><!--logo end-->
 					<div class="search-bar">
 						<form>
@@ -20,7 +20,7 @@
 							
 								<a href="index.html" title="">
 									<span><img src="<c:url value='/resources/images/icon1.png'/>" alt=""></span>
-									Home
+									Homesdfd
 								</a>
 							</li>
 							<li>
