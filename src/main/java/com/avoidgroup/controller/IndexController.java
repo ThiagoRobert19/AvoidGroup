@@ -9,6 +9,10 @@ public class IndexController {
 	public String index() {
 		return "index/index";
 	}
+	@RequestMapping(value = { "/user/login"}, method = RequestMethod.GET)
+	public String login() {
+		return "index/login";
+	}
 	
 	/*
 	@RequestMapping(value = "/security", method = RequestMethod.GET)
