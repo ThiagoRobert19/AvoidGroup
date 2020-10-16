@@ -29,39 +29,6 @@ import com.avoidgroup.dao.GenericDao;
 @Component
 @EnableScheduling
 public class ScheduledTasks {
-	
-
-	/*@Scheduled(fixedRate = 1800000)
-	public void scheduledESports() {
-
-		Thread one = new Thread() {
-			public void run() {
-				try {
-					TimeZone zone = TimeZone.getTimeZone("America/New_York");
-
-					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
-					sd.setTimeZone(zone);
-					Date d = Calendar.getInstance().getTime();
-					String today = sd.format(d);
-
-					Map<String, Object> map = new HashMap<String, Object>();
-					daoMatchOfTheDay.delete(MatchOfTheDayEntity.class, map, "");
-					listSport.clear();
-					listSport = createMatches(zone, today);
-					System.out.println("Criando partidas");
-					saveMatches(listSport);
-
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
-
-		one.start();
-	}
-
 	@Scheduled(fixedRate = 900000)
 	public void scheduledNews() {
 		System.out.println("Criando news");
@@ -107,6 +74,39 @@ public class ScheduledTasks {
 
 		one.start();
 	}
+
+	/*@Scheduled(fixedRate = 1800000)
+	public void scheduledESports() {
+
+		Thread one = new Thread() {
+			public void run() {
+				try {
+					TimeZone zone = TimeZone.getTimeZone("America/New_York");
+
+					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+					sd.setTimeZone(zone);
+					Date d = Calendar.getInstance().getTime();
+					String today = sd.format(d);
+
+					Map<String, Object> map = new HashMap<String, Object>();
+					daoMatchOfTheDay.delete(MatchOfTheDayEntity.class, map, "");
+					listSport.clear();
+					listSport = createMatches(zone, today);
+					System.out.println("Criando partidas");
+					saveMatches(listSport);
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		};
+
+		one.start();
+	}
+
+	
 
 	@Scheduled(fixedRate = 86400000)
 	public void scheduledTournamentsPlayersTeamsLeaguesSeries() {

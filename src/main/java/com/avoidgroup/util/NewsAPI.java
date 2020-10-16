@@ -28,7 +28,7 @@ import org.json.XML;
 
 
 public class NewsAPI {
-/*
+
 	static final String API_KEY = "KTXRMvC8XKGpgY2tIYJySOpLGdFoYNUl";
 
 	public String getNews() throws JSONException {
@@ -52,7 +52,7 @@ public class NewsAPI {
 		}
 		return json;
 	}
-
+/*
 	public List<NewsEntity> getGeneral(String topic) {
 		List<NewsEntity> list = new ArrayList<NewsEntity>();
 		String xmlText = "";
@@ -91,7 +91,7 @@ public class NewsAPI {
 
 	}
 	
-
+*/
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
@@ -112,5 +112,5 @@ public class NewsAPI {
 		} finally {
 			is.close();
 		}
-	}*/
+	}
 }
