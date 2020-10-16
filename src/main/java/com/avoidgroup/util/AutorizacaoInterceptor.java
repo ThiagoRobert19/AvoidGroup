@@ -13,17 +13,14 @@ import com.avoidgroup.dao.GenericDao;
 
 @Component
 public class AutorizacaoInterceptor extends HandlerInterceptorAdapter {
-
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller)
 			throws Exception {
 
 		String uri = request.getRequestURI();
-		if ((uri.endsWith("/user/login/simple") || uri.endsWith("/user/logout") || uri.endsWith("/user/verification")
-				|| uri.endsWith("/user/verify") || uri.endsWith("/user/login") || uri.endsWith("/user/add")
-				|| uri.contains("resources") || uri.contains("/doVerification") || uri.endsWith("/")
-				|| uri.endsWith("/user/save") || uri.endsWith("/avoidgroup/terms")
-				|| uri.endsWith("/avoidgroup/privacy") || uri.endsWith("/avoidgroup/about"))
+		if ((uri.endsWith("/user/logout")|| uri.endsWith("/user/login") || uri.contains("resources") || uri.endsWith("/user/register")
+				|| uri.endsWith("/user/doLogin"))
 				|| (request.getSession().getAttribute("clienteLogado") != null)) {
 
 	

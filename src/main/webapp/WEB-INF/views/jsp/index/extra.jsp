@@ -7,7 +7,7 @@
 
 
 			<img src="<c:url value='/resources/images/logo192.png'/>" alt="">
-			<h3>InAvonts</h3>
+			<h3>InAvonts - Seja bem vindo(a)  ${clienteLogado.name}</h3>
 			<span>Pay only for the Hours worked</span>
 			<div class="sign_link">
 				<h3>
