@@ -1,96 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>InAvonts</title>
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="InAvonts - Social Games Networking" />
-<meta name="keywords"
-	content="games game-online inavonts most-popular-games profile online-social-games-networking" />
-<meta name="author" content="InAvonts Group" />
-
-
-<!-- FAVICON -->
-<link rel="apple-touch-icon" sizes="57x57"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-57x57.png'/>">
-<link rel="apple-touch-icon" sizes="60x60"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-60x60.png'/>">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-76x76.png'/>">
-<link rel="apple-touch-icon" sizes="114x114"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-114x114.png'/>">
-<link rel="apple-touch-icon" sizes="120x120"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-120x120.png'/>">
-<link rel="apple-touch-icon" sizes="144x144"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-144x144.png'/>">
-<link rel="apple-touch-icon" sizes="152x152"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-152x152.png'/>">
-<link rel="apple-touch-icon" sizes="180x180"
-	href="<c:url value='/resources/_img/_favicon/apple-touch-icon-180x180.png'/>">
-
-<link rel="icon" type="image/png"
-	href="<c:url value='/resources/_img/_favicon/android-chrome-192x192.png'/>"
-	sizes="192x192">
-
-<link rel="icon" type="image/png"
-	href="<c:url value='/resources/_img/_favicon/favicon-16x16.png'/>"
-	sizes="16x16">
-<link rel="icon" type="image/png"
-	href="<c:url value='/resources/_img/_favicon/favicon-32x32.png'/>"
-	sizes="32x32">
-<link rel="icon" type="image/png"
-	href="<c:url value='/resources/_img/_favicon/favicon-96x96.png'/>"
-	sizes="96x96">
-
-<link rel="manifest"
-	href="<c:url value='/resources/_img/_favicon/manifest.json'/>">
-<link rel="shortcut icon" type='image/x-icon'
-	href="<c:url value='/resources/_img/_favicon/favicon.ico'/>">
-
-
-
-<meta name="msapplication-TileColor" content="#2754eb">
-<meta name="msapplication-TileImage"
-	content="<c:url value='/resources/_img/_favicon/mstile-144x144.png'/>">
-<meta name="msapplication-config"
-	content="<c:url value='/resources/_img/_favicon/browserconfig.xml'/>">
-
-
-<!-- END FAVICON -->
-
-
-
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/animate.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/bootstrap.min.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/line-awesome.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/line-awesome-font-awesome.min.css'/>">
-<link
-	href="<c:url value='/resources/vendor/fontawesome-free/css/all.min.css'/>"
-	rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/font-awesome.min.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/jquery.mCustomScrollbar.min.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/lib/slick/slick.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/lib/slick/slick-theme.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/style.css'/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/resources/css/responsive.css'/>">
-</head>
-<body>
-
-	<div class="wrapper">
+<c:import url="/WEB-INF/cabecalho/header.jsp" />
 		<div class="sign-in-page sign-in-with-back">
 			<div class="signin-popup">
 				<div class="signin-pop">
@@ -102,9 +12,8 @@
 
 									<img src="<c:url value='/resources/images/logo192.png'/>"
 										alt="">
-									<p>Workwise, is a global freelancing platform and social
-										networking where businesses and independent professionals
-										connect and collaborate remotely</p>
+									<p>InAvonts, is a global Social Network focused in the Gaming world!</p>
+									<p>We focus in bringing the best gaming content related, gaming tournaments, news and more!</p>
 								</div>
 								<!--cm-logo end-->
 								<img src="<c:url value='/resources/images/cm-main-img.png'/>"
@@ -152,8 +61,19 @@
 											<div class="col-lg-12 no-pdd">
 												<button type="submit" value="submit">Sign in</button>
 											</div>
+
+											<c:if test="${not empty erro}">
+												<div class="col-lg-12 no-pdd">
+													<div class="alert alert-danger">
+														<strong>Erro!</strong> ${erro}
+													</div>
+												</div>
+											</c:if>
+
+
 										</div>
 									</form>
+
 									<div class="login-resources">
 										<h4>Login Via Social Account</h4>
 										<ul>
@@ -165,6 +85,7 @@
 									</div>
 									<!--login-resources end-->
 								</div>
+
 								<!--sign_in_sec end-->
 								<div class="sign_in_sec" id="tab-2">
 									<!-- div class="signup-tab">
@@ -180,7 +101,7 @@
 									<div class="dff-tab current" id="tab-3">
 										<form action="<c:url value='/user/register'/>" method="post">
 											<div class="row">
-											<div class="col-lg-12 no-pdd">
+												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="text" name="name" placeholder="Full Name">
 														<i class="la la-user"></i>
@@ -194,14 +115,15 @@
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="tel" name="phone" placeholder="(999)000-0000">
+														<input type="tel" name="phone" placeholder="Phone number">
 														<i class="la la-globe"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="email" name="email" placeholder="something@email.com">
-														<i class="la la-globe"></i>
+														<input type="email" name="email"
+															placeholder="something@email.com"> <i
+															class="la la-globe"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
@@ -223,7 +145,7 @@
 															<input type="checkbox" name="cc" id="c2"> <label
 																for="c2"> <span></span>
 															</label> <small>Yes, I understand and agree to the
-																workwise Terms & Conditions.</small>
+																InAvonts Terms & Conditions.</small>
 														</div>
 														<!--fgt-sec end-->
 													</div>
@@ -231,11 +153,18 @@
 												<div class="col-lg-12 no-pdd">
 													<button type="submit" value="submit">Get Started</button>
 												</div>
+													<c:if test="${not empty erro}">
+												<div class="col-lg-12 no-pdd">
+													<div class="alert alert-danger">
+														<strong>Erro!</strong> ${erro}
+													</div>
+												</div>
+											</c:if>
 											</div>
 										</form>
 									</div>
-									
-								
+
+
 									<!--dff-tab end-->
 								</div>
 							</div>
@@ -245,19 +174,8 @@
 				</div>
 				<!--signin-pop end-->
 			</div>
-	
-<c:if test="${not empty erro}">
 
-	<div class="form-group row">
-		<div class="text-center col-sm-3 mb-3 mb-sm-0"></div>
-		<div class="text-center col-sm-6 mb-3 mb-sm-0">
-			<div class="alert alert-danger">
-				<strong>Erro!</strong> ${erro}
-			</div>
 
-		</div>
-	</div>
-</c:if>
 			<!--signin-popup end-->
 			<div class="footy-sec">
 				<div class="container">
@@ -283,19 +201,5 @@
 			<!--footy-sec end-->
 		</div>
 
-	</div>
-	<!--theme-layout end-->
 
-
-	<script type="text/javascript"
-		src="<c:url value='/resources/js/jquery.min.js'/>"></script>
-	<script type="text/javascript"
-		src="<c:url value='/resources/js/pooper.js'/>"></script>
-	<script type="text/javascript"
-		src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-	<script type="text/javascript"
-		src="<c:url value='/resources/lib/slick/slick.min.js'/>"></script>
-	<script type="text/javascript"
-		src="<c:url value='/resources/js/script.js'/>"></script>
-</body>
-</html>
+<c:import url="/WEB-INF/cabecalho/footer.jsp" />

@@ -29,6 +29,8 @@ import com.avoidgroup.dao.GenericDao;
 @Component
 @EnableScheduling
 public class ScheduledTasks {
+	
+	/*
 	@Scheduled(fixedRate = 900000)
 	public void scheduledNews() {
 		System.out.println("Criando news");
@@ -74,7 +76,7 @@ public class ScheduledTasks {
 
 		one.start();
 	}
-
+*/
 	/*@Scheduled(fixedRate = 1800000)
 	public void scheduledESports() {
 
