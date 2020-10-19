@@ -3,17 +3,41 @@
 <div class="col-lg-6 col-md-8 no-pd">
 	<div class="main-ws-sec">
 		<div class="post-topbar">
-			<div class="user-picy">
+
+			<form action="<c:url value='/publication/add'/>" method="POST"
+				enctype="multipart/form-data">
+				<div class="form-group">
+					<div class="row">
+						<textarea class="form-control" rows="7"
+							placeholder="What are you thinking?" name="content"></textarea>
+					</div>
+					<div class="row">
+						<input class="form-control" type="file" id="customFile"
+							name="file">
+						<div id="filedrag"></div>
+						<img id="image" />
+
+					</div>
+					<div class="row post-st">
+						<ul>
+						
+							<li><button type="submit" class="btn btn-primary">Post</button></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+
+			<!--div class="user-picy">
 				<img src="<c:url value='/resources/images/resources/user3.png'/>"
 					alt="">
 			</div>
+
 			<div class="post-st">
 				<ul>
-					<li><a class="post_project" href="#" title="">Post a
-							Project</a></li>
+					<li><textarea class="form-control" name="description"></textarea></li>
 					<li><a class="post-jb active" href="#" title="">Post a Job</a></li>
 				</ul>
-			</div>
+			</div-->
 			<!--post-st end-->
 		</div>
 		<!--post-topbar end-->

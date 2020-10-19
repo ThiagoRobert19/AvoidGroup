@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.avoidgroup.dao.GenericDao;
+import com.avoidgroup.model.GeneralCommentEntity;
+import com.avoidgroup.model.GeneralLikeEntity;
+import com.avoidgroup.model.GeneralPublicationEntity;
+import com.avoidgroup.model.UserEntity;
 
 
 public class PublicationUtil {
 
-/*	public List<GeneralPublicationEntity> getPublicationNoFriend(Integer id) throws ParseException {
+	public List<GeneralPublicationEntity> getPublicationNoFriend(Integer id) throws ParseException {
 		GenericDao<GeneralPublicationEntity> daoPublication = new GenericDao<GeneralPublicationEntity>();
 		GenericDao<GeneralLikeEntity> daoLike = new GenericDao<GeneralLikeEntity>();
 		GenericDao<GeneralCommentEntity> daoComment = new GenericDao<GeneralCommentEntity>();
@@ -101,13 +105,13 @@ public class PublicationUtil {
 
 	}
 
-	public List<GeneralPublicationEntity> getPublication(ProfileEntity profile) throws ParseException {
+	public List<GeneralPublicationEntity> getPublication(UserEntity userEntity) throws ParseException {
 		GenericDao<GeneralPublicationEntity> daoPublication = new GenericDao<GeneralPublicationEntity>();
 		GenericDao<GeneralLikeEntity> daoLike = new GenericDao<GeneralLikeEntity>();
 		GenericDao<GeneralCommentEntity> daoComment = new GenericDao<GeneralCommentEntity>();
 
 		List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
-		listaPublication = daoPublication.listPublication(profile.getId().toString());
+		listaPublication = daoPublication.listPublication(userEntity.getId().toString());
 
 		Map<String, Object> mapGeral = new HashMap<String, Object>();
 		mapGeral.put("publisher.user.email", "account@avoidgroup.com");
@@ -170,7 +174,7 @@ public class PublicationUtil {
 
 			Map<String, Object> mapLike = new HashMap<String, Object>();
 			mapLike.put("publication.id", listaPAvoid.get(tam).getId());
-			mapLike.put("liker.id", profile.getId());
+			mapLike.put("liker.id", userEntity.getId());
 
 			if (daoLike.exist(GeneralLikeEntity.class, mapLike, "and")) {
 				listaPAvoid.get(tam).setYouLiked("yes");
@@ -182,5 +186,5 @@ public class PublicationUtil {
 		}
 		return listPubFinalEND;
 	}
-*/
+
 }
