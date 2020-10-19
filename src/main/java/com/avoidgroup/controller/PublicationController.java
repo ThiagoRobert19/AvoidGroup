@@ -179,7 +179,7 @@ public class PublicationController {
 			entity.setDateOfPublication(date1.getTime());
 			entity.setTimeOfPublication(date1.getTime());
 			entity.setShared("no");
-			if (file.toString() != null && !file.getOriginalFilename().equals("")) {
+			/*if (file.toString() != null && !file.getOriginalFilename().equals("")) {
 				System.out.println("nao eh null");
 				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
 
@@ -198,7 +198,7 @@ public class PublicationController {
 
 			} else {
 				entity.setImage(null);
-			}
+			}*/
 
 			daoPublication.saveUpdate(entity);
 

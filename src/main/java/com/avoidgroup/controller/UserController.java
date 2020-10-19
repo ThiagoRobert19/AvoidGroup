@@ -23,9 +23,6 @@ public class UserController {
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 
-	@Autowired
-	private UserEntity userEntity;
-
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login() {
 
@@ -53,7 +50,7 @@ public class UserController {
 			} else {
 				model.addObject("in", "yes");
 				model.addObject("up", "no");
-				model.addObject("erro", "Senha n√£o confere!");
+				model.addObject("erro", "Senha n„o confere!");
 				model.setViewName("user/login");
 				return model;
 
@@ -62,7 +59,7 @@ public class UserController {
 		} else {
 			model.addObject("in", "yes");
 			model.addObject("up", "no");
-			model.addObject("erro", "N√£o existe Usu√°rio cadastrado com esse email!");
+			model.addObject("erro", "N„o existe Usu·rio cadastrado com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}
@@ -80,7 +77,7 @@ public class UserController {
 			map.put("userName", userEntity.getUserName());
 			if (!daoUser.exist(UserEntity.class, map, "and")) {
 				if (userEntity.getPassword().equals(rePassword)) {
-					
+
 					daoUser.saveUpdate(userEntity);
 					model.setViewName("redirect:/user/login");
 					return model;
@@ -96,7 +93,7 @@ public class UserController {
 			} else {
 				model.addObject("in", "no");
 				model.addObject("up", "yes");
-				model.addObject("erro", "J√° existe cadastro com esse Username!");
+				model.addObject("erro", "J· existe cadastro com esse Username!");
 				model.setViewName("user/login");
 				return model;
 			}
@@ -104,7 +101,7 @@ public class UserController {
 		} else {
 			model.addObject("in", "no");
 			model.addObject("up", "yes");
-			model.addObject("erro", "J√° existe cadastro com esse email!");
+			model.addObject("erro", "J· existe cadastro com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}
