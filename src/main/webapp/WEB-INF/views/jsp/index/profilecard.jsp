@@ -13,8 +13,8 @@
 				</div>
 				<!--username-dt end-->
 				<div class="user-specs">
-					<h3>John Doe</h3>
-					<span>Graphic Designer at Self Employed</span>
+					<h3>${clienteLogado.userName}</h3>
+					<span>${clienteLogado.name}</span>
 				</div>
 			</div>
 			<!--user-profile end-->

@@ -36,11 +36,11 @@ public class UserController {
 	public ModelAndView doLogin(UserEntity userEntity, ModelAndView model, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", userEntity.getEmail());
-
+		System.out.println("Senha digitada: " + userEntity.getPassword());
 		if (daoUser.exist(UserEntity.class, map, "and")) {
 			Map<String, Object> mappassword = new HashMap<String, Object>();
 			mappassword.put("email", userEntity.getEmail());
-			mappassword.put("password", Criptografia.criptografar(userEntity.getPassword()));
+			mappassword.put("password", userEntity.getPassword());
 
 			if (daoUser.exist(UserEntity.class, mappassword, "and")) {
 				userEntity = daoUser.findByProperty(UserEntity.class, mappassword, "and");
@@ -51,16 +51,18 @@ public class UserController {
 				return model;
 
 			} else {
-
-				model.addObject("erro", "Senha n„o confere!");
+				model.addObject("in", "yes");
+				model.addObject("up", "no");
+				model.addObject("erro", "Senha n√£o confere!");
 				model.setViewName("user/login");
 				return model;
 
 			}
 
 		} else {
-
-			model.addObject("erro", "N„o existe Usu·rio cadastrado com esse email!");
+			model.addObject("in", "yes");
+			model.addObject("up", "no");
+			model.addObject("erro", "N√£o existe Usu√°rio cadastrado com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}
@@ -69,26 +71,40 @@ public class UserController {
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
 	public ModelAndView register(UserEntity userEntity, String rePassword, ModelAndView model) {
+		rePassword = Criptografia.criptografar(rePassword);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", userEntity.getEmail());
 
 		if (!daoUser.exist(UserEntity.class, map, "and")) {
+			map.clear();
+			map.put("userName", userEntity.getUserName());
+			if (!daoUser.exist(UserEntity.class, map, "and")) {
+				if (userEntity.getPassword().equals(rePassword)) {
+					
+					daoUser.saveUpdate(userEntity);
+					model.setViewName("redirect:/user/login");
+					return model;
 
-			System.out.println("N„o existe email cadastrado.. vamos cadastrar eeeeee");
-
-			if (userEntity.getPassword().equals(rePassword)) {
-				userEntity.setPassword(Criptografia.criptografar(userEntity.getPassword()));
-				daoUser.saveUpdate(userEntity);
-				model.setViewName("redirect:/user/login");
-				return model;
+				} else {
+					model.addObject("in", "no");
+					model.addObject("up", "yes");
+					model.addObject("erro", "Senha tem que coincidir com o Segunda Senha!");
+					model.setViewName("user/login");
+					return model;
+				}
 
 			} else {
-				model.addObject("erro", "Password tem que coincidir com o Re Password!");
+				model.addObject("in", "no");
+				model.addObject("up", "yes");
+				model.addObject("erro", "J√° existe cadastro com esse Username!");
 				model.setViewName("user/login");
 				return model;
 			}
+
 		} else {
-			model.addObject("erro", "J· existe esse email cadastrado!");
+			model.addObject("in", "no");
+			model.addObject("up", "yes");
+			model.addObject("erro", "J√° existe cadastro com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}

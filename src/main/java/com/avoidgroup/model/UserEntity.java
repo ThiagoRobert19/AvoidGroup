@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.avoidgroup.util.Criptografia;
 import com.avoidgroup.util.EntidadeBase;
 
 @Component("UserEntity")
@@ -58,7 +59,7 @@ public class UserEntity implements Serializable, EntidadeBase {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Criptografia.criptografar(password);
 	}
 
 	public String getUserName() {
