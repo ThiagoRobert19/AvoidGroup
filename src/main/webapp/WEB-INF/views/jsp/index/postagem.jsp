@@ -84,8 +84,8 @@
 					
 					
 						
-						var firstnamePublisher =escapeHTML(jsonObj[i].publisher.firstName) ;
-						var lastnamePublisher = escapeHTML(jsonObj[i].publisher.lastName) ;
+						var publisherName =escapeHTML(jsonObj[i].publisher.name) ;
+						
 						
 						$("#publicaqui").append(
 						'<div class="posts-section">'
@@ -94,8 +94,9 @@
 									+'<div class="usy-dt">'
 										+'	<img src="'+photoPublisher+'"alt="">'
 										+'<div class="usy-name">'
-											+'<h3>John Doe</h3>'
-											+'	<span>3	min ago</span>'
+											+'<h3>'+publisherName+'</h3>'
+											+'	<span>'+jsonObj[i].dateOfPublication+'</span>'
+											+'	<span>'+jsonObj[i].timeOfPublication+'</span>'
 										+'</div>'
 									+'</div>'
 									+'<div class="ed-opts">'
@@ -111,11 +112,11 @@
 							+'</div>'
 							
 							+'<div class="job_descp">'
-								+'<h3>Senior Wordpress Developer</h3>'
+								+'<h3>'+jsonObj[i].publisher.userName+'</h3>'
 							
-								+'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>'
-								+'<ul class="skill-tags">
-								+'<li><a href="#" title="">HTML</a></li>
+								+'<p>'+jsonObj[i].content+'</p>'
+								+'<ul class="skill-tags">'
+								+'<li><a href="#" title="">HTML</a></li>'
 								+'<li><a href="#" title="">PHP</a></li>'
 								+'<li><a href="#" title="">CSS</a></li>
 								+'<li><a href="#" title="">Javascript</a></li>
@@ -130,82 +131,7 @@
 								+'<a href="#"><i class="fas fa-eye"></i>Views 50</a>'
 							+'</div>'
 						+'</div>'
-							//===========================
-							
-								+'<div class="d-flex justify-content-between align-items-center">'
-										+'<div class="d-flex justify-content-between align-items-center">'
-											+'<div class="mr-2">'
-												+'<img class="rounded-circle" width="45"  alt="avatar" src="'+photoPublisher+'">'
-											+'</div>'
-											+'<div class="ml-2">'
-												+'<div class="h5 m-0">'
-													+'<a href="<c:url value="/friend/viewFriend/'+jsonObj[i].publisher.id+'"/>"> '+firstnamePublisher+'</a>'
-												+'</div>'
-												+'<div class="h7 text-muted">'+jsonObj[i].publisher.about+'</div>'
-											+'</div>'
-										+'</div>'
-								+'</div>'
-							+'</div>'
-							
-							
-							+'<div class="card-body">'
-							+'<div class="text-muted h7 mb-2">'
-								+jsonObj[i].dateOfPublication+' | '
-								+jsonObj[i].timeOfPublication
-								
-								
-							+'</div>'
 
-							+'<p class="card-text">'
-								+'<h5>'
-								+jsonObj[i].content
-								+'</h5>'
-								
-							+'</p>'
-							+'<p class="card-text">'
-								+'<img height="150"  alt="avatar" src="'+jsonObj[i].image+'">'
-							+'</p>'
-							
-								+'<div class="card-header">'
-
-									+'<div class="d-flex justify-content-between align-items-center">'
-										+'<div class="d-flex justify-content-between align-items-center">'
-											+'<div class="mr-2">'
-											+'<img class="rounded-circle" width="45"  alt="avatar" src="'+photoPublisher+'">'
-											+'</div>'
-											+'<div class="ml-2">'
-												+'<div class="h5 m-0">'
-													+'<a href="<c:url value="/friend/viewFriend/'+jsonObj[i].publisher.id+'"/>"> '+firstnamePublisher+'</a>'
-												+'</div>'
-												+'<div class="h7 text-muted">'
-												+jsonObj[i].publisher.about
-												+'</div>'
-											+'</div>'
-										+'</div>'
-
-									+'</div>'
-								+'</div>'
-								+'<div class="card-body">'
-									+'<div class="text-muted h7 mb-2">'
-									+jsonObj[i].dateOfPublication +' | '
-									+jsonObj[i].timeOfPublication
-										
-										+'<h5>'
-										+jsonObj[i].content
-										
-										+'</h5>'
-										
-											+'<p class="card-text">'
-											+'<img height="150"  alt="avatar" src="'+jsonObj[i].image+'">'
-											+'</p>'
-										
-									+'</div>'
-									+'</div>'
-							
-									+'</div>'
-						+'</div>'
-								
-						
 						);
 						
 						
