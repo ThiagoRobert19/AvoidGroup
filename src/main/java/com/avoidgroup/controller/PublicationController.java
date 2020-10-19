@@ -53,6 +53,51 @@ public class PublicationController {
 	@Autowired
 	private GeneralPublicationEntity publication2;
 
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ModelAndView add(GeneralPublicationEntity entity, HttpServletRequest request, MultipartFile file,
+			ModelAndView model) throws IllegalStateException, IOException {
+
+		if(entity.getContent() != null && !entity.getContent().trim().equals("")){
+			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+			Calendar date1 = Calendar.getInstance();
+			entity.setPublisher(userEntity);
+			entity.setDateOfPublication(date1.getTime());
+			entity.setTimeOfPublication(date1.getTime());
+			entity.setShared("no");
+			/*if (file.toString() != null && !file.getOriginalFilename().equals("")) {
+				System.out.println("nao eh null");
+				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
+
+				file.transferTo(convFile);
+
+				SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+				final Calendar cal = Calendar.getInstance();
+
+				String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+						+ userEntity.getId() + df.format(cal.getTime()) + "publication";
+
+				String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
+				entity.setPhotoName("/" + nome.trim() + ".jpg");
+				entity.setImage(foto);
+				convFile.delete();
+
+			} else {
+				entity.setImage(null);
+			}*/
+
+			daoPublication.saveUpdate(entity);
+
+			
+		}
+		model.setViewName("redirect:/");
+
+		return model;
+
+	}
+	
+	
 	@RequestMapping(value = { "/share/{id}" }, method = RequestMethod.GET)
 	public ModelAndView share(@PathVariable(value = "id") String id, ModelAndView model, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -167,48 +212,7 @@ public class PublicationController {
 
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView add(GeneralPublicationEntity entity, HttpServletRequest request, MultipartFile file,
-			ModelAndView model) throws IllegalStateException, IOException {
 
-		if(entity.getContent() != null && entity.getContent().trim().equals("")){
-			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-
-			Calendar date1 = Calendar.getInstance();
-			entity.setPublisher(userEntity);
-			entity.setDateOfPublication(date1.getTime());
-			entity.setTimeOfPublication(date1.getTime());
-			entity.setShared("no");
-			/*if (file.toString() != null && !file.getOriginalFilename().equals("")) {
-				System.out.println("nao eh null");
-				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
-
-				file.transferTo(convFile);
-
-				SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-				final Calendar cal = Calendar.getInstance();
-
-				String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
-						+ userEntity.getId() + df.format(cal.getTime()) + "publication";
-
-				String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-				entity.setPhotoName("/" + nome.trim() + ".jpg");
-				entity.setImage(foto);
-				convFile.delete();
-
-			} else {
-				entity.setImage(null);
-			}*/
-
-			daoPublication.saveUpdate(entity);
-
-			
-		}
-		model.setViewName("redirect:/");
-
-		return model;
-
-	}
 
 	@RequestMapping(value = "/viewPublications", method = RequestMethod.GET)
 	public void viewComments(HttpServletRequest request, HttpServletResponse response, ModelAndView model)

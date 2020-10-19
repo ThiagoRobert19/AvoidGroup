@@ -28,7 +28,28 @@ public class UserEntity implements Serializable, EntidadeBase {
 	
 	private String userName;
 	
+	private String photo;
+	private String photoName;
+	
 	private String phone;
+
+	
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
+	}
 
 	public Integer getId() {
 		return id;
@@ -85,9 +106,10 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", userName="
-				+ userName + ", phone=" + phone + "]";
+				+ userName + ", photo=" + photo + ", photoName=" + photoName + ", phone=" + phone + "]";
 	}
 
+	
 	
 	
 

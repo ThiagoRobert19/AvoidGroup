@@ -11,6 +11,24 @@
 						<textarea class="form-control" rows="7"
 							placeholder="What are you thinking?" name="content"></textarea>
 					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="video-url">Paste a Vimeo or YouTube video URL
+								here</label> <input class="form-control" id="video" name="video"
+								onchange="displayIt(); return false;" placeholder="Video URL"
+								type="url">
+						</div>
+						<div id="videocontainer" style="display: none;">
+							<div class="form-group">
+								<div id="video-preview"></div>
+							</div>
+							<div class="form-group">
+								<label for="video-title">Caption/Title</label> <input
+									class="form-control" id="video-title" maxlength="100"
+									name="video" placeholder="Video Title" type="text">
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<input class="form-control" type="file" id="customFile"
 							name="file">
@@ -18,9 +36,19 @@
 						<img id="image" />
 
 					</div>
+					<div id="videobox" style="display: none;">
+						<div class="form-group">
+							<div id="video-preview"></div>
+						</div>
+						<div class="form-group">
+							<label for="video-title">Caption/Title</label> <input
+								class="form-control" id="video-title" maxlength="100"
+								name="video" placeholder="Video Title" type="text">
+						</div>
+					</div>
 					<div class="row post-st">
 						<ul>
-						
+
 							<li><button type="submit" class="btn btn-primary">Post</button></li>
 						</ul>
 					</div>
@@ -457,3 +485,140 @@
 	</div>
 	<!--main-ws-sec end-->
 </div>
+
+<script>
+//$(document).ready(function () {
+//	loadPublication();
+//});	
+	function loadPublication() {
+		console.log("carregando publicacao");
+		var currentLocation = window.location;
+
+		var url = currentLocation + "publication/viewPublications";
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest(); //for IE7+, Firefox, Chrome, Opera, Safari
+		} else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //for IE6, IE5
+		}
+
+		xmlhttp.open("GET", url, true);
+
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+
+				var jsonObj = JSON.parse(xmlhttp.responseText);
+				
+				for (i = 0; i < jsonObj.length; i++) {
+					var photoPublisher = jsonObj[i].publisher.photo;
+					var photoSharer = jsonObj[i].sharer.photo;
+					
+					
+					var content = jsonObj[i].content;
+					
+					
+						
+						var publisherName =escapeHTML(jsonObj[i].publisher.name) ;
+						
+						
+						$("#publicaqui").append(
+						'<div class="card gedf-card">'
+							+'<div class="card-header"> '
+								+'<div class="d-flex justify-content-between align-items-center">'
+										+'<div class="d-flex justify-content-between align-items-center">'
+											+'<div class="mr-2">'
+												+'<img class="rounded-circle" width="45"  alt="avatar" src="'+photoPublisher+'">'
+											+'</div>'
+											+'<div class="ml-2">'
+												+'<div class="h5 m-0">'
+													+'<a href="<c:url value="/friend/viewFriend/'+jsonObj[i].publisher.id+'"/>"> '+publisherName+'</a>'
+												+'</div>'
+												+'<div class="h7 text-muted">'+jsonObj[i].publisher.userName+'</div>'
+											+'</div>'
+										+'</div>'
+								+'</div>'
+							+'</div>'
+							
+							
+							+'<div class="card-body">'
+							+'<div class="text-muted h7 mb-2">'
+								+jsonObj[i].dateOfPublication+' | '
+								+jsonObj[i].timeOfPublication
+								
+								
+							+'</div>'
+
+							+'<p class="card-text">'
+								+'<h5>'
+								+jsonObj[i].content
+								+'</h5>'
+								
+							+'</p>'
+							+'<p class="card-text">'
+								+'<img height="150"  alt="avatar" src="'+jsonObj[i].image+'">'
+							+'</p>'
+							
+								+'<div class="card-header">'
+
+									+'<div class="d-flex justify-content-between align-items-center">'
+										+'<div class="d-flex justify-content-between align-items-center">'
+											+'<div class="mr-2">'
+											+'<img class="rounded-circle" width="45"  alt="avatar" src="'+photoPublisher+'">'
+											+'</div>'
+											+'<div class="ml-2">'
+												+'<div class="h5 m-0">'
+													+'<a href="<c:url value="/friend/viewFriend/'+jsonObj[i].publisher.id+'"/>"> '+firstnamePublisher+'</a>'
+												+'</div>'
+												+'<div class="h7 text-muted">'
+												+jsonObj[i].publisher.about
+												+'</div>'
+											+'</div>'
+										+'</div>'
+
+									+'</div>'
+								+'</div>'
+								+'<div class="card-body">'
+									+'<div class="text-muted h7 mb-2">'
+									+jsonObj[i].dateOfPublication +' | '
+									+jsonObj[i].timeOfPublication
+										
+										+'<h5>'
+										+jsonObj[i].content
+										
+										+'</h5>'
+										
+											+'<p class="card-text">'
+											+'<img height="150"  alt="avatar" src="'+jsonObj[i].image+'">'
+											+'</p>'
+										
+									+'</div>'
+									+'</div>'
+							
+									+'</div>'
+						+'</div>'
+								
+						
+						);
+						
+						
+					
+						
+					
+				}
+
+			}
+		};
+		function escapeHTML (unsafe_str) {
+		    return unsafe_str
+		      .replace(/&/g, '&amp;')
+		      .replace(/</g, '&lt;')
+		      .replace(/>/g, '&gt;')
+		      .replace(/\"/g, '&quot;')
+		      .replace(/\'/g, '&#39;')
+		      .replace(/\//g, '&#x2F;')
+		}
+
+		xmlhttp.send(null);
+
+	}
+</script>
