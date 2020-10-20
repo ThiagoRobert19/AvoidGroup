@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +54,11 @@ public class PublicationController {
 	@Autowired
 	private GeneralPublicationEntity publication2;
 
-	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView add(GeneralPublicationEntity entity, HttpServletRequest request, MultipartFile file,
 			ModelAndView model) throws IllegalStateException, IOException {
 
-		if(entity.getContent() != null && !entity.getContent().trim().equals("")){
+		if (entity.getContent() != null && !entity.getContent().trim().equals("")) {
 			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 			Calendar date1 = Calendar.getInstance();
@@ -66,38 +66,37 @@ public class PublicationController {
 			entity.setDateOfPublication(date1.getTime());
 			entity.setTimeOfPublication(date1.getTime());
 			entity.setShared("no");
-			/*if (file.toString() != null && !file.getOriginalFilename().equals("")) {
-				System.out.println("nao eh null");
-				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
-
-				file.transferTo(convFile);
-
-				SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-				final Calendar cal = Calendar.getInstance();
-
-				String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
-						+ userEntity.getId() + df.format(cal.getTime()) + "publication";
-
-				String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-				entity.setPhotoName("/" + nome.trim() + ".jpg");
-				entity.setImage(foto);
-				convFile.delete();
-
-			} else {
-				entity.setImage(null);
-			}*/
+			/*
+			 * if (file.toString() != null &&
+			 * !file.getOriginalFilename().equals("")) {
+			 * System.out.println("nao eh null"); File convFile = new
+			 * File(request.getRealPath("/img/") + file.getOriginalFilename());
+			 * 
+			 * file.transferTo(convFile);
+			 * 
+			 * SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			 * final Calendar cal = Calendar.getInstance();
+			 * 
+			 * String nome = userEntity.getName().toLowerCase() +
+			 * userEntity.getUserName().toLowerCase() + userEntity.getId() +
+			 * df.format(cal.getTime()) + "publication";
+			 * 
+			 * String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim()
+			 * + ".jpg"); entity.setPhotoName("/" + nome.trim() + ".jpg");
+			 * entity.setImage(foto); convFile.delete();
+			 * 
+			 * } else { entity.setImage(null); }
+			 */
 
 			daoPublication.saveUpdate(entity);
 
-			
 		}
 		model.setViewName("redirect:/");
 
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = { "/share/{id}" }, method = RequestMethod.GET)
 	public ModelAndView share(@PathVariable(value = "id") String id, ModelAndView model, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -212,29 +211,50 @@ public class PublicationController {
 
 	}
 
-
-
 	@RequestMapping(value = "/viewPublications", method = RequestMethod.GET)
 	public void viewComments(HttpServletRequest request, HttpServletResponse response, ModelAndView model)
 			throws IOException, ParseException {
+
+		System.out.println("Ver publicações");
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		PublicationUtil pubUtil = new PublicationUtil();
+
 		List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
+		
+		
+		//listaPublication = pubUtil.getPublication(userEntity);
+	//	System.out.println("tamanho da lista: "+listaPublication.size());
+		
+		Map<String, Object> mapP = new HashMap<String, Object>();
+		mapP.put("publisher.id", userEntity.getId());
+
+		listaPublication = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
+
+		System.out.println("tamanho da lista: "+listaPublication.size());
+		Collections.sort(listaPublication);
+		Collections.reverse(listaPublication);
+	/*	System.out.println("Vamos contar amigos");
 		Integer count = 0;
+
 		count = daoFriend.count("FriendEntity", "userEntity1.id", userEntity.getId().toString())
 				+ daoFriend.count("FriendEntity", "userEntity2.id", userEntity.getId().toString());
 		if (count > 0) {
+			System.out.println("Tem amigos");
 			listaPublication = pubUtil.getPublication(userEntity);
 		} else {
-			Integer contador = 0;
-			contador = daoPublication.count("GeneralPublicationEntity", "publisher.id", userEntity.getId().toString());
-			if (contador > 0) {
-				listaPublication = pubUtil.getPublicationNoFriend(userEntity.getId());
-			}
+			System.out.println("Nao tem amigos");
+			listaPublication = pubUtil.getPublicationNoFriend(userEntity.getId());
 
+			/*
+			 * Integer contador = 0; contador =
+			 * daoPublication.count("GeneralPublicationEntity", "publisher.id",
+			 * userEntity.getId().toString()); if (contador > 0) {
+			 * listaPublication =
+			 * pubUtil.getPublicationNoFriend(userEntity.getId()); }
+			 
 		}
-
+*/
 		String json = new Gson().toJson(listaPublication);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

@@ -30,7 +30,7 @@ public class PublicationUtil {
 		mapP.put("publisher.id", id);
 
 		listaPublication = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
-
+/*
 		Map<String, Object> mapGeral = new HashMap<String, Object>();
 		mapGeral.put("publisher.user.email", "account@avoidgroup.com");
 
@@ -39,8 +39,8 @@ public class PublicationUtil {
 
 		listaPAvoidLast = daoPublication.listarProperty(GeneralPublicationEntity.class, mapGeral, "and");
 
-		// ----------------------
-
+		// ---------------------
+		 
 		for (GeneralPublicationEntity general : listaPAvoidLast) {
 
 			SimpleDateFormat dateParse = new SimpleDateFormat("yyyy-MM-dd");
@@ -59,11 +59,11 @@ public class PublicationUtil {
 
 			}
 
-		}
+		}*/
 		Collections.sort(listaPublication);
 		Collections.reverse(listaPublication);
 
-		for (GeneralPublicationEntity general : listaPublication) {
+		/*for (GeneralPublicationEntity general : listaPublication) {
 			listaPAvoid.add(general);
 		}
 		List<GeneralPublicationEntity> listPubFinalEND = new ArrayList<GeneralPublicationEntity>();
@@ -100,8 +100,8 @@ public class PublicationUtil {
 			}
 
 			listPubFinalEND.add(listaPAvoid.get(tam));
-		}
-		return listPubFinalEND;
+		}*/
+		return listaPublication;
 
 	}
 
@@ -112,7 +112,7 @@ public class PublicationUtil {
 
 		List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
 		listaPublication = daoPublication.listPublication(userEntity.getId().toString());
-
+/*
 		Map<String, Object> mapGeral = new HashMap<String, Object>();
 		mapGeral.put("publisher.user.email", "account@avoidgroup.com");
 		List<GeneralPublicationEntity> listaPAvoid = new ArrayList<GeneralPublicationEntity>();
@@ -140,11 +140,11 @@ public class PublicationUtil {
 
 			}
 
-		}
+		}*/
 		// ----------------------
 		Collections.sort(listaPublication);
 		Collections.reverse(listaPublication);
-
+/*
 		for (GeneralPublicationEntity general : listaPublication) {
 			listaPAvoid.add(general);
 
@@ -183,8 +183,8 @@ public class PublicationUtil {
 			}
 
 			listPubFinalEND.add(listaPAvoid.get(tam));
-		}
-		return listPubFinalEND;
+		}*/
+		return listaPublication;
 	}
 
 }

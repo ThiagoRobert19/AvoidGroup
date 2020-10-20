@@ -13,8 +13,11 @@
 				</div>
 				<!--username-dt end-->
 				<div class="user-specs">
-					<h3>${clienteLogado.userName}</h3>
-					<span>${clienteLogado.name}</span>
+					<h3>
+						<a href="<c:url value='/user/myprofile'/>" title="">${clienteLogado.userName}</a>
+					</h3>
+					<span><a href="<c:url value='/user/myprofile'/>" title="">${clienteLogado.name}</a></span>
+					
 				</div>
 			</div>
 			<!--user-profile end-->

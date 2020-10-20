@@ -3,6 +3,7 @@ package com.avoidgroup.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ import com.avoidgroup.util.Criptografia;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
-
+	@Autowired
+	private UserEntity userEntity;
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 
@@ -27,6 +29,13 @@ public class UserController {
 	public String login() {
 
 		return "user/login";
+	}
+	@RequestMapping(value = { "/myprofile" }, method = RequestMethod.GET)
+	public ModelAndView myprofile( HttpServletRequest request,ModelAndView model) {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		model.addObject("userEntity", userEntity);
+		model.setViewName("user/myprofile/myprofile");
+		return model;
 	}
 
 	@RequestMapping(value = { "/doLogin" }, method = RequestMethod.POST)

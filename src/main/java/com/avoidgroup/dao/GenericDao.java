@@ -432,10 +432,10 @@ public class GenericDao<T extends EntidadeBase> {
 		manager = EntityManagerHelper.getEntityManager();
 		List<T> lista = new ArrayList<T>();
 		String active = "1";
-		lista = manager.createQuery("select ge from GeneralPublicationEntity ge inner join ProfileEntity"
+		lista = manager.createQuery("select ge from GeneralPublicationEntity ge inner join UserEntity"
 				+ " pe on ge.publisher.id = pe.id inner join FriendEntity fe "
-				+ " on fe.profile1.id = pe.id or fe.profile2.id = pe.id where fe.profile1.id = '" + id
-				+ "' or fe.profile2.id = '" + id + "' ORDER  BY ge.id ASC")
+				+ " on fe.userEntity1.id = pe.id or fe.userEntity2.id = pe.id where fe.userEntity1.id = '" + id
+				+ "' or fe.userEntity2.id = '" + id + "' ORDER  BY ge.id ASC")
 				.getResultList();
 
 		EntityManagerHelper.closeEntityManager();
