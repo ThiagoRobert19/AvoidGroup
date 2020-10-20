@@ -23,7 +23,7 @@
 					<div class="row post-st">
 						<ul>
 
-							<li><button type="submit" class="btn btn-primary">Post</button></li>
+							<li><button type="submit" class="btn btn-primary ">Post</button></li>
 						</ul>
 					</div>
 				</div>

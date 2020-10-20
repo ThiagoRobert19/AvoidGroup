@@ -4,10 +4,7 @@
 		<header>
 			<div class="container">
 				<div class="header-data">
-					<div class="logo">
 					
-						<a href="index.html" title=""><img src="<c:url value='/resources/images/logo192.png'/>"  alt=""></a>
-					</div><!--logo end-->
 					<div class="search-bar">
 						<form>
 							<input type="text" name="search" placeholder="Search...">
@@ -18,7 +15,7 @@
 						<ul>
 							<li>
 							
-								<a href="index.html" title="">
+								<a href="<c:url value='/'/>" title="">
 									<span><img src="<c:url value='/resources/images/icon1.png'/>" alt=""></span>
 									Home
 								</a>
@@ -165,7 +162,7 @@
 					<div class="user-account">
 						<div class="user-info">
 							<img src="<c:url value='/resources/images/resources/user3.png'/>" alt="" width="40" height="40">
-							<a href="#" title="">${clienteLogado.userName}</a>
+							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss" id="users">

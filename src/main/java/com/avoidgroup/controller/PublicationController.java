@@ -215,46 +215,40 @@ public class PublicationController {
 	public void viewComments(HttpServletRequest request, HttpServletResponse response, ModelAndView model)
 			throws IOException, ParseException {
 
-		System.out.println("Ver publicações");
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		PublicationUtil pubUtil = new PublicationUtil();
 
 		List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
-		
-		
-		//listaPublication = pubUtil.getPublication(userEntity);
-	//	System.out.println("tamanho da lista: "+listaPublication.size());
-		
+
+		// listaPublication = pubUtil.getPublication(userEntity);
+		// System.out.println("tamanho da lista: "+listaPublication.size());
+
 		Map<String, Object> mapP = new HashMap<String, Object>();
 		mapP.put("publisher.id", userEntity.getId());
 
 		listaPublication = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
 
-		System.out.println("tamanho da lista: "+listaPublication.size());
 		Collections.sort(listaPublication);
 		Collections.reverse(listaPublication);
-	/*	System.out.println("Vamos contar amigos");
-		Integer count = 0;
-
-		count = daoFriend.count("FriendEntity", "userEntity1.id", userEntity.getId().toString())
-				+ daoFriend.count("FriendEntity", "userEntity2.id", userEntity.getId().toString());
-		if (count > 0) {
-			System.out.println("Tem amigos");
-			listaPublication = pubUtil.getPublication(userEntity);
-		} else {
-			System.out.println("Nao tem amigos");
-			listaPublication = pubUtil.getPublicationNoFriend(userEntity.getId());
-
-			/*
-			 * Integer contador = 0; contador =
-			 * daoPublication.count("GeneralPublicationEntity", "publisher.id",
-			 * userEntity.getId().toString()); if (contador > 0) {
-			 * listaPublication =
-			 * pubUtil.getPublicationNoFriend(userEntity.getId()); }
-			 
-		}
-*/
+		/*
+		 * System.out.println("Vamos contar amigos"); Integer count = 0;
+		 * 
+		 * count = daoFriend.count("FriendEntity", "userEntity1.id",
+		 * userEntity.getId().toString()) + daoFriend.count("FriendEntity",
+		 * "userEntity2.id", userEntity.getId().toString()); if (count > 0) {
+		 * System.out.println("Tem amigos"); listaPublication =
+		 * pubUtil.getPublication(userEntity); } else {
+		 * System.out.println("Nao tem amigos"); listaPublication =
+		 * pubUtil.getPublicationNoFriend(userEntity.getId());
+		 * 
+		 * /* Integer contador = 0; contador =
+		 * daoPublication.count("GeneralPublicationEntity", "publisher.id",
+		 * userEntity.getId().toString()); if (contador > 0) { listaPublication
+		 * = pubUtil.getPublicationNoFriend(userEntity.getId()); }
+		 * 
+		 * }
+		 */
 		String json = new Gson().toJson(listaPublication);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

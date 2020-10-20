@@ -41,7 +41,7 @@
 	<!-- END FAVICON -->
 	
 
-	
+	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/comment.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/animate.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/line-awesome.css'/>">

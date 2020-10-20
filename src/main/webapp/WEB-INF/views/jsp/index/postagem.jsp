@@ -92,7 +92,7 @@
 										+ '<li><a href="#" title="">Edit Post</a></li>'
 										+ '<li><a href="#" title="">Unsaved</a></li>'
 										+ '<li><a href="#" title="">Unbid</a></li>'
-										+ '<li><a href="#" title="">Close</a></li>'
+										+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'"/>" title="">Delete</a></li>'
 										+ '<li><a href="#" title="">Hide</a></li>'
 										+ '</ul>'
 										+ '</div>'
