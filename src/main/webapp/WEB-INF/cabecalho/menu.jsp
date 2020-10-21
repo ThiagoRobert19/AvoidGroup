@@ -21,33 +21,28 @@
 								</a>
 							</li>
 							<li>
-								<a href="companies.html" title="">
+								<a href="<c:url value='/team/data'/>" title="">
 									<span><img src="<c:url value='/resources/images/icon2.png'/>" alt=""></span>
-									Companies
+									Team
 								</a>
-								<ul>
-									<li><a href="companies.html" title="">Companies</a></li>
-									<li><a href="company-profile.html" title="">Company Profile</a></li>
-								</ul>
+								
 							</li>
 							<li>
-								<a href="projects.html" title="">
+								<a href="<c:url value='/user/data'/>" title="">
+									<span><img src="<c:url value='/resources/images/icon4.png'/>" alt=""></span>
+									Profiles
+								</a>
+								
+							</li>
+							<li>
+								<a href="#" title="">
 									<span><img src="<c:url value='/resources/images/icon3.png'/>" alt=""></span>
 									Projects
 								</a>
 							</li>
+							
 							<li>
-								<a href="profiles.html" title="">
-									<span><img src="<c:url value='/resources/images/icon4.png'/>" alt=""></span>
-									Profiles
-								</a>
-								<ul>
-									<li><a href="user-profile.html" title="">User Profile</a></li>
-									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="jobs.html" title="">
+								<a href="#" title="">
 									<span><img src="<c:url value='/resources/images/icon5.png'/>" alt=""></span>
 									Jobs
 								</a>

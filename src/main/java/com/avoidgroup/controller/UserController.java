@@ -1,6 +1,7 @@
 package com.avoidgroup.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,22 @@ import com.avoidgroup.util.Criptografia;
 public class UserController {
 	@Autowired
 	private UserEntity userEntity;
+	
+	@Autowired
+	private List<UserEntity> listUser;
+	
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 
+	
+	@RequestMapping(value = { "/data" }, method = RequestMethod.GET)
+	public ModelAndView data( HttpServletRequest request,ModelAndView model) {
+		listUser = daoUser.list(UserEntity.class);
+
+		model.addObject("listUser", listUser);
+		model.setViewName("user/data");
+		return model;
+	}
 	
 	@RequestMapping(value = { "/myprofile" }, method = RequestMethod.GET)
 	public ModelAndView myprofile( HttpServletRequest request,ModelAndView model) {
