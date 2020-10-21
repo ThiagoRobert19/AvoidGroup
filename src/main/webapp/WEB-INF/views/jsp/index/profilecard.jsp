@@ -14,9 +14,9 @@
 				<!--username-dt end-->
 				<div class="user-specs">
 					<h3>
-						<a href="<c:url value='/user/myprofile'/>" title="">${clienteLogado.userName}</a>
+						${clienteLogado.userName}
 					</h3>
-					<span><a href="<c:url value='/user/myprofile'/>" title="">${clienteLogado.name}</a></span>
+					<span>${clienteLogado.name}</span>
 					
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 				<li>
 					<h4>Followers</h4> <span>155</span>
 				</li>
-				<li><a href="my-profile.html" title="">View Profile</a></li>
+				<li><a href="<c:url value='/user/myprofile'/>" title="">View Profile</a></li>
 			</ul>
 		</div>
 		<!--user-data end-->

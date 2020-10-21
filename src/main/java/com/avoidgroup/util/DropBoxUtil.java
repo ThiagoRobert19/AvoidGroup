@@ -21,7 +21,8 @@ import com.dropbox.core.v2.sharing.SharedLinkSettings;
 import com.dropbox.core.v2.users.FullAccount;
 
 public class DropBoxUtil {
-	private static final String ACCESS_TOKEN = "i_mj4H3VjGAAAAAAAAAADJEAs4hmFFd2yewGjm7N4vpcUFrFXuAGEdVYjqUII4sU";
+//private static final String ACCESS_TOKEN = "i_mj4H3VjGAAAAAAAAAADJEAs4hmFFd2yewGjm7N4vpcUFrFXuAGEdVYjqUII4sU";
+	private static final String ACCESS_TOKEN = "sl.AkBhBaNI_d5JgnxGs3zJzqo_cKCs3_EU69GKWBVq71EqxgYoXimj2Ek51sNjpVkJTvIh_XfMXiaPzEZWhn95rZ9sNbEgpBe7pMNK6xr_6KOaB3nmGhuzwv8G81rjfLnP0l7cTQ60";
 	private static final DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
 	private static final DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
@@ -36,7 +37,7 @@ public class DropBoxUtil {
 			url = sharedLinkMetadata.getUrl();
 			url = url.replaceAll("dl=0", "raw=1");
 
-			System.out.println("url1234: " + sharedLinkMetadata.getUrl());
+			
 		} catch (FileNotFoundException fne) {
 			fne.printStackTrace();
 		} catch (IOException ioe) {

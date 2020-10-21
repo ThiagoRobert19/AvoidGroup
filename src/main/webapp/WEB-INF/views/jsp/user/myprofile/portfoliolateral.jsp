@@ -9,7 +9,8 @@
 						<div class="widget widget-portfolio">
 							<div class="wd-heady">
 								<h3>Portfolio</h3>
-								<img src="images/photo-icon.png" alt="">
+								
+								<img src="<c:url value='/resources/images/photo-icon.png'/>" alt="">
 							</div>
 							<div class="pf-gallery">
 								<ul>

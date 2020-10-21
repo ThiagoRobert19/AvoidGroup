@@ -110,7 +110,9 @@
 					File</label>
 			</div>
 			<div class="pf-img">
-				<img src="images/resources/np.png" alt="">
+			
+			
+				<img src="<c:url value='/resources/images/resources/np.png'/>" alt="">
 			</div>
 			<input type="text" name="website-url"
 				placeholder="htp://www.example.com">

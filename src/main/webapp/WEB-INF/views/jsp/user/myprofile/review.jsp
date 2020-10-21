@@ -11,7 +11,9 @@
 		<div class="post-bar ">
 			<div class="post_topbar">
 				<div class="usy-dt">
-					<img src="images/resources/bg-img3.png" alt="">
+				
+				
+					<img src="<c:url value='/resources/images/resources/bg-img3.png'/>" alt="">
 					<div class="usy-name">
 						<h3>Rock William</h3>
 						<span>UserName</span>
@@ -38,7 +40,7 @@
 
 				<div class="post_topbar post-reply">
 					<div class="usy-dt">
-						<img src="images/resources/bg-img4.png" alt="">
+						<img src="<c:url value='/resources/images/resources/bg-img4.png'/>" alt="">
 						<div class="usy-name">
 							<h3>John Doe</h3>
 							<div class="epi-sec epi2">
@@ -53,7 +55,7 @@
 				<div class="post_topbar rep-post rep-thanks">
 					<hr>
 					<div class="usy-dt">
-						<img src="images/resources/bg-img4.png" alt=""> <input
+						<img src=""<c:url value='/resources/images/resources/bg-img4.png'/>" alt=""> <input
 							class="reply" type="text" placeholder="Reply"> <a
 							class="replybtn" href="#">Send</a>
 
