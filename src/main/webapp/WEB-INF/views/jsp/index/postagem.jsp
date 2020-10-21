@@ -112,7 +112,7 @@
 										+ '<ul class="like-com">'
 										+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
 										+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
-										+ '<li><a href="#"><i class="fas fa-share"></i></i>Share 15</a></li>'
+										+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
 										+ '</ul>' + '</div>' + '</div>'
 
 						);

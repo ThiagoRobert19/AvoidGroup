@@ -25,16 +25,19 @@ public class UserController {
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String login() {
-
-		return "user/login";
-	}
+	
 	@RequestMapping(value = { "/myprofile" }, method = RequestMethod.GET)
 	public ModelAndView myprofile( HttpServletRequest request,ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 		model.addObject("userEntity", userEntity);
 		model.setViewName("user/myprofile/myprofile");
+		return model;
+	}
+	@RequestMapping(value = { "/settings" }, method = RequestMethod.GET)
+	public ModelAndView settings( HttpServletRequest request,ModelAndView model) {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		model.addObject("userEntity", userEntity);
+		model.setViewName("user/settings/setting");
 		return model;
 	}
 
@@ -117,6 +120,11 @@ public class UserController {
 
 	}
 
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login() {
+
+		return "user/login";
+	}
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 
