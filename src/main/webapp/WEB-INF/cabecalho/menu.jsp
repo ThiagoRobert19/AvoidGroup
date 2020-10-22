@@ -6,8 +6,9 @@
 				<div class="header-data">
 					
 					<div class="search-bar">
-						<form>
-							<input type="text" name="search" placeholder="Search...">
+						<form action="<c:url value='/user/pesquisa'/>" method="POST"
+				enctype="multipart/form-data">
+							<input type="text" name="texto" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div><!--search-bar end-->
