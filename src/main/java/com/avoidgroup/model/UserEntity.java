@@ -33,8 +33,17 @@ public class UserEntity implements Serializable, EntidadeBase {
 	
 	private String phone;
 
+	private String perfil;//public, private	
 	
 	
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
 	public String getPhoto() {
 		return photo;
 	}

@@ -738,6 +738,12 @@ main {
 	border-right: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
 }
+.botaopreto {
+	background-color:#000000;
+	color: #ffffff;
+	
+	
+}
 .username-dt {
 	float: left;
 	width: 100%;

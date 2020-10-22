@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-	<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+	<div class="tab-pane fade " id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
 									<div class="acc-setting">
 										<h3>Account Setting</h3>
 										<form>

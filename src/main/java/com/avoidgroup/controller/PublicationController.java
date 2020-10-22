@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avoidgroup.dao.GenericDao;
-import com.avoidgroup.model.FriendEntity;
+import com.avoidgroup.friendship.model.FollowEntity;
 import com.avoidgroup.model.GeneralCommentEntity;
 import com.avoidgroup.model.GeneralLikeEntity;
 import com.avoidgroup.model.GeneralPublicationEntity;
@@ -47,7 +47,7 @@ public class PublicationController {
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 	@Autowired
-	private GenericDao<FriendEntity> daoFriend;
+	private GenericDao<FollowEntity> daoFriend;
 
 	@Autowired
 	private GeneralPublicationEntity publication;

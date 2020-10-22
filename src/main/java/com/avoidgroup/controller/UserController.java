@@ -103,7 +103,7 @@ public class UserController {
 			map.put("userName", userEntity.getUserName());
 			if (!daoUser.exist(UserEntity.class, map, "and")) {
 				if (userEntity.getPassword().equals(rePassword)) {
-
+					userEntity.setPerfil("public");
 					daoUser.saveUpdate(userEntity);
 					model.setViewName("redirect:/user/login");
 					return model;

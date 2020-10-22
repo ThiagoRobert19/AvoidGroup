@@ -21,10 +21,14 @@
 					</div>
 
 					<div class="row post-st">
+					
 						<ul>
+						
 
-							<li><button type="submit" class="btn btn-primary ">Post</button></li>
+							<li><button  type="submit"class="btn botaopreto" > Post</button></li>
+						
 						</ul>
+						
 					</div>
 				</div>
 			</form>
@@ -37,6 +41,9 @@
 </div>
 
 <script>
+
+
+
 	document.getElementById("customFile").onchange = function() {
 		var reader = new FileReader();
 
