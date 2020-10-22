@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +31,12 @@ public class UserController {
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 
+	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
+	public ModelAndView pesquisa(String texto, HttpServletRequest request,ModelAndView model) {
+		
+		model.setViewName("redirect:/");
+		return model;
+	}
 	
 	@RequestMapping(value = { "/data" }, method = RequestMethod.GET)
 	public ModelAndView data( HttpServletRequest request,ModelAndView model) {
@@ -76,7 +83,7 @@ public class UserController {
 			} else {
 				model.addObject("in", "yes");
 				model.addObject("up", "no");
-				model.addObject("erro", "Senha não confere!");
+				model.addObject("erro", "Senha nï¿½o confere!");
 				model.setViewName("user/login");
 				return model;
 
@@ -85,7 +92,7 @@ public class UserController {
 		} else {
 			model.addObject("in", "yes");
 			model.addObject("up", "no");
-			model.addObject("erro", "Não existe Usuário cadastrado com esse email!");
+			model.addObject("erro", "Nï¿½o existe Usuï¿½rio cadastrado com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}
@@ -119,7 +126,7 @@ public class UserController {
 			} else {
 				model.addObject("in", "no");
 				model.addObject("up", "yes");
-				model.addObject("erro", "Já existe cadastro com esse Username!");
+				model.addObject("erro", "Jï¿½ existe cadastro com esse Username!");
 				model.setViewName("user/login");
 				return model;
 			}
@@ -127,7 +134,7 @@ public class UserController {
 		} else {
 			model.addObject("in", "no");
 			model.addObject("up", "yes");
-			model.addObject("erro", "Já existe cadastro com esse email!");
+			model.addObject("erro", "Jï¿½ existe cadastro com esse email!");
 			model.setViewName("user/login");
 			return model;
 		}
