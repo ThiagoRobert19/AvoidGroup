@@ -34,6 +34,7 @@ public class UserController {
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request,ModelAndView model) {
 		
+		
 		model.setViewName("redirect:/");
 		return model;
 	}
