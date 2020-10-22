@@ -74,7 +74,7 @@
 								'<div class="post-bar"> '
 										+ '<div class="post_topbar">'
 										+ '<div class="usy-dt">'
-										+ '	<img src="'+photoPublisher+'" alt="" >'
+										+ '<img src="<c:url value="/resources/images/resources/user3.png"/>" alt="">'
 										+ '<div class="usy-name">' + '<h3>'
 										+ publisherName
 										+ '</h3>'
