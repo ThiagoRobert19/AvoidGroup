@@ -44,7 +44,7 @@ public class UserController {
 		}
 		
 		
-		model.setViewName("redirect:/");
+		model.setViewName("user/pesquisa");
 		return model;
 	}
 	
