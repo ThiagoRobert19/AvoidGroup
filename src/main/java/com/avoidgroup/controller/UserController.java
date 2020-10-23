@@ -33,14 +33,14 @@ public class UserController {
 
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request,ModelAndView model) {
-		System.out.println("Texto aqui");
-		System.out.println(texto);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name",texto);
 		listUser=daoUser.listByPropertyLike(UserEntity.class, "UserEntity", "name", texto);
 		
+		
 		for(UserEntity user : listUser){
-			System.out.println("User: "+user.getName());
+			System.out.println("USUARIO: "+user.getName());
 		}
 		
 		

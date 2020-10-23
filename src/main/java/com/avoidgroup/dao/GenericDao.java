@@ -361,7 +361,7 @@ public class GenericDao<T extends EntidadeBase> {
 
 		List<T> lista = new ArrayList<T>();
 
-		lista = manager.createQuery("select u from " + clazz + " u where u." + property + " LIKE '" + value + "%'")
+		lista = manager.createQuery("select u from " + clazz + " u where lower(u." + property + ") LIKE lower('%"+value+"%')")
 				.getResultList();
 
 		EntityManagerHelper.closeEntityManager();
