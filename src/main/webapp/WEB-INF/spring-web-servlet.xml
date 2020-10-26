@@ -33,7 +33,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.avoidgroup.util.AutorizacaoInterceptor" />
+			<bean class="com.inavonts.util.AutorizacaoInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

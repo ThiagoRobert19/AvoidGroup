@@ -3,7 +3,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>Avoid Group</display-name>
+	<display-name>InAvonts</display-name>
 
 	<servlet>
 		<servlet-name>spring-web</servlet-name>

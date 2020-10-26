@@ -23,8 +23,13 @@
 										alt="">
 								</div>
 								<div class="usr_quest">
-									<h3><a href="<c:url value='/user/view/${listUser.id}'/>">${listUser.name}</a></h3>
-
+									<h3>
+										<a href="<c:url value='/user/view/${listUser.id}'/>">${listUser.name}</a>
+									</h3>
+									<div class="star-descp">
+										<span><a href="<c:url value='/user/view/${listUser.id}'/>">${listUser.userName}</a></span>
+										
+									</div>
 									<!--ul class="quest-tags">
 										<c:if test="${listUser.perfil =='private'}">
 											<li><a href="#" title="">Request</a></li>

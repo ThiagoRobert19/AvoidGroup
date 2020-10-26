@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:import url="/WEB-INF/cabecalho/header.jsp" />
 <c:import url="/WEB-INF/cabecalho/menu.jsp" />
-<c:import url="/WEB-INF/views/jsp/user/myprofile/top.jsp" />
+<c:import url="/WEB-INF/views/jsp/user/view/top.jsp" />
 <main>
 
 <div class="main-section">
 	<div class="container">
 		<div class="main-section-data">
 			<div class="row">
-				<c:import url="/WEB-INF/views/jsp/user/myprofile/profilecard.jsp" />
+				<c:import url="/WEB-INF/views/jsp/user/view/profilecard.jsp" />
 				<div class="col-lg-6">
 					<div class="main-ws-sec">
 						<div class="user-tab-sec rewivew">
@@ -55,10 +55,10 @@
 						</div>
 						<!--user-tab-sec end-->
 
-						<c:import url="/WEB-INF/views/jsp/user/myprofile/feed.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/myprofile/info.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/myprofile/portfolio.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/myprofile/review.jsp" />
+						<c:import url="/WEB-INF/views/jsp/user/view/feed.jsp" />
+						<c:import url="/WEB-INF/views/jsp/user/view/info.jsp" />
+						<c:import url="/WEB-INF/views/jsp/user/view/portfolio.jsp" />
+						<c:import url="/WEB-INF/views/jsp/user/view/review.jsp" />
 
 						<!--product-feed-tab end-->
 
@@ -70,7 +70,7 @@
 					<!--main-ws-sec end-->
 				</div>
 				<c:import
-					url="/WEB-INF/views/jsp/user/myprofile/portfoliolateral.jsp" />
+					url="/WEB-INF/views/jsp/user/view/portfoliolateral.jsp" />
 			</div>
 		</div>
 		<!-- main-section-data end-->
