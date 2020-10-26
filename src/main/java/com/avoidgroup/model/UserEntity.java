@@ -19,23 +19,31 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private String name;
-	
+
 	private String email;
-	
+
 	private String password;
-	
+
 	private String userName;
-	
+
 	private String photo;
 	private String photoName;
-	
+
 	private String phone;
 
-	private String perfil;//public, private	
-	
-	
+	private String perfil;// public, private
+	private String follow;// yes,no
+
+	public String getFollow() {
+		return follow;
+	}
+
+	public void setFollow(String follow) {
+		this.follow = follow;
+	}
+
 	public String getPerfil() {
 		return perfil;
 	}
@@ -115,13 +123,8 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", userName="
-				+ userName + ", photo=" + photo + ", photoName=" + photoName + ", phone=" + phone + "]";
+				+ userName + ", photo=" + photo + ", photoName=" + photoName + ", phone=" + phone + ", perfil=" + perfil
+				+ ", follow=" + follow + "]";
 	}
 
-	
-	
-	
-
 }
-
-
