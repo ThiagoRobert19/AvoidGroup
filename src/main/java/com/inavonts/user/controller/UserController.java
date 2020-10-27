@@ -1,4 +1,4 @@
-package com.inavonts.controller;
+package com.inavonts.user.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

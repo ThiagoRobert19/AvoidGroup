@@ -18,15 +18,31 @@
 						<p>Choose who can see your email address on your profile</p>
 						<div class="row">
 							<div class="col-md-9 col-sm-12">
-								<form class="radio-form">
+								<form class="radio-form" action="<c:url value='/setting/changeprivacy'/>" method="post">
 									<div class="custom-control custom-checkbox">
-										<input type="radio" name="tipoPerfil" checked="checked" class="custom-control-input"
-											id="customCheck1"> <label
+										<c:if test="${userEntity.perfil =='private'}">
+											<input type="radio" name="tipoPerfil" value="private" checked="checked" class="custom-control-input"
+												id="customCheck1"> 
+										</c:if>
+										<c:if test="${userEntity.perfil !='private'}">
+											<input type="radio" name="tipoPerfil" value="private"  class="custom-control-input"
+												id="customCheck1"> 
+										</c:if>
+											<label
 											class="custom-control-label" for="customCheck1">Private</label>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<input type="radio" name="tipoPerfil" class="custom-control-input"
-											id="customCheck2"> <label
+										<c:if test="${userEntity.perfil =='private'}">
+											<input type="radio" name="tipoPerfil" value="public"  class="custom-control-input"
+												id="customCheck1"> 
+										</c:if>
+										<c:if test="${userEntity.perfil !='private'}">
+											<input type="radio" name="tipoPerfil" value="public" checked="checked"  class="custom-control-input"
+												id="customCheck1"> 
+										</c:if>
+										
+										
+										 <label
 											class="custom-control-label" for="customCheck2">Public</label>
 									</div>
 								</form>
