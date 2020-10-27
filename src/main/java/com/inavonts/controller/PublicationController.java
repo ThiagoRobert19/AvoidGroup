@@ -28,7 +28,7 @@ import com.inavonts.friendship.model.FollowEntity;
 import com.inavonts.model.GeneralCommentEntity;
 import com.inavonts.model.GeneralLikeEntity;
 import com.inavonts.model.GeneralPublicationEntity;
-import com.inavonts.model.UserEntity;
+import com.inavonts.user.model.UserEntity;
 import com.inavonts.util.DropBoxUtil;
 import com.inavonts.util.PublicationUtil;
 

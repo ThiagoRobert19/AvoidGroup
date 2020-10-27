@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -244,4 +245,10 @@ public class Common {
 		return horaFinal;
 
 	}
+	public static String geraUUID() {
+		UUID gfg1 = UUID.randomUUID();
+
+		return gfg1.toString();
+	}
+
 }

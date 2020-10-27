@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import com.inavonts.model.UserEntity;
+import com.inavonts.user.model.UserEntity;
 import com.inavonts.util.EntidadeBase;
 
 @Component("FollowEntity")

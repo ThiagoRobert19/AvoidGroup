@@ -19,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
-import com.inavonts.model.UserEntity;
+import com.inavonts.user.model.UserEntity;
+import com.inavonts.user.model.UserNotificationEntity;
+import com.inavonts.util.Common;
 import com.inavonts.util.Criptografia;
 
 @Controller
@@ -36,6 +38,11 @@ public class UserController {
 
 	@Autowired
 	private GenericDao<FollowEntity> daoFollow;
+
+	@Autowired
+	private List<UserNotificationEntity> listNotification;
+	@Autowired
+	private GenericDao<UserNotificationEntity> daoNotification;
 
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request, ModelAndView model) {
@@ -87,46 +94,44 @@ public class UserController {
 	@RequestMapping(value = { "/view/{id}" }, method = RequestMethod.GET)
 	public ModelAndView view(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-		
+
 		UserEntity user = new UserEntity();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if (daoUser.exist(UserEntity.class, map, "and")) {
-			
-			
-			if(!userEntity.getId().equals(Integer.parseInt(id))){
-				
+
+			if (!userEntity.getId().equals(Integer.parseInt(id))) {
+
 				user = daoUser.buscaId(UserEntity.class, Integer.parseInt(id));
-				
+
 				Map<String, Object> mapfollower = new HashMap<String, Object>();
 				mapfollower.put("follower.id", userEntity.getId());
 				mapfollower.put("followed.id", Integer.parseInt(id));
-				
-				
+
 				Map<String, Object> mapfollowed = new HashMap<String, Object>();
 				mapfollowed.put("follower.id", Integer.parseInt(id));
 				mapfollowed.put("followed.id", userEntity.getId());
-				
-				if(daoUser.exist(UserEntity.class, mapfollower, "and")){
+
+				if (daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("unfollow");
 				}
-				if(daoUser.exist(UserEntity.class, mapfollowed, "and") && !daoUser.exist(UserEntity.class, mapfollower, "and")){
+				if (daoFollow.exist(FollowEntity.class, mapfollowed, "and")
+						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("followback");
 				}
-				if(!daoUser.exist(UserEntity.class, mapfollowed, "and") && !daoUser.exist(UserEntity.class, mapfollower, "and")){
+				if (!daoFollow.exist(FollowEntity.class, mapfollowed, "and")
+						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("follow");
 				}
-				
-				
+
 				model.addObject("userEntity", user);
 				model.setViewName("user/view/profile");
 				return model;
-			}else{
+			} else {
 				model.setViewName("redirect:/user/myprofile");
 				return model;
 			}
-			
-			
+
 		} else {
 
 			model.setViewName("redirect:/");
@@ -173,6 +178,15 @@ public class UserController {
 			if (daoUser.exist(UserEntity.class, mappassword, "and")) {
 				userEntity = daoUser.findByProperty(UserEntity.class, mappassword, "and");
 
+				Map<String, Object> mapnotification = new HashMap<String, Object>();
+				mapnotification.put("status", "unread");
+				mapnotification.put("userEntity.id", userEntity.getId());
+
+				listNotification = daoNotification.listarProperty(UserNotificationEntity.class, mapnotification, "and");
+				int countNotification = listNotification.size();
+
+				session.setAttribute("countNotification", countNotification);
+				session.setAttribute("listNotification", listNotification);
 				session.setAttribute("clienteLogado", userEntity);
 
 				model.setViewName("redirect:/");
@@ -209,6 +223,9 @@ public class UserController {
 			if (!daoUser.exist(UserEntity.class, map, "and")) {
 				if (userEntity.getPassword().equals(rePassword)) {
 					userEntity.setPerfil("public");
+					Common comum = new Common();
+					userEntity.setUuid(comum.geraUUID());
+
 					daoUser.saveUpdate(userEntity);
 					model.setViewName("redirect:/user/login");
 					return model;

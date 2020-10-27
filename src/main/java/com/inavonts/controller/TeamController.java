@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
-import com.inavonts.model.UserEntity;
 import com.inavonts.team.model.TeamEntity;
+import com.inavonts.user.model.UserEntity;
 
 @Controller
 @RequestMapping(value = "/team")

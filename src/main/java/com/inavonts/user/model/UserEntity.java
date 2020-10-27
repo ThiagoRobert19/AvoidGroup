@@ -1,4 +1,4 @@
-package com.inavonts.model;
+package com.inavonts.user.model;
 
 import java.io.Serializable;
 
@@ -20,6 +20,8 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	
+	private String uuid;
 	private String name;
 
 	private String email;
@@ -42,6 +44,14 @@ public class UserEntity implements Serializable, EntidadeBase {
 
 	public void setFollow(String follow) {
 		this.follow = follow;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getPerfil() {
@@ -122,9 +132,11 @@ public class UserEntity implements Serializable, EntidadeBase {
 
 	@Override
 	public String toString() {
-		return "UserEntity [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", userName="
-				+ userName + ", photo=" + photo + ", photoName=" + photoName + ", phone=" + phone + ", perfil=" + perfil
-				+ ", follow=" + follow + "]";
+		return "UserEntity [id=" + id + ", uuid=" + uuid + ", name=" + name + ", email=" + email + ", password="
+				+ password + ", userName=" + userName + ", photo=" + photo + ", photoName=" + photoName + ", phone="
+				+ phone + ", perfil=" + perfil + ", follow=" + follow + "]";
 	}
+
+	
 
 }

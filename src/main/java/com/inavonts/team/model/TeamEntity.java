@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import org.springframework.stereotype.Component;
 
 import com.inavonts.game.model.GameEntity;
-import com.inavonts.model.UserEntity;
+import com.inavonts.user.model.UserEntity;
 import com.inavonts.util.EntidadeBase;
 
 @Component("TeamEntity")

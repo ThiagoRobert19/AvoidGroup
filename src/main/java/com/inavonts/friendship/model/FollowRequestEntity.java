@@ -1,18 +1,27 @@
 package com.inavonts.friendship.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import com.inavonts.model.UserEntity;
+import org.springframework.stereotype.Component;
 
-public class FollowRequestEntity {
+import com.inavonts.user.model.UserEntity;
+import com.inavonts.util.EntidadeBase;
+@Component("FollowRequestEntity")
+@Entity
+public class FollowRequestEntity implements Serializable, EntidadeBase{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	private String uuid;
 
 	@OneToOne
 	@JoinColumn(name = "follower_id")
@@ -23,6 +32,16 @@ public class FollowRequestEntity {
 	private UserEntity followed;//seguido
 
 	private String status;//approved, pending, recused
+
+	
+	
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	public Integer getId() {
 		return id;

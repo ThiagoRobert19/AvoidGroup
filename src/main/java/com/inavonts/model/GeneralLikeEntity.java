@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.stereotype.Component;
 
+import com.inavonts.user.model.UserEntity;
 import com.inavonts.util.EntidadeBase;
 
 @Component("GeneralLikeEntity")

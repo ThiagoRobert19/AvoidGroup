@@ -14,7 +14,7 @@ import com.inavonts.dao.GenericDao;
 import com.inavonts.model.GeneralCommentEntity;
 import com.inavonts.model.GeneralLikeEntity;
 import com.inavonts.model.GeneralPublicationEntity;
-import com.inavonts.model.UserEntity;
+import com.inavonts.user.model.UserEntity;
 
 
 public class PublicationUtil {

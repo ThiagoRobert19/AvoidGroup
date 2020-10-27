@@ -26,40 +26,46 @@
 								<a href="#" title="">Status</a>
 							</div>
 							<!--star-descp end-->
-							<div class="tab-feed st2 settingjb">
-								<ul>
-									<li data-tab="feed-dd" class="active"><a href="#" title="">
+							<c:if test="${userEntity.perfil !='private'}">
 
-											<img src="<c:url value='/resources/images/ic1.png'/>" alt="">
-											<span>Feed</span>
-									</a></li>
-									<li data-tab="info-dd"><a href="#" title=""> <img
-											src="<c:url value='/resources/images/ic2.png'/>" alt="">
-											<span>Info</span>
-									</a></li>
-
-
-									<li data-tab="portfolio-dd"><a href="#" title=""> <img
-											src="<c:url value='/resources/images/ic3.png'/>" alt="">
-											<span>Portfolio</span>
-									</a></li>
-									<li data-tab="rewivewdata"><a href="#" title=""> <img
-											src="<c:url value='/resources/images/review.png'/>" alt="">
-											<span>Reviews</span>
-									</a></li>
+								<img src="<c:url value='/resources/images/private.png'/>" alt="">
+							</c:if>
+							<c:if test="${userEntity.perfil =='private'}">
+								<div class="tab-feed st2 settingjb">
+									<ul>
+										<li data-tab="feed-dd" class="active"><a href="#"
+											title=""> <img
+												src="<c:url value='/resources/images/ic1.png'/>" alt="">
+												<span>Feed</span>
+										</a></li>
+										<li data-tab="info-dd"><a href="#" title=""> <img
+												src="<c:url value='/resources/images/ic2.png'/>" alt="">
+												<span>Info</span>
+										</a></li>
 
 
-								</ul>
-							</div>
+										<li data-tab="portfolio-dd"><a href="#" title=""> <img
+												src="<c:url value='/resources/images/ic3.png'/>" alt="">
+												<span>Portfolio</span>
+										</a></li>
+										<li data-tab="rewivewdata"><a href="#" title=""> <img
+												src="<c:url value='/resources/images/review.png'/>" alt="">
+												<span>Reviews</span>
+										</a></li>
+
+
+									</ul>
+								</div>
+							</c:if>
 							<!-- tab-feed end-->
 						</div>
 						<!--user-tab-sec end-->
-
-						<c:import url="/WEB-INF/views/jsp/user/view/feed.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/view/info.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/view/portfolio.jsp" />
-						<c:import url="/WEB-INF/views/jsp/user/view/review.jsp" />
-
+						<c:if test="${userEntity.perfil =='private'}">
+							<c:import url="/WEB-INF/views/jsp/user/view/feed.jsp" />
+							<c:import url="/WEB-INF/views/jsp/user/view/info.jsp" />
+							<c:import url="/WEB-INF/views/jsp/user/view/portfolio.jsp" />
+							<c:import url="/WEB-INF/views/jsp/user/view/review.jsp" />
+						</c:if>
 						<!--product-feed-tab end-->
 
 
@@ -69,8 +75,9 @@
 					</div>
 					<!--main-ws-sec end-->
 				</div>
-				<c:import
-					url="/WEB-INF/views/jsp/user/view/portfoliolateral.jsp" />
+			
+					<c:import url="/WEB-INF/views/jsp/user/view/portfoliolateral.jsp" />
+				
 			</div>
 		</div>
 		<!-- main-section-data end-->

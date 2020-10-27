@@ -1,7 +1,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+
 <div class="product-feed-tab current" id="feed-dd">
+
+
 	<div class="posts-section">
 
 		<!--post-bar end-->
@@ -56,10 +60,11 @@
 			<div class="job-status-bar">
 				<ul class="like-com">
 					<li><a href="#"><i class="fas fa-heart"></i> Like 25</a></li>
-					<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>
+					<li><a href="#"><i class="fas fa-comment-alt"></i>Comment
+							15</a></li>
 					<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>
 				</ul>
-				
+
 			</div>
 		</div>
 		<!--post-bar end-->
@@ -73,5 +78,6 @@
 		<!--process-comm end-->
 	</div>
 	<!--posts-section end-->
+
 </div>
 

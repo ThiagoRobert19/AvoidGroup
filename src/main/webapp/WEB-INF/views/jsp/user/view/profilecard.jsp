@@ -9,10 +9,7 @@
 				<img
 					src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
 					alt="">
-				<div class="add-dp">
-					<input type="file" id="uploadImage" name="photoFile"> <label
-						for="file"><i class="fas fa-camera"></i></label>
-				</div>
+
 			</div>
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
