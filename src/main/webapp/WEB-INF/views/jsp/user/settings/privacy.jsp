@@ -9,59 +9,63 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row">
-			<div class="col-12">
-				<div class="dropdown privacydropd">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile
-						Type: ${clienteLogado.perfil}</a>
-					<div class="dropdown-menu">
-						<p>Choose who can see your email address on your profile</p>
+		<form class="radio-form"
+			action="<c:url value='/setting/changeprivacy'/>" method="post">
+			<div class="row">
+				<div class="col-12">
+
+					Profile Type: ${clienteLogado.perfil}
+					<div>
+						<p>Choose your profile type</p>
 						<div class="row">
+
 							<div class="col-md-9 col-sm-12">
-								<form class="radio-form" action="<c:url value='/setting/changeprivacy'/>" method="post">
+
+								<input type="hidden" name="id" value="${userEntity.id}" />
+								<c:if test="${userEntity.perfil =='private'}">
 									<div class="custom-control custom-checkbox">
-										<c:if test="${userEntity.perfil =='private'}">
-											<input type="radio" name="tipoPerfil" value="private" checked="checked" class="custom-control-input"
-												id="customCheck1"> 
-										</c:if>
-										<c:if test="${userEntity.perfil !='private'}">
-											<input type="radio" name="tipoPerfil" value="private"  class="custom-control-input"
-												id="customCheck1"> 
-										</c:if>
-											<label
-											class="custom-control-label" for="customCheck1">Private</label>
+
+										<input type="radio" name="tipoPerfil" value="private" checked
+											class="custom-control-input" id="private"> <label
+											class="custom-control-label" for="private">Private</label>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<c:if test="${userEntity.perfil =='private'}">
-											<input type="radio" name="tipoPerfil" value="public"  class="custom-control-input"
-												id="customCheck1"> 
-										</c:if>
-										<c:if test="${userEntity.perfil !='private'}">
-											<input type="radio" name="tipoPerfil" value="public" checked="checked"  class="custom-control-input"
-												id="customCheck1"> 
-										</c:if>
-										
-										
-										 <label
-											class="custom-control-label" for="customCheck2">Public</label>
+
+										<input type="radio" name="tipoPerfil" value="public"
+											class="custom-control-input" id="public"> <label
+											class="custom-control-label" for="public">Public</label>
 									</div>
-								</form>
+								</c:if>
+								<c:if test="${userEntity.perfil !='private'}">
+									<div class="custom-control custom-checkbox">
+
+										<input type="radio" name="tipoPerfil" value="private"
+											class="custom-control-input" id="private"> <label
+											class="custom-control-label" for="private">Private</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+
+										<input type="radio" name="tipoPerfil" value="public" checked
+											class="custom-control-input" id="public"> <label
+											class="custom-control-label" for="public">Public</label>
+									</div>
+								</c:if>
+
 							</div>
-							<div class="col-md-3 col-sm-12">
-								<p style="float: right;">${clienteLogado.perfil}</p>
-							</div>
+
 						</div>
 					</div>
+
 				</div>
 			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-12">
-				<div class="privabtns">
-					<a href="#">Save</a> <a href="#">Cancel</a>
-				</div>
+
+			<div class="save-stngs pd2">
+				<ul>
+					<li><button type="submit" value="Save">Save</button></li>
+					
+
+				</ul>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

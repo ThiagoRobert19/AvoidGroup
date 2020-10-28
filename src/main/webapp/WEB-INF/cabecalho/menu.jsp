@@ -155,7 +155,7 @@
 
 					<h3>Setting</h3>
 					<ul class="us-links">
-						<li><a href="<c:url value='/user/settings'/>" title="">Account
+						<li><a href="<c:url value='/setting/settings'/>" title="">Account
 								Setting</a></li>
 						<li><a href="#" title="">Privacy</a></li>
 						<li><a href="#" title="">Faqs</a></li>

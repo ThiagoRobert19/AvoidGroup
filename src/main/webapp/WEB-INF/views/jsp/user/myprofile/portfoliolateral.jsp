@@ -3,7 +3,7 @@
 				<div class="col-lg-3">
 					<div class="right-sidebar">
 						<div class="message-btn">
-							<a href="<c:url value='/user/settings'/>" title=""><i
+							<a href="<c:url value='/setting/settings'/>" title=""><i
 								class="fas fa-cog"></i> Setting</a>
 						</div>
 						<div class="widget widget-portfolio">

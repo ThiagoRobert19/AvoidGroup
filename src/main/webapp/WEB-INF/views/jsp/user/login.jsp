@@ -25,18 +25,18 @@
 				<div class="col-lg-6">
 					<div class="login-sec">
 						<ul class="sign-control">
-						<c:if test="${in=='yes'}">
-							<li data-tab="tab-1" class="current"><a href="#" title="">Sign
+							<c:if test="${in=='yes'}">
+								<li data-tab="tab-1" class="current"><a href="#" title="">Sign
 										in</a></li>
-							<li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
-						</c:if>
-						<c:if test="${in!='yes'}">
-							<li data-tab="tab-1" ><a href="#" title="">Sign
-										in</a></li>
-							<li data-tab="tab-2" class="current"><a href="#" title="">Sign up</a></li>
-						</c:if>
-							
-							
+								<li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+							</c:if>
+							<c:if test="${in!='yes'}">
+								<li data-tab="tab-1"><a href="#" title="">Sign in</a></li>
+								<li data-tab="tab-2" class="current"><a href="#" title="">Sign
+										up</a></li>
+							</c:if>
+
+
 						</ul>
 						<div class="sign_in_sec current" id="tab-1">
 
@@ -152,8 +152,8 @@
 										<div class="col-lg-12 no-pdd">
 											<div class="checky-sec st2">
 												<div class="fgt-sec">
-													<input type="checkbox" name="cc" id="c2" required="required"> <label
-														for="c2"> <span></span>
+													<input type="checkbox" name="cc" id="c2"
+														required="required"> <label for="c2"> <span></span>
 													</label> <small>Yes, I understand and agree to the InAvonts
 														Terms & Conditions.</small>
 												</div>

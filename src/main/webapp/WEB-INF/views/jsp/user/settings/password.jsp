@@ -3,38 +3,35 @@
 <div class="tab-pane fade" id="nav-password" role="tabpanel"
 	aria-labelledby="nav-password-tab">
 	<div class="acc-setting">
-		<h3>Account Setting</h3>
-		<form>
+		<h3>Password Setting</h3>
+		<form class="radio-form"
+			action="<c:url value='/setting/changepassword'/>" method="post">
 			<div class="cp-field">
 				<h5>Old Password</h5>
 				<div class="cpp-fiel">
-					<input type="text" name="old-password" placeholder="Old Password">
-					<i class="fa fa-lock"></i>
+					<input type="password" name="oldpassword"
+						placeholder="Old Password"> <i class="fa fa-lock"></i>
 				</div>
 			</div>
 			<div class="cp-field">
 				<h5>New Password</h5>
 				<div class="cpp-fiel">
-					<input type="text" name="new-password" placeholder="New Password">
-					<i class="fa fa-lock"></i>
+					<input type="password" name="newpassword"
+						placeholder="New Password"> <i class="fa fa-lock"></i>
 				</div>
 			</div>
 			<div class="cp-field">
 				<h5>Repeat Password</h5>
 				<div class="cpp-fiel">
-					<input type="text" name="repeat-password"
+					<input type="password" name="repeatpassword"
 						placeholder="Repeat Password"> <i class="fa fa-lock"></i>
 				</div>
 			</div>
-			<div class="cp-field">
-				<h5>
-					<a href="#" title="">Forgot Password?</a>
-				</h5>
-			</div>
+
 			<div class="save-stngs pd2">
 				<ul>
-					<li><button type="submit">Save Setting</button></li>
-					<li><button type="submit">Restore Setting</button></li>
+					<li><button class="btn botaopreto" type="submit">Save</button></li>
+
 				</ul>
 			</div>
 			<!--save-stngs end-->

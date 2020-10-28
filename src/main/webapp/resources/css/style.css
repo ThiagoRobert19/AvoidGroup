@@ -6138,6 +6138,16 @@ a:hover {
     color: #fff;
     background-color: #000000;
 }
+.privabtns button{
+	margin-right: 15px;
+	padding: 8px 25px;
+	color: #000000;
+	border:1px solid #e5e5e5;
+}
+.privabtns button:hover{
+    color: #fff;
+    background-color: #000000;
+}
 .privac{
 	background-color: #fff;
 	height: 560px;

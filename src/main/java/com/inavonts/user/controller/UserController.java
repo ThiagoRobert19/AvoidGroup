@@ -157,13 +157,7 @@ public class UserController {
 		return model;
 	}
 
-	@RequestMapping(value = { "/settings" }, method = RequestMethod.GET)
-	public ModelAndView settings(HttpServletRequest request, ModelAndView model) {
-		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-		model.addObject("userEntity", userEntity);
-		model.setViewName("user/settings/setting");
-		return model;
-	}
+	
 
 	@RequestMapping(value = { "/doLogin" }, method = RequestMethod.POST)
 	public ModelAndView doLogin(UserEntity userEntity, ModelAndView model, HttpSession session) {
