@@ -111,7 +111,7 @@
 						<div class="notification-box noti" id="notification">
 							<div class="nt-title">
 								<h4>Setting</h4>
-								<a href="<c:url value='/notification/clear'/>" title="">Clear all</a>
+								<a href="<c:url value='/notification/clearall'/>" title="">Clear all</a>
 							</div>
 							<div class="nott-list">
 								<c:forEach var="listNotification" items="${listNotification}">
@@ -123,7 +123,7 @@
 										</div>
 										<div class="notification-info">
 											<h3>
-												<a href="#" title="">${listNotification.follow}</a> ${listNotification.preview}
+												<a href="#" title="">${listNotification.follow.name}</a> ${listNotification.extra}
 											</h3>
 											<span>${listNotification.dateOfNotification} ${listNotification.timeOfNotification}</span>
 										</div>

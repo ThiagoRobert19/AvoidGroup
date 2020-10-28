@@ -50,9 +50,15 @@ public class FriendController {
 	@RequestMapping(value = { "/follow/{id}" }, method = RequestMethod.GET)
 	public ModelAndView follow(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		
+		if(userEntity.getId().equals(Integer.parseInt(id))){
+			model.setViewName("redirect:/");
+			return model;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if(daoUser.exist(UserEntity.class, map, "and")){
+			
 			user=daoUser.findByProperty(UserEntity.class, map, "and");
 			
 			if(user.getPerfil().equals("public")){
@@ -80,9 +86,11 @@ public class FriendController {
 				notificationEntity.setFollow(userEntity);
 				notificationEntity.setFollowRequest(followRequestEntity);
 				notificationEntity.setExtra("Started Following you");
+				notificationEntity.setTipo("follow");
 				
 				daoNotification.saveUpdate(notificationEntity);
-				
+				model.setViewName("redirect:/user/view/"+id);
+				return model;
 			}
 			if(user.getPerfil().equals("private")){
 				String uuid = Common.geraUUID();
@@ -105,8 +113,11 @@ public class FriendController {
 				notificationEntity.setFollow(userEntity);
 				notificationEntity.setFollowRequest(followRequestEntity);
 				notificationEntity.setExtra("Requested to Follow You");
+				notificationEntity.setTipo("follow");
 				
 				daoNotification.saveUpdate(notificationEntity);
+				model.setViewName("redirect:/user/view/"+id);
+				return model;
 			
 			}
 			

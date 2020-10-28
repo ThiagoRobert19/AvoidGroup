@@ -30,6 +30,8 @@ public class UserNotificationEntity implements Serializable, EntidadeBase, Compa
 	private String extra;//yourequest , requested
 	
 	private String status;//unread read
+	
+	private String tipo;//follow , team, publication
 	@OneToOne
 	@JoinColumn(name = "userEntity_id")
 	private UserEntity userEntity;//pessoa logada
@@ -56,6 +58,16 @@ public class UserNotificationEntity implements Serializable, EntidadeBase, Compa
 	}
 
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

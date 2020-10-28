@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
+import com.inavonts.friendship.model.FollowRequestEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
 import com.inavonts.util.Common;
@@ -43,6 +44,10 @@ public class UserController {
 	private List<UserNotificationEntity> listNotification;
 	@Autowired
 	private GenericDao<UserNotificationEntity> daoNotification;
+	@Autowired
+	private FollowRequestEntity followRequestEntity;
+	@Autowired
+	private GenericDao<FollowRequestEntity> daoRequest;
 
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request, ModelAndView model) {
@@ -114,15 +119,26 @@ public class UserController {
 
 				if (daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("unfollow");
+					
 				}
 				if (daoFollow.exist(FollowEntity.class, mapfollowed, "and")
 						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("followback");
+					
 				}
 				if (!daoFollow.exist(FollowEntity.class, mapfollowed, "and")
 						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("follow");
+					
 				}
+				Map<String, Object> maprequest = new HashMap<String, Object>();
+				maprequest.put("follower.id", userEntity.getId());
+				maprequest.put("followed.id", Integer.parseInt(id));
+				maprequest.put("status", "pending");
+				if(daoRequest.exist(FollowRequestEntity.class, maprequest, "and")){
+					user.setFollow("requested");
+				}
+				
 
 				model.addObject("userEntity", user);
 				model.setViewName("user/view/profile");

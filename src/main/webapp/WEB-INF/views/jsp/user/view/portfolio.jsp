@@ -4,10 +4,7 @@
 <div class="product-feed-tab" id="portfolio-dd">
 	<div class="portfolio-gallery-sec">
 		<h3>Portfolio</h3>
-		<div class="portfolio-btn">
-			<a href="#" title=""><i class="fas fa-plus-square"></i> Add
-				Portfolio</a>
-		</div>
+		
 		<div class="gallery_pf">
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-6 col-6">

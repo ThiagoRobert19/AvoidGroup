@@ -26,11 +26,11 @@
 								<a href="#" title="">Status</a>
 							</div>
 							<!--star-descp end-->
-							<c:if test="${userEntity.perfil !='private'}">
+							<c:if test="${userEntity.perfil =='private' && (userEntity.follow =='follow' || userEntity.follow=='followback')}">
 
 								<img src="<c:url value='/resources/images/private.png'/>" alt="">
 							</c:if>
-							<c:if test="${userEntity.perfil =='private'}">
+							<c:if test="${userEntity.perfil =='public' || userEntity.follow =='unfollow'}">
 								<div class="tab-feed st2 settingjb">
 									<ul>
 										<li data-tab="feed-dd" class="active"><a href="#"
@@ -60,7 +60,7 @@
 							<!-- tab-feed end-->
 						</div>
 						<!--user-tab-sec end-->
-						<c:if test="${userEntity.perfil =='private'}">
+						<c:if test="${userEntity.perfil =='public' || userEntity.follow =='unfollow'}">
 							<c:import url="/WEB-INF/views/jsp/user/view/feed.jsp" />
 							<c:import url="/WEB-INF/views/jsp/user/view/info.jsp" />
 							<c:import url="/WEB-INF/views/jsp/user/view/portfolio.jsp" />

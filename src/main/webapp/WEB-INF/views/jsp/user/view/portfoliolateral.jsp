@@ -15,9 +15,13 @@
 				<a href="<c:url value='/friend/follow/${userEntity.id}'/>"
 					title=""><i class="fas fa-share"></i> Follow Back</a>
 			</c:if>
+			<c:if test="${userEntity.follow =='requested'}">
+				<a href="<c:url value='/friend/cancelrequest/${userEntity.id}'/>"
+					title=""><i class="fas fa-share"></i>Cancel Request</a>
+			</c:if>
 
 		</div>
-		<c:if test="${userEntity.perfil =='private'}">
+		<c:if test="${userEntity.perfil =='public' || (userEntity.follow =='unfollow')}">
 			<div class="widget widget-portfolio">
 				<div class="wd-heady">
 					<h3>Portfolio</h3>
