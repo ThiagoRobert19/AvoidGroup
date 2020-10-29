@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
 import com.inavonts.dao.GenericDao;
+import com.inavonts.user.model.UserEntity;
 
 
 @Component("Common")
@@ -169,6 +170,18 @@ public class Common {
 
 	}
 */
+	public boolean checkOnline(HttpServletRequest request) {
+		UserEntity user = new UserEntity();
+		user = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		if (user == null) {
+
+			return false;
+		} else {
+
+			return true;
+		}
+
+	}
 	public Date RandomDateRound(Date min) throws ParseException {
 
 		Calendar calMin = Calendar.getInstance();
