@@ -14,8 +14,8 @@
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
 				<ul class="flw-status">
-					<li><span>Following</span> <b>34</b></li>
-					<li><span>Followers</span> <b>155</b></li>
+					<li><span>Following</span> <b>${countfollowing}</b></li>
+					<li><span>Followers</span> <b>${countfollowers}</b></li>
 				</ul>
 			</div>
 			<!--user_pro_status end-->

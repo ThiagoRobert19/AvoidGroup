@@ -31,7 +31,7 @@ public class FollowRequestEntity implements Serializable, EntidadeBase{
 	@JoinColumn(name = "followed_id")
 	private UserEntity followed;//seguido
 
-	private String status;//approved, pending, recused
+	private String status;//approved, pending, denied, cancel
 
 	
 	

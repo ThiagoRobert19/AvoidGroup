@@ -139,8 +139,15 @@ public class UserController {
 					user.setFollow("requested");
 				}
 				
+				
+				int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
+				int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
 
+				
 				model.addObject("userEntity", user);
+				
+				model.addObject("countfollowers", countfollowers);
+				model.addObject("countfollowing", countfollowing);
 				model.setViewName("user/view/profile");
 				return model;
 			} else {
@@ -168,6 +175,17 @@ public class UserController {
 	@RequestMapping(value = { "/myprofile" }, method = RequestMethod.GET)
 	public ModelAndView myprofile(HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		String id= userEntity.getId().toString();
+		int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
+		int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
+
+		
+	
+		
+		model.addObject("countfollowers", countfollowers);
+		model.addObject("countfollowing", countfollowing);
+		
+		
 		model.addObject("userEntity", userEntity);
 		model.setViewName("user/myprofile/myprofile");
 		return model;

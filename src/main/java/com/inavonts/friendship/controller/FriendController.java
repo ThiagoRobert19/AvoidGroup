@@ -26,10 +26,10 @@ public class FriendController {
 
 	@Autowired
 	private UserEntity userEntity;
-	
+
 	@Autowired
 	private UserEntity user;
-	
+
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 	@Autowired
@@ -40,44 +40,87 @@ public class FriendController {
 	private UserNotificationEntity notificationEntity;
 	@Autowired
 	private GenericDao<UserNotificationEntity> daoNotification;
-	
+
 	@Autowired
 	private FollowRequestEntity followRequestEntity;
 	@Autowired
 	private GenericDao<FollowRequestEntity> daoRequest;
-	
-	
-	@RequestMapping(value = { "/follow/{id}" }, method = RequestMethod.GET)
-	public ModelAndView follow(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
+
+	@RequestMapping(value = { "/cancelrequest/{id}" }, method = RequestMethod.GET)
+	public ModelAndView cancelrequest(@PathVariable(value = "id") String id, HttpServletRequest request,
+			ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-		
-		if(userEntity.getId().equals(Integer.parseInt(id))){
+
+		if (userEntity.getId().equals(Integer.parseInt(id))) {
 			model.setViewName("redirect:/");
 			return model;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
-		if(daoUser.exist(UserEntity.class, map, "and")){
-			
-			user=daoUser.findByProperty(UserEntity.class, map, "and");
-			
-			if(user.getPerfil().equals("public")){
+		if (daoUser.exist(UserEntity.class, map, "and")) {
+
+			user = daoUser.findByProperty(UserEntity.class, map, "and");
+
+			Map<String, Object> mapfollow = new HashMap<String, Object>();
+			mapfollow.put("followed.id", Integer.parseInt(id));
+			mapfollow.put("follower.id", userEntity.getId());
+			mapfollow.put("status", "pending");
+
+			followRequestEntity = daoRequest.findByProperty(FollowRequestEntity.class, mapfollow, "and");
+
+			Map<String, Object> mapnotification = new HashMap<String, Object>();
+			mapnotification.put("followRequest.id", followRequestEntity.getId());
+
+			if (daoNotification.exist(UserNotificationEntity.class, mapnotification, "and")) {
+
+				daoNotification.delete(UserNotificationEntity.class, mapnotification, "and");
+			}
+
+			followRequestEntity.setStatus("cancel");
+
+			daoRequest.saveUpdate(followRequestEntity);
+
+			model.setViewName("redirect:/user/view/" + id);
+
+			return model;
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
+
+	}
+
+	@RequestMapping(value = { "/follow/{id}" }, method = RequestMethod.GET)
+	public ModelAndView follow(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+		if (userEntity.getId().equals(Integer.parseInt(id))) {
+			model.setViewName("redirect:/");
+			return model;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(id));
+		if (daoUser.exist(UserEntity.class, map, "and")) {
+
+			user = daoUser.findByProperty(UserEntity.class, map, "and");
+
+			if (user.getPerfil().equals("public")) {
 				followEntity.setFollowed(user);
 				followEntity.setFollower(userEntity);
 				daoFollow.saveUpdate(followEntity);
-				
+
 				String uuid = Common.geraUUID();
 				followRequestEntity.setFollowed(user);
 				followRequestEntity.setFollower(userEntity);
 				followRequestEntity.setUuid(uuid);
 				followRequestEntity.setStatus("approved");
 				daoRequest.saveUpdate(followRequestEntity);
-				
+
 				Map<String, Object> mapuuid = new HashMap<String, Object>();
 				mapuuid.put("uuid", uuid);
-				
+
 				followRequestEntity = daoRequest.findByProperty(FollowRequestEntity.class, mapuuid, "and");
-				
+
 				Calendar date1 = Calendar.getInstance();
 				notificationEntity.setDateOfNotification(date1.getTime());
 				notificationEntity.setTimeOfNotification(date1.getTime());
@@ -87,24 +130,24 @@ public class FriendController {
 				notificationEntity.setFollowRequest(followRequestEntity);
 				notificationEntity.setExtra("Started Following you");
 				notificationEntity.setTipo("follow");
-				
+
 				daoNotification.saveUpdate(notificationEntity);
-				model.setViewName("redirect:/user/view/"+id);
+				model.setViewName("redirect:/user/view/" + id);
 				return model;
 			}
-			if(user.getPerfil().equals("private")){
+			if (user.getPerfil().equals("private")) {
 				String uuid = Common.geraUUID();
 				followRequestEntity.setFollowed(user);
 				followRequestEntity.setFollower(userEntity);
 				followRequestEntity.setUuid(uuid);
 				followRequestEntity.setStatus("pending");
 				daoRequest.saveUpdate(followRequestEntity);
-				
+
 				Map<String, Object> mapuuid = new HashMap<String, Object>();
 				mapuuid.put("uuid", uuid);
-				
+
 				followRequestEntity = daoRequest.findByProperty(FollowRequestEntity.class, mapuuid, "and");
-				
+
 				Calendar date1 = Calendar.getInstance();
 				notificationEntity.setDateOfNotification(date1.getTime());
 				notificationEntity.setTimeOfNotification(date1.getTime());
@@ -114,19 +157,60 @@ public class FriendController {
 				notificationEntity.setFollowRequest(followRequestEntity);
 				notificationEntity.setExtra("Requested to Follow You");
 				notificationEntity.setTipo("follow");
-				
+
 				daoNotification.saveUpdate(notificationEntity);
-				model.setViewName("redirect:/user/view/"+id);
+				model.setViewName("redirect:/user/view/" + id);
 				return model;
-			
+
 			}
-			
-			
+
 			return model;
-		}else{
+		} else {
 			model.setViewName("redirect:/");
 			return model;
 		}
-	
+
+	}
+
+	@RequestMapping(value = { "/unfollow/{id}" }, method = RequestMethod.GET)
+	public ModelAndView unfollow(@PathVariable(value = "id") String id, HttpServletRequest request,
+			ModelAndView model) {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+		if (userEntity.getId().equals(Integer.parseInt(id))) {
+			model.setViewName("redirect:/");
+			return model;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(id));
+		if (daoUser.exist(UserEntity.class, map, "and")) {
+
+			user = daoUser.findByProperty(UserEntity.class, map, "and");
+
+			Map<String, Object> mapfollow = new HashMap<String, Object>();
+			mapfollow.put("followed.id", Integer.parseInt(id));
+			mapfollow.put("follower.id", userEntity.getId());
+
+			daoFollow.delete(FollowEntity.class, mapfollow, "and");
+
+			Calendar date1 = Calendar.getInstance();
+			notificationEntity.setDateOfNotification(date1.getTime());
+			notificationEntity.setTimeOfNotification(date1.getTime());
+			notificationEntity.setUserEntity(user);
+			notificationEntity.setStatus("unread");
+			notificationEntity.setFollow(userEntity);
+			notificationEntity.setExtra("Stoped Following you");
+			notificationEntity.setTipo("stopped");
+
+			daoNotification.saveUpdate(notificationEntity);
+
+			model.setViewName("redirect:/user/view/" + id);
+
+			return model;
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
+
 	}
 }
