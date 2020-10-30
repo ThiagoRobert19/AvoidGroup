@@ -29,9 +29,8 @@ public class AWSAPI {
 	static final String key_name = "foto.png";
 	static final String filepath = "C://Desenvolvimento//imagem.png";
 
-	
-	//http://inavontsbucket.s3.amazonaws.com/foto.png access denied
-	
+	// http://inavontsbucket.s3.amazonaws.com/foto.png access denied
+
 	final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials))
 			.withRegion(Regions.US_EAST_2).build();
 

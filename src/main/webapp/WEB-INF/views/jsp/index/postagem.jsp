@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <div class="posts-section">
-	<!--div class="post-bar">
+	<div class="post-bar">
 		<div class="post_topbar">
 			<div class="usy-dt">
 				<img src="images/resources/us-pic.png" alt="">
@@ -53,18 +53,44 @@
 			</ul>
 		</div>
 		<div class="job-status-bar">
-			<ul class="like-com">
-				<li><a href="#"><i class="fas fa-heart"></i> Like</a> <img
-					src="images/liked-img.png" alt=""> <span>25</span></li>
-				<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
-						Comment 15</a></li>
-			</ul>
-			<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+
+			<a href="#" ><i class="fas fa-heart"></i> Like 25</a>
+			
+			<a href="#" id="dropComment" onClick="carregarComentarios(${lista.id})" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment</a> 
+			<input type="hidden" id="idPub${lista.id}" value="${lista.id}">
+			
+			<a href="#"><i class="fas fa-share"></i>Shares 50</a>
+			
+			
+			<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5"
+				aria-labelledby="gedf-drop1">
+
+
+				<form action="<c:url value='/comment/addCommentPublication'/>"
+					method="post">
+					<input type="hidden" name="publicationID" value="${lista.id}">
+					<textarea class="form-control" rows="3" placeholder="Comment"
+						name="content"></textarea>
+
+
+
+					<button class="float-right" type="submit">
+						Send
+					</button>
+
+				</form>
+				<br> <br>
+
+				<div class="container">
+					<ul id="listCa${lista.id}">
+
+					</ul>
+				</div>
+			</div>
 		</div>
-	</div-->
+
+	</div>
 	<div id="publicaqui"></div>
-
-
 
 	<!--post-bar end-->
 	<div class="top-profiles">
@@ -159,22 +185,24 @@
 										+ '</div>'
 										+ '</div>'
 										+ '<div class="job_descp">'
-											+ '<h3>'+ jsonObj[i].publisher.userName+ '</h3>'
-											+ '<p>'+ jsonObj[i].content+ '</p>'
-											+ '<ul class="skill-tags">'
-												+'<li><a href="#" title="">HTML</a></li>'
-												+'<li><a href="#" title="">PHP</a></li>'
-												+'<li><a href="#" title="">JAVA</a></li>'
-											+ '</ul>'
+										+ '<h3>'
+										+ jsonObj[i].publisher.userName
+										+ '</h3>'
+										+ '<p>'
+										+ jsonObj[i].content
+										+ '</p>'
+										+ '<ul class="skill-tags">'
+										+ '<li><a href="#" title="">HTML</a></li>'
+										+ '<li><a href="#" title="">PHP</a></li>'
+										+ '<li><a href="#" title="">JAVA</a></li>'
+										+ '</ul>'
 										+ '</div>'
 										+ '<div class="job-status-bar">'
-											+ '<ul class="like-com">'
-												+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
-												+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
-												+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
-											+ '</ul>' 
-										+ '</div>'
-								+ '</div>'
+										+ '<ul class="like-com">'
+										+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
+										+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
+										+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
+										+ '</ul>' + '</div>' + '</div>'
 
 						);
 
