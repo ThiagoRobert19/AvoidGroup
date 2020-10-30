@@ -28,9 +28,6 @@ public class FriendController {
 	private UserEntity userEntity;
 
 	@Autowired
-	private UserEntity user;
-
-	@Autowired
 	private GenericDao<UserEntity> daoUser;
 	@Autowired
 	private FollowEntity followEntity;
@@ -58,8 +55,6 @@ public class FriendController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if (daoUser.exist(UserEntity.class, map, "and")) {
-
-			user = daoUser.findByProperty(UserEntity.class, map, "and");
 
 			Map<String, Object> mapfollow = new HashMap<String, Object>();
 			mapfollow.put("followed.id", Integer.parseInt(id));
@@ -93,22 +88,28 @@ public class FriendController {
 	@RequestMapping(value = { "/follow/{id}" }, method = RequestMethod.GET)
 	public ModelAndView follow(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-
+		System.out.println("ID: " + id);
 		if (userEntity.getId().equals(Integer.parseInt(id))) {
 			model.setViewName("redirect:/");
 			return model;
 		}
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if (daoUser.exist(UserEntity.class, map, "and")) {
-
+			System.out.println("Existe");
+			UserEntity user = new UserEntity();
 			user = daoUser.findByProperty(UserEntity.class, map, "and");
-
+			System.out.println("User que buscou: " + user.getName());
+			System.out.println("User perfil: " + user.getPerfil());
 			if (user.getPerfil().equals("public")) {
-				followEntity.setFollowed(user);
-				followEntity.setFollower(userEntity);
-				daoFollow.saveUpdate(followEntity);
+				FollowEntity follow = new FollowEntity();
+				follow.setFollowed(user);
+				follow.setFollower(userEntity);
 
+				System.out.println("Follow montado: " + follow.toString());
+				daoFollow.saveUpdate(follow);
+				System.out.println("Salvou follow ");
 				String uuid = Common.geraUUID();
 				followRequestEntity.setFollowed(user);
 				followRequestEntity.setFollower(userEntity);
@@ -184,7 +185,7 @@ public class FriendController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if (daoUser.exist(UserEntity.class, map, "and")) {
-
+			UserEntity user = new UserEntity();
 			user = daoUser.findByProperty(UserEntity.class, map, "and");
 
 			Map<String, Object> mapfollow = new HashMap<String, Object>();

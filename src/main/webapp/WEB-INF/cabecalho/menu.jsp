@@ -123,16 +123,16 @@
 										</div>
 										<div class="notification-info">
 											<h3>
-												<a href="#" title="">${listNotification.follow.name}</a> ${listNotification.extra}
+												<a href="<c:url value='/notification/read/${listNotification.id}'/>" title="">${listNotification.follow.name}</a> ${listNotification.extra}
 											</h3>
-											<span>${listNotification.dateOfNotification} ${listNotification.timeOfNotification}</span>
+											<span>${listNotification.dateOfNotification} </span>
 										</div>
 										<!--notification-info -->
 									</div>
 								</c:forEach>
-								<!--div class="view-all-nots">
+								<div class="view-all-nots">
 									<a href="<c:url value='/notification/all'/>" title="">View All Notification</a>
-								</div-->
+								</div>
 							</div>
 							<!--nott-list end-->
 						</div> <!--notification-box end--></li>

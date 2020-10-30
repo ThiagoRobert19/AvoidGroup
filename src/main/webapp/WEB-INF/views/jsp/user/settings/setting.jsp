@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:import url="/WEB-INF/cabecalho/header.jsp" />
 <c:import url="/WEB-INF/cabecalho/menu.jsp" />
-
-										
-						
 <section class="profile-account-setting">
 
 			<div class="container">
