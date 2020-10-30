@@ -70,50 +70,50 @@
 				var publisherName = escapeHTML(jsonObj[i].publisher.name);
 
 				$("#publicaqui")
-						.append(
-								'<div class="post-bar"> '
+						.append('<div class="post-bar"> '
 										+ '<div class="post_topbar">'
-										+ '<div class="usy-dt">'
-										+ '<img src="<c:url value="/resources/images/resources/user3.png"/>" alt="">'
-										+ '<div class="usy-name">' + '<h3>'
-										+ publisherName
-										+ '</h3>'
-										+ '	<span>'
-										+ jsonObj[i].dateOfPublication
-										+ '</span>'
-										+ '	<span>'
-										+ jsonObj[i].timeOfPublication
-										+ '</span>'
+												+ '<div class="usy-dt">'
+													+ '<img src="<c:url value="/resources/images/resources/user3.png"/>" alt="">'
+													+ '<div class="usy-name">' + '<h3>'
+													+ publisherName
+														+ '</h3>'
+														+ '	<span>'
+														+ jsonObj[i].dateOfPublication
+														+ '</span>'
+														+ '	<span>'
+														+ jsonObj[i].timeOfPublication
+														+ '</span>'
+													+ '</div>'
+												+ '</div>'
+												+ '<div class="ed-opts">'
+													+ '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>'
+													+ '<ul class="ed-options">'
+														+ '<li><a href="#" title="">Edit Post</a></li>'
+														+ '<li><a href="#" title="">Unsaved</a></li>'
+														+ '<li><a href="#" title="">Unbid</a></li>'
+														+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'"/>" title="">Delete</a></li>'
+														+ '<li><a href="#" title="">Hide</a></li>'
+													+ '</ul>'
+												+ '</div>'
 										+ '</div>'
-										+ '</div>'
-										+ '<div class="ed-opts">'
-										+ '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>'
-										+ '<ul class="ed-options">'
-										+ '<li><a href="#" title="">Edit Post</a></li>'
-										+ '<li><a href="#" title="">Unsaved</a></li>'
-										+ '<li><a href="#" title="">Unbid</a></li>'
-										+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'"/>" title="">Delete</a></li>'
-										+ '<li><a href="#" title="">Hide</a></li>'
-										+ '</ul>'
-										+ '</div>'
-										+ '</div>'
-
 										+ '<div class="job_descp">'
-										+ '<h3>'
-										+ jsonObj[i].publisher.userName
-										+ '</h3>'
-
-										+ '<p>'
-										+ jsonObj[i].content
-										+ '</p>'
-
+												+ '<h3>'
+												+ jsonObj[i].publisher.userName
+												+ '</h3>'
+		
+												+ '<p>'
+												+ jsonObj[i].content
+												+ '</p>'
+	
 										+ '</div>'
 										+ '<div class="job-status-bar">'
-										+ '<ul class="like-com">'
-										+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
-										+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
-										+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
-										+ '</ul>' + '</div>' + '</div>'
+												+ '<ul class="like-com">'
+												+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
+												+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
+												+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
+												+ '</ul>' 
+										 +'</div>' 
+								+ '</div>'
 
 						);
 
