@@ -15,6 +15,12 @@
 
 	<dependencies>
 		<!-- JAVAX -->
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.11.891</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.el</groupId>
@@ -22,13 +28,13 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
-<dependency>
-    <groupId>javax.servlet.jsp</groupId>
-    <artifactId>jsp-api</artifactId>
-    <version>2.0</version>
-    <scope>provided</scope>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -127,13 +133,13 @@
 		</dependency>
 		<!-- End Hibernate -->
 		<!-- PostGreSql -->
-		
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>42.2.17</version>
-</dependency>
-		
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.17</version>
+		</dependency>
+
 		<!-- End PostGreSql -->
 
 		<!-- NOVAS DEPENDENCIAS -->
@@ -192,28 +198,28 @@
 
 		<!-- https://mvnrepository.com/artifact/com.syncthemall/dropbox-java-sdk -->
 		<!-- https://mvnrepository.com/artifact/com.dropbox.core/dropbox-core-sdk -->
-<dependency>
-    <groupId>com.dropbox.core</groupId>
-    <artifactId>dropbox-core-sdk</artifactId>
-    <version>3.1.5</version>
-</dependency>
+		<dependency>
+			<groupId>com.dropbox.core</groupId>
+			<artifactId>dropbox-core-sdk</artifactId>
+			<version>3.1.5</version>
+		</dependency>
 
 		<!-- STRIPE API -->
-<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
-<dependency>
-    <groupId>com.stripe</groupId>
-    <artifactId>stripe-java</artifactId>
-    <version>20.17.0</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>20.17.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-websocket</artifactId>
-    <version>5.0.4.RELEASE</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.0.4.RELEASE</version>
+		</dependency>
 
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
@@ -222,19 +228,19 @@
 			<artifactId>spring-messaging</artifactId>
 			<version>5.1.9.RELEASE</version>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>1.7.25</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.5</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
 
 
 	</dependencies>

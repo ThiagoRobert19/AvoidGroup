@@ -24,41 +24,16 @@ public class mainTeste {
 
 	public static void main(String args[]) throws Exception {
 
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
+		AWSAPI aws = new AWSAPI();
+		System.out.println("tenta upload");
+		aws.uploadfile();
+		System.out.println("fez");
 		
-		String saltString = salt.toString();
-		String saltString2 = salt.toString();
-		System.out.println(saltString);
-		System.out.println(saltString2);
-		
-		
-		
-		
+		aws.list();
+		//aws.delete();
+		System.out.println("ver lista");
+		aws.list();
 	
-	//	String senha = Crypt.criptografar("Mondial19!");
-
-	//	String senha2 = Crypt.criptografar("Mondial19!");
-
-	/*	
-		if(senha.hashCode()==senha2.hashCode()){
-			System.out.println("é igual hash");
-		}else{
-			System.out.println("é diferente  hash");
-		}
-		
-
-		if (senha.equals(senha2)) {
-			System.out.println("Sao iguais");
-			System.out.println("Senha1: " + senha);
-			System.out.println("Senha2: " + senha2);
-		} else {
-			System.out.println("Diferentes");
-			System.out.println("Senha1: " + senha);
-			System.out.println("Senha2: " + senha2);
-		}
-		*/
 	}
 
 }
