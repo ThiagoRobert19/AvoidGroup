@@ -1,4 +1,4 @@
-package com.inavonts.model;
+package com.inavonts.publication.model;
 
 import java.io.Serializable;
 import java.util.Calendar;

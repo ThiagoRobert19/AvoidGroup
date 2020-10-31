@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.inavonts.dao.GenericDao;
-import com.inavonts.model.GeneralCommentEntity;
-import com.inavonts.model.GeneralLikeEntity;
-import com.inavonts.model.GeneralPublicationEntity;
+import com.inavonts.publication.model.GeneralCommentEntity;
+import com.inavonts.publication.model.GeneralLikeEntity;
+import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 
 

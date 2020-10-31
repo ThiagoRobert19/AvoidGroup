@@ -54,14 +54,13 @@
 		</div>
 		<div class="job-status-bar">
 
-			<a href="#" ><i class="fas fa-heart"></i> Like 25</a>
-			
-			<a href="#" id="dropComment" onClick="carregarComentarios(${lista.id})" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment</a> 
+			<ul class="like-com">
+					<li><a href="#" ><i class="fas fa-heart"></i> Like 25</a></li>
+					<li><a href="#"><i class="fas fa-share"></i>Shares 50</a></li>
+			</ul>
+
+			<a href="#" id="dropComment" onClick="carregarComentarios(${lista.id})" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment 30</a> 
 			<input type="hidden" id="idPub${lista.id}" value="${lista.id}">
-			
-			<a href="#"><i class="fas fa-share"></i>Shares 50</a>
-			
-			
 			<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5"
 				aria-labelledby="gedf-drop1">
 
@@ -90,8 +89,9 @@
 		</div>
 
 	</div>
+	<input type="hidden" name="userID" value="${clienteLogado.id}"/>
 	<div id="publicaqui"></div>
-
+	<div id="comentarioaqui"></div>
 	<!--post-bar end-->
 	<div class="top-profiles">
 		<div class="pf-hd">
@@ -152,9 +152,10 @@
 				var photoPublisher = jsonObj[i].publisher.photoName;
 				//var photoSharer = jsonObj[i].sharer.photoName;
 
-				var content = jsonObj[i].content;
+				var content=escapeHTML(jsonObj[i].content);
 
 				var publisherName = escapeHTML(jsonObj[i].publisher.name);
+				var publisherUserName = escapeHTML(jsonObj[i].publisher.userName);
 
 				$("#publicaqui")
 						.append(
@@ -186,10 +187,10 @@
 										+ '</div>'
 										+ '<div class="job_descp">'
 										+ '<h3>'
-										+ jsonObj[i].publisher.userName
+										+ publisherUserName
 										+ '</h3>'
 										+ '<p>'
-										+ jsonObj[i].content
+										+ content
 										+ '</p>'
 										+ '<ul class="skill-tags">'
 										+ '<li><a href="#" title="">HTML</a></li>'
@@ -198,11 +199,24 @@
 										+ '</ul>'
 										+ '</div>'
 										+ '<div class="job-status-bar">'
-										+ '<ul class="like-com">'
-										+ '<li><a href="#"><i class="fas fa-heart"></i> Like 25</a> </li>'
-										+ '<li><a href="#"><i class="fas fa-comment-alt"></i>Comment 15</a></li>'
-										+ '<li><a href="#"><i class="fas fa-share"></i>Share 15</a></li>'
-										+ '</ul>' + '</div>' + '</div>'
+										+'<ul class="like-com">'
+										+'<li><a href="#" ><i class="fas fa-heart"></i> Like 25</a></li>'
+										+'<li><a href="#"><i class="fas fa-share"></i>Shares 50</a></li>'
+										+'</ul>'
+										+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment 30</a>' 
+										+'<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5" aria-labelledby="gedf-drop1">'
+											+'<form action="<c:url value="/comment/addCommentPublication"/>" method="post">'
+												+'<input type="hidden" name="publicationID" value="'+ jsonObj[i].id+'">'
+												+'<textarea class="form-control" rows="3" placeholder="Comment" name="content"></textarea>'
+												+'<button class="float-right" type="submit">Send</button>'
+											+'</form>'
+											+'<br> <br>'
+											+'<div class="container">'
+												+'<ul id="listCa'+ jsonObj[i].id+'"></ul>'
+											+'</div>'
+										+'</div>'
+										+ '</div>' 
+										+ '</div>'
 
 						);
 
@@ -218,4 +232,88 @@
 
 	xmlhttp.send(null);
 </script>
+
+<script>
+	
+	function carregarComentarios(idPub) {
+		
+		$("#listCa" + idPub).empty();
+		
+		
+		var currentLocation = window.location;
+
+		var url = currentLocation + "comment/viewComments/" + idPub;
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest(); //for IE7+, Firefox, Chrome, Opera, Safari
+		} else {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //for IE6, IE5
+		}
+
+		xmlhttp.open("GET", url, true);
+
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+
+				var jsonObj = JSON.parse(xmlhttp.responseText);
+
+				for (i = 0; i < jsonObj.length; i++) {
+					var commenterID = jsonObj[i].commenter.id;
+					var userID = document.getElementById("userID").value;
+					
+					var timecomment =jsonObj[i].timeOfComment ; 
+					var datecomment =jsonObj[i].dateOfComment ; 
+					var content=escapeHTML(jsonObj[i].content);
+					
+					var name=escapeHTML(jsonObj[i].commenter.name);
+					
+					
+					if (commenterID == userID) {
+						
+						$("#listCa" + idPub)
+								.append(
+										'<li>'
+												+ '<hr> <img src="'+jsonObj[i].commenter.photo+'" height="50" alt="Avatar" class="rounded-circle">'
+												+ name
+												+ ' <br> '
+												+ datecomment + ' ' +timecomment
+												+ ' <br> '
+												+content
+												+ ' <br>'
+												+ '<a href="<c:url value="/comment/delete/'+jsonObj[i].id+'"/>"  class="button-comment button1-comment" >'
+												+ ' ' + 'delete' + '</a>'
+												+ '</li>');
+					} else {
+
+						$("#listCa" + idPub)
+								.append('<li>'
+												+ '<hr> <img src="'+jsonObj[i].commenter.photo+'" height="50" alt="Avatar" class="rounded-circle">'
+												+ ' '
+												+ name
+												+ ' <br> '
+												+ datecomment + ' ' +timecomment
+												+ ' <br> '
+												+content
+												+ '</li>');
+					}
+
+				}
+
+			}
+		};
+		function escapeHTML (unsafe_str) {
+		    return unsafe_str
+		      .replace(/&/g, '&amp;')
+		      .replace(/</g, '&lt;')
+		      .replace(/>/g, '&gt;')
+		      .replace(/\"/g, '&quot;')
+		      .replace(/\'/g, '&#39;')
+		      .replace(/\//g, '&#x2F;')
+		}
+
+		xmlhttp.send(null);
+
+	}
+</script>
+
 

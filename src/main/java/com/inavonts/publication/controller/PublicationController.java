@@ -1,4 +1,4 @@
-package com.inavonts.controller;
+package com.inavonts.publication.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
-import com.inavonts.model.GeneralCommentEntity;
-import com.inavonts.model.GeneralLikeEntity;
-import com.inavonts.model.GeneralPublicationEntity;
+import com.inavonts.publication.model.GeneralCommentEntity;
+import com.inavonts.publication.model.GeneralLikeEntity;
+import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.util.DropBoxUtil;
 import com.inavonts.util.PublicationUtil;
