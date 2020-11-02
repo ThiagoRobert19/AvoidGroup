@@ -47,9 +47,8 @@ public class CommentController {
 
 	@RequestMapping(value = "/addCommentPublication", method = RequestMethod.POST)
 	public ModelAndView addCommentPublication(String publicationID, GeneralCommentEntity comment,
-
 			HttpServletRequest request, ModelAndView model) {
-
+		System.out.println("Comentar");
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		publication = daoPublication.buscaId(GeneralPublicationEntity.class, Integer.parseInt(publicationID));
@@ -61,7 +60,7 @@ public class CommentController {
 		comment.setTimeOfComment(date1.getTime());
 
 		daoComment.saveUpdate(comment);
-
+		System.out.println("Comentou");
 		model.setViewName("redirect:/");
 
 		return model;
@@ -79,7 +78,7 @@ public class CommentController {
 		mapComment.put("publication.id", Integer.parseInt(idPub));
 
 		listComment = daoComment.listarProperty(GeneralCommentEntity.class, mapComment, "and");
-
+		System.out.println("Vamos ver o tamanho da lista: "+listComment.size());
 		Collections.sort(listComment);
 		Collections.reverse(listComment);
 

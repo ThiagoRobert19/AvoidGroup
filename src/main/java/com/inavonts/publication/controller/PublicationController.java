@@ -231,14 +231,37 @@ public class PublicationController {
 			listaPublication = pubUtil.getPublication(userEntity);
 
 		} else {
-
+			List<GeneralPublicationEntity> listPassa = new ArrayList<GeneralPublicationEntity>();
 			Map<String, Object> mapP = new HashMap<String, Object>();
 			mapP.put("publisher.id", userEntity.getId());
 
-			listaPublication = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
+			listPassa = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
 
-			Collections.sort(listaPublication);
-			Collections.reverse(listaPublication);
+			Collections.sort(listPassa);
+			Collections.reverse(listPassa);
+			
+			for(GeneralPublicationEntity pub : listPassa){
+				//	for(GeneralPublicationEntity pub : listaPublication){
+						Integer countComment = daoComment.count("GeneralCommentEntity", "publication.id",pub.getId().toString());
+						Integer countLike = daoLike.count("GeneralLikeEntity", "publication.id", pub.getId().toString());
+						Integer countShared = daoPublication.count2Properties("GeneralPublicationEntity", "shared", "yes", "originalID",pub.getId().toString());
+						
+						pub.setCountComment(countComment);
+						pub.setCountLike(countLike);
+						pub.setCountShared(countShared);
+						
+						Map<String, Object> mapLike = new HashMap<String, Object>();
+						mapLike.put("publication.id", pub.getId());
+						mapLike.put("liker.id", userEntity.getId());
+
+						if (daoLike.exist(GeneralLikeEntity.class, mapLike, "and")) {
+							pub.setYouLiked("yes");
+						} else {
+							pub.setYouLiked("no");
+						}
+						listaPublication.add(pub);
+					}
+			
 
 		}
 

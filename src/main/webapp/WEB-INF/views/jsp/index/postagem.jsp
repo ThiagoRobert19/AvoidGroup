@@ -81,7 +81,7 @@
 				<br> <br>
 
 				<div class="container">
-					<ul id="listCa${lista.id}">
+					<ul id="listCa">
 
 					</ul>
 				</div>
@@ -89,7 +89,7 @@
 		</div>
 
 	</div>
-	<input type="hidden" name="userID" value="${clienteLogado.id}"/>
+
 	<div id="publicaqui"></div>
 	<div id="comentarioaqui"></div>
 	<!--post-bar end-->
@@ -132,7 +132,7 @@
 </div>
 <script>
 	var currentLocation = window.location;
-	console.log("Hello world!");
+
 	var url = currentLocation + "publication/viewPublications";
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -203,17 +203,19 @@
 										+'<li><a href="#" ><i class="fas fa-heart"></i> Like 25</a></li>'
 										+'<li><a href="#"><i class="fas fa-share"></i>Shares 50</a></li>'
 										+'</ul>'
-										+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment 30</a>' 
+										+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment '+ jsonObj[i].countComment+' </a>' 
 										+'<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5" aria-labelledby="gedf-drop1">'
 											+'<form action="<c:url value="/comment/addCommentPublication"/>" method="post">'
 												+'<input type="hidden" name="publicationID" value="'+ jsonObj[i].id+'">'
 												+'<textarea class="form-control" rows="3" placeholder="Comment" name="content"></textarea>'
-												+'<button class="float-right" type="submit">Send</button>'
+												+'<button class="float-right btn botaopreto" type="submit">Send</button>'
 											+'</form>'
 											+'<br> <br>'
 											+'<div class="container">'
-												+'<ul id="listCa'+ jsonObj[i].id+'"></ul>'
-											+'</div>'
+											+'<ul id="listCa'+ jsonObj[i].id+'">'
+													
+											+'</ul>'
+										+'</div>'
 										+'</div>'
 										+ '</div>' 
 										+ '</div>'
@@ -259,7 +261,7 @@
 
 				for (i = 0; i < jsonObj.length; i++) {
 					var commenterID = jsonObj[i].commenter.id;
-					var userID = document.getElementById("userID").value;
+					var userID = ${clienteLogado.id};
 					
 					var timecomment =jsonObj[i].timeOfComment ; 
 					var datecomment =jsonObj[i].dateOfComment ; 
@@ -270,18 +272,17 @@
 					
 					if (commenterID == userID) {
 						
-						$("#listCa" + idPub)
+						$("#listCa"+ idPub)
 								.append(
 										'<li>'
 												+ '<hr> <img src="'+jsonObj[i].commenter.photo+'" height="50" alt="Avatar" class="rounded-circle">'
 												+ name
 												+ ' <br> '
-												+ datecomment + ' ' +timecomment
+												+timecomment
 												+ ' <br> '
-												+content
+												+'<input class="form-control"  placeholder="Comment" name="content" value="'+content+'" readonly />'
 												+ ' <br>'
-												+ '<a href="<c:url value="/comment/delete/'+jsonObj[i].id+'"/>"  class="button-comment button1-comment" >'
-												+ ' ' + 'delete' + '</a>'
+												+ '<a href="<c:url value="/comment/delete/'+jsonObj[i].id+'"/>"  class="btn botaopreto" > Delete </a>'
 												+ '</li>');
 					} else {
 
@@ -291,9 +292,9 @@
 												+ ' '
 												+ name
 												+ ' <br> '
-												+ datecomment + ' ' +timecomment
+												+timecomment
 												+ ' <br> '
-												+content
+												+'<input class="form-control"  placeholder="Comment" name="content" value="'+content+'" readonly />'
 												+ '</li>');
 					}
 
