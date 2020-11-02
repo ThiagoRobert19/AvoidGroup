@@ -15,6 +15,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
@@ -49,6 +50,21 @@ public class UserController {
 	@Autowired
 	private GenericDao<FollowRequestEntity> daoRequest;
 
+	
+	@RequestMapping(value = { "/changeimage" }, method = RequestMethod.POST)
+	public ModelAndView changeimage(UserEntity userEntity, ModelAndView model, HttpSession session, MultipartFile photoFile) {
+		System.out.println("troca de foto de perfil");
+		if (photoFile.toString() != null &&
+				!photoFile.getOriginalFilename().equals("")) {
+			System.out.println("Tem imagem");
+			
+		}
+		
+		model.setViewName("redirect:/user/myprofile");
+		return model;
+	}
+	
+	
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request, ModelAndView model) {
 

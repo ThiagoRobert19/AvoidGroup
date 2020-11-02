@@ -68,28 +68,33 @@ public class PublicationController {
 			entity.setDateOfPublication(date1.getTime());
 			entity.setTimeOfPublication(date1.getTime());
 			entity.setShared("no");
-			
-			if (file.toString() != null &&
-			!file.getOriginalFilename().equals("")) {
-			System.out.println("nao eh null"); File convFile = new
-			File(request.getRealPath("/img/") + file.getOriginalFilename());
-			
+
+			if (file.toString() != null && !file.getOriginalFilename().equals("")) {
+				System.out.println("nao eh null");
+				File path = new File(request.getRealPath("/img/"));
+				if(!path.exists()){
+					 path.mkdir();
+				}
+			      //Creating the directory
+			   
+				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
+
 				file.transferTo(convFile);
-			
-			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-			final Calendar cal = Calendar.getInstance();
-			
-			String nome = userEntity.getName().toLowerCase() +
-			userEntity.getUserName().toLowerCase() + userEntity.getId() +
-			df.format(cal.getTime()) + "publication";
-			
-			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim()
-			+ ".jpg"); entity.setPhotoName("/" + nome.trim() + ".jpg");
-			entity.setImage(foto); 
-			convFile.delete();
-			
-			} else { entity.setImage(null); }
-			
+
+				SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+				final Calendar cal = Calendar.getInstance();
+
+				String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+						+ userEntity.getId() + df.format(cal.getTime()) + "publication";
+
+				String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
+				entity.setPhotoName("/" + nome.trim() + ".jpg");
+				entity.setImage(foto);
+				convFile.delete();
+
+			} else {
+				entity.setImage(null);
+			}
 
 			daoPublication.saveUpdate(entity);
 
@@ -240,29 +245,30 @@ public class PublicationController {
 
 			Collections.sort(listPassa);
 			Collections.reverse(listPassa);
-			
-			for(GeneralPublicationEntity pub : listPassa){
-				//	for(GeneralPublicationEntity pub : listaPublication){
-						Integer countComment = daoComment.count("GeneralCommentEntity", "publication.id",pub.getId().toString());
-						Integer countLike = daoLike.count("GeneralLikeEntity", "publication.id", pub.getId().toString());
-						Integer countShared = daoPublication.count2Properties("GeneralPublicationEntity", "shared", "yes", "originalID",pub.getId().toString());
-						
-						pub.setCountComment(countComment);
-						pub.setCountLike(countLike);
-						pub.setCountShared(countShared);
-						
-						Map<String, Object> mapLike = new HashMap<String, Object>();
-						mapLike.put("publication.id", pub.getId());
-						mapLike.put("liker.id", userEntity.getId());
 
-						if (daoLike.exist(GeneralLikeEntity.class, mapLike, "and")) {
-							pub.setYouLiked("yes");
-						} else {
-							pub.setYouLiked("no");
-						}
-						listaPublication.add(pub);
-					}
-			
+			for (GeneralPublicationEntity pub : listPassa) {
+				// for(GeneralPublicationEntity pub : listaPublication){
+				Integer countComment = daoComment.count("GeneralCommentEntity", "publication.id",
+						pub.getId().toString());
+				Integer countLike = daoLike.count("GeneralLikeEntity", "publication.id", pub.getId().toString());
+				Integer countShared = daoPublication.count2Properties("GeneralPublicationEntity", "shared", "yes",
+						"originalID", pub.getId().toString());
+
+				pub.setCountComment(countComment);
+				pub.setCountLike(countLike);
+				pub.setCountShared(countShared);
+
+				Map<String, Object> mapLike = new HashMap<String, Object>();
+				mapLike.put("publication.id", pub.getId());
+				mapLike.put("liker.id", userEntity.getId());
+
+				if (daoLike.exist(GeneralLikeEntity.class, mapLike, "and")) {
+					pub.setYouLiked("yes");
+				} else {
+					pub.setYouLiked("no");
+				}
+				listaPublication.add(pub);
+			}
 
 		}
 

@@ -10,8 +10,16 @@
 					src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
 					alt="">
 				<div class="add-dp">
-					<input type="file" id="uploadImage" name="photoFile"> <label
-						for="file"><i class="fas fa-camera"></i></label>
+					<form action="<c:url value='/user/changeimage'/>" method="post" id="myForm"
+						enctype="multipart/form-data">
+						
+
+						<input type="file" value="teste" id="fileInput" name="photoFile" onchange="javascript:this.form.submit();"> <label
+							for="file"><i class="fas fa-camera"></i></label>
+					</form>
+
+
+
 				</div>
 			</div>
 			<!--user-pro-img end-->
@@ -75,7 +83,9 @@
 </div>
 
 <script>
-	document.getElementById("uploadImage").onchange = function() {
-		alert('teste');
-	};
+document.getElementById("fileInput").onchange = function()  {
+	alert('asd');
+	
+	  $('#myForm').submit();
+	});
 </script>
