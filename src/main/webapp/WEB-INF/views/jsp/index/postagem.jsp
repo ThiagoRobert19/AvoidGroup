@@ -149,78 +149,160 @@
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 
 			for (i = 0; i < jsonObj.length; i++) {
-				var photoPublisher = jsonObj[i].publisher.photoName;
-				//var photoSharer = jsonObj[i].sharer.photoName;
-
+				
 				var content=escapeHTML(jsonObj[i].content);
 
 				var publisherName = escapeHTML(jsonObj[i].publisher.name);
 				var publisherUserName = escapeHTML(jsonObj[i].publisher.userName);
+				var photoPublisher;
+				
+				var shared=jsonObj[i].shared;
+				if(shared=="yes"){
+					photoPublisher=jsonObj[i].sharer.photoName;
+					$("#publicaqui")
+					.append('<div class="post-bar"> '
+														+ '<div class="post_topbar">'
+																+ '<div class="usy-dt">'
+																		+ '<img src="'+photoPublisher+'" alt="no image">'
+																		+ '<div class="usy-name">' + '<h3>'
+																				+ publisherName
+																				+ '</h3>'
+																				+ '	<span>'
+																				+ jsonObj[i].dateOfShare
+																				+ '</span>'
+																				+ '	<span>'
+																				+ jsonObj[i].timeOfShare
+																				+ '</span>'
+																		+ '</div>'
+																+ '</div>'
+																+ '<div class="ed-opts">'
+																	+ '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>'
+																	+ '<ul class="ed-options">'
+																	+ '<li><a href="#" title="">Edit Post</a></li>'
+																	+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'/shared"/>" title="">Delete</a></li>'
+																	+ '</ul>'
+																+ '</div>'
+														+ '</div>'
+												+'<div class="post-bar"> '
+														+ '<div class="post_topbar">'
+																+ '<div class="usy-dt">'
+																		+ '<img src="'+photoPublisher+'" alt="no image">'
+																		+ '<div class="usy-name">'
+																				+ '<h3>'
+																					+ publisherName  +'<i class="fas fa-share"></i>'
+																				+ '</h3>'
+																				+ '	<span>'
+																				+ jsonObj[i].dateOfPublication
+																				+ '</span>'
+																				+ '	<span>'
+																				+ jsonObj[i].timeOfPublication
+																				+ '</span>'
+																		+ '</div>'
+																+ '</div>'
+														
+														+ '</div>'
+														+ '<div class="job_descp">'
+																+ '<h3>'+ publisherUserName+ '</h3>'
+																+ '<p>'+ content+ '</p>'
+																+ '<ul class="skill-tags">'
+																	+ '<li><a href="#" title="">HTML</a></li>'
+																	+ '<li><a href="#" title="">PHP</a></li>'
+																	+ '<li><a href="#" title="">JAVA</a></li>'
+																+ '</ul>'
+														+ '</div>'
+														
+												+ '</div>'
+												+ '<div class="job-status-bar">'
+												+'<ul class="like-com">'
+													+'<li><a href="#" ><i class="fas fa-heart"></i> Like '+ jsonObj[i].countLike+'</a></li>'
+													+'<li><a href="<c:url value="/publication/share/'+jsonObj[i].id+'"/>"><i class="fas fa-share"></i>Shares '+ jsonObj[i].countShared+'</a></li>'
+												+'</ul>'
+												+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment '+ jsonObj[i].countComment+' </a>' 
+												+'<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5" aria-labelledby="gedf-drop1">'
+													+'<form action="<c:url value="/comment/addCommentPublication"/>" method="post">'
+														+'<input type="hidden" name="publicationID" value="'+ jsonObj[i].id+'">'
+														+'<textarea class="form-control" rows="3" placeholder="Comment" name="content"></textarea>'
+														+'<button class="float-right btn botaopreto" type="submit">Send</button>'
+													+'</form>'
+													+'<br> <br>'
+													+'<div class="container">'
+														+'<ul id="listCa'+ jsonObj[i].id+'">'
+																
+														+'</ul>'
+													+'</div>'
+												+'</div>'
+										+ '</div>' 
+							+ '</div>'
 
-				$("#publicaqui")
-						.append(
-								'<div class="post-bar"> '
-										+ '<div class="post_topbar">'
+					);
+					
+				}
+				if(shared!="yes"){
+					photoPublisher=jsonObj[i].publisher.photoName;
+					$("#publicaqui")
+					.append(
+							'<div class="post-bar"> '
+									+ '<div class="post_topbar">'
 										+ '<div class="usy-dt">'
-										+ '<img src="<c:url value="/resources/images/resources/user3.png"/>" alt="">'
-										+ '<div class="usy-name">' + '<h3>'
-										+ publisherName
-										+ '</h3>'
-										+ '	<span>'
-										+ jsonObj[i].dateOfPublication
-										+ '</span>'
-										+ '	<span>'
-										+ jsonObj[i].timeOfPublication
-										+ '</span>'
-										+ '</div>'
+											+ '<img src="'+photoPublisher+'" alt="no image">'
+											+ '<div class="usy-name">' + '<h3>'
+												+ publisherName
+											+ '</h3>'
+											+ '	<span>'
+											+ jsonObj[i].dateOfPublication
+											+ '</span>'
+											+ '	<span>'
+											+ jsonObj[i].timeOfPublication
+											+ '</span>'
+											+ '</div>'
 										+ '</div>'
 										+ '<div class="ed-opts">'
-										+ '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>'
-										+ '<ul class="ed-options">'
-										+ '<li><a href="#" title="">Edit Post</a></li>'
-										+ '<li><a href="#" title="">Unsaved</a></li>'
-										+ '<li><a href="#" title="">Unbid</a></li>'
-										+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'"/>" title="">Delete</a></li>'
-										+ '<li><a href="#" title="">Hide</a></li>'
-										+ '</ul>'
+											+ '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>'
+											+ '<ul class="ed-options">'
+											+ '<li><a href="#" title="">Edit Post</a></li>'
+											+ '<li><a href="<c:url value="/publication/delete/'+jsonObj[i].id+'"/>" title="">Delete</a></li>'
+											+ '</ul>'
 										+ '</div>'
-										+ '</div>'
-										+ '<div class="job_descp">'
-										+ '<h3>'
-										+ publisherUserName
-										+ '</h3>'
-										+ '<p>'
-										+ content
-										+ '</p>'
-										+ '<ul class="skill-tags">'
-										+ '<li><a href="#" title="">HTML</a></li>'
-										+ '<li><a href="#" title="">PHP</a></li>'
-										+ '<li><a href="#" title="">JAVA</a></li>'
-										+ '</ul>'
-										+ '</div>'
-										+ '<div class="job-status-bar">'
-										+'<ul class="like-com">'
-										+'<li><a href="#" ><i class="fas fa-heart"></i> Like 25</a></li>'
-										+'<li><a href="#"><i class="fas fa-share"></i>Shares 50</a></li>'
-										+'</ul>'
-										+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment '+ jsonObj[i].countComment+' </a>' 
-										+'<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5" aria-labelledby="gedf-drop1">'
-											+'<form action="<c:url value="/comment/addCommentPublication"/>" method="post">'
-												+'<input type="hidden" name="publicationID" value="'+ jsonObj[i].id+'">'
-												+'<textarea class="form-control" rows="3" placeholder="Comment" name="content"></textarea>'
-												+'<button class="float-right btn botaopreto" type="submit">Send</button>'
-											+'</form>'
-											+'<br> <br>'
-											+'<div class="container">'
-											+'<ul id="listCa'+ jsonObj[i].id+'">'
-													
+									+ '</div>'
+									+ '<div class="job_descp">'
+											+ '<h3>'+ publisherUserName+ '</h3>'
+											+ '<p>'+ content+ '</p>'
+											+ '<ul class="skill-tags">'
+												+ '<li><a href="#" title="">HTML</a></li>'
+												+ '<li><a href="#" title="">PHP</a></li>'
+												+ '<li><a href="#" title="">JAVA</a></li>'
+											+ '</ul>'
+									+ '</div>'
+									+ '<div class="job-status-bar">'
+											+'<ul class="like-com">'
+												+'<li><a href="#" ><i class="fas fa-heart"></i> Like '+ jsonObj[i].countLike+'</a></li>'
+												+'<li><a href="<c:url value="/publication/share/'+jsonObj[i].id+'"/>"><i class="fas fa-share"></i>Shares '+ jsonObj[i].countShared+'</a></li>'
 											+'</ul>'
-										+'</div>'
-										+'</div>'
-										+ '</div>' 
-										+ '</div>'
+											+'<a href="#" id="dropComment" onClick="carregarComentarios('+ jsonObj[i].id+')" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment '+ jsonObj[i].countComment+' </a>' 
+											+'<div id="dropComment" class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5" aria-labelledby="gedf-drop1">'
+												+'<form action="<c:url value="/comment/addCommentPublication"/>" method="post">'
+													+'<input type="hidden" name="publicationID" value="'+ jsonObj[i].id+'">'
+													+'<textarea class="form-control" rows="3" placeholder="Comment" name="content"></textarea>'
+													+'<button class="float-right btn botaopreto" type="submit">Send</button>'
+												+'</form>'
+												+'<br> <br>'
+												+'<div class="container">'
+												+'<ul id="listCa'+ jsonObj[i].id+'">'
+														
+												+'</ul>'
+											+'</div>'
+									+'</div>'
+								+ '</div>' 
+							+ '</div>'
 
-						);
+					);
+				}
+				
+				
+				
+				
+				
+			
 
 			}
 

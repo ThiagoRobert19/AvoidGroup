@@ -68,27 +68,28 @@ public class PublicationController {
 			entity.setDateOfPublication(date1.getTime());
 			entity.setTimeOfPublication(date1.getTime());
 			entity.setShared("no");
-			/*
-			 * if (file.toString() != null &&
-			 * !file.getOriginalFilename().equals("")) {
-			 * System.out.println("nao eh null"); File convFile = new
-			 * File(request.getRealPath("/img/") + file.getOriginalFilename());
-			 * 
-			 * file.transferTo(convFile);
-			 * 
-			 * SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-			 * final Calendar cal = Calendar.getInstance();
-			 * 
-			 * String nome = userEntity.getName().toLowerCase() +
-			 * userEntity.getUserName().toLowerCase() + userEntity.getId() +
-			 * df.format(cal.getTime()) + "publication";
-			 * 
-			 * String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim()
-			 * + ".jpg"); entity.setPhotoName("/" + nome.trim() + ".jpg");
-			 * entity.setImage(foto); convFile.delete();
-			 * 
-			 * } else { entity.setImage(null); }
-			 */
+			
+			if (file.toString() != null &&
+			!file.getOriginalFilename().equals("")) {
+			System.out.println("nao eh null"); File convFile = new
+			File(request.getRealPath("/img/") + file.getOriginalFilename());
+			
+				file.transferTo(convFile);
+			
+			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			final Calendar cal = Calendar.getInstance();
+			
+			String nome = userEntity.getName().toLowerCase() +
+			userEntity.getUserName().toLowerCase() + userEntity.getId() +
+			df.format(cal.getTime()) + "publication";
+			
+			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim()
+			+ ".jpg"); entity.setPhotoName("/" + nome.trim() + ".jpg");
+			entity.setImage(foto); 
+			convFile.delete();
+			
+			} else { entity.setImage(null); }
+			
 
 			daoPublication.saveUpdate(entity);
 
