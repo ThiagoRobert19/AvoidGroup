@@ -164,7 +164,7 @@
 					.append('<div class="post-bar"> '
 														+ '<div class="post_topbar">'
 																+ '<div class="usy-dt">'
-																		+ '<img src="'+jsonObj[i].sharer.photoName+'" alt="no image">'
+																		+ '<img src="'+jsonObj[i].sharer.photo+'" alt="no image">'
 																		+ '<div class="usy-name">' + '<h3>'
 																				+ sharerName
 																				+ '</h3>'
@@ -187,7 +187,7 @@
 												+'<div class="post-bar"> '
 														+ '<div class="post_topbar">'
 																+ '<div class="usy-dt">'
-																		+ '<img src="'+jsonObj[i].publisher.photoName+'" alt="no image">'
+																		+ '<img src="'+jsonObj[i].publisher.photo+'" alt="no image">'
 																		+ '<div class="usy-name">'
 																				+ '<h3>'
 																					+ publisherName  +'<i class="fas fa-share"></i>'
@@ -245,7 +245,7 @@
 							'<div class="post-bar"> '
 									+ '<div class="post_topbar">'
 										+ '<div class="usy-dt">'
-											+ '<img src="'+jsonObj[i].publisher.photoName+'" alt="no image">'
+											+ '<img src="'+jsonObj[i].publisher.photo+'" alt="no image">'
 											+ '<div class="usy-name">' + '<h3>'
 												+ publisherName
 											+ '</h3>'
@@ -400,14 +400,3 @@
 	}
 </script>
 
-	document.getElementById("customFile").onchange = function() {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-			// get loaded data and render thumbnail.
-			document.getElementById("image").src = e.target.result;
-		};
-
-		// read the image file as a data URL.
-		reader.readAsDataURL(this.files[0]);
-	};

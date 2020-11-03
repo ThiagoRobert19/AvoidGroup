@@ -2,16 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <section class="cover-sec">
-<c:if test="${not empty clienteLogado.backPhoto}">
+	<c:if test="${not empty clienteLogado.backPhoto}">
 
-	<img src="<c:url value='${clienteLogado.backPhoto}'/>"
-		alt="" width="1600px" height="400px">
-</c:if>
-<c:if test="${empty clienteLogado.backPhoto}">
+		<img src="<c:url value='${clienteLogado.backPhoto}'/>" alt=""
+			width="1600px" height="400px">
+	</c:if>
+	<c:if test="${empty clienteLogado.backPhoto}">
 
-	<img src="<c:url value='/images/resources/cover-img.jpg'/>"
-		alt="" width="1600px" height="400px">
-</c:if>
+		<img src="<c:url value='/images/resources/cover-img.jpg'/>" alt=""
+			width="1600px" height="400px">
+	</c:if>
 	<!--img src="<c:url value='/resources/images/resources/cover-img.jpg'/>"alt=""-->
 	<div class="add-pic-box">
 		<div class="container">
@@ -33,9 +33,10 @@
 				enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-lg-12">
-						<input type="file" name="userback" id="userback" placeholder="Title">
+						<input type="file" name="userback" id="userback"
+							placeholder="Title">
 					</div>
-					
+
 					<div class="col-lg-12">
 						<img id="userbackpreview" />
 					</div>
@@ -67,5 +68,4 @@
 		// read the image file as a data URL.
 		reader.readAsDataURL(this.files[0]);
 	};
-
 </script>

@@ -20,7 +20,6 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	
 	private String uuid;
 	private String name;
 
@@ -31,10 +30,8 @@ public class UserEntity implements Serializable, EntidadeBase {
 	private String userName;
 
 	private String photo;
-	private String photoName;
-	
+
 	private String backPhoto;
-	private String backPhotoName;
 
 	private String phone;
 
@@ -45,23 +42,12 @@ public class UserEntity implements Serializable, EntidadeBase {
 		return follow;
 	}
 
-
 	public String getBackPhoto() {
 		return backPhoto;
 	}
 
-
 	public void setBackPhoto(String backPhoto) {
 		this.backPhoto = backPhoto;
-	}
-
-
-	public String getBackPhotoName() {
-		return backPhotoName;
-	}
-
-	public void setBackPhotoName(String backPhotoName) {
-		this.backPhotoName = backPhotoName;
 	}
 
 	public void setFollow(String follow) {
@@ -90,14 +76,6 @@ public class UserEntity implements Serializable, EntidadeBase {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}
-
-	public String getPhotoName() {
-		return photoName;
-	}
-
-	public void setPhotoName(String photoName) {
-		this.photoName = photoName;
 	}
 
 	public Integer getId() {
@@ -155,10 +133,8 @@ public class UserEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", uuid=" + uuid + ", name=" + name + ", email=" + email + ", password="
-				+ password + ", userName=" + userName + ", photo=" + photo + ", photoName=" + photoName + ", phone="
+				+ password + ", userName=" + userName + ", photo=" + photo + ", backPhoto=" + backPhoto + ", phone="
 				+ phone + ", perfil=" + perfil + ", follow=" + follow + "]";
 	}
-
-	
 
 }

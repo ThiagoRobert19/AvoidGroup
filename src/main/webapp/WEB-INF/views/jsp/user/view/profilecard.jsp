@@ -5,10 +5,15 @@
 	<div class="main-left-sidebar">
 		<div class="user_profile">
 			<div class="user-pro-img">
+				<c:if test="${empty userEntity.photo}">
+					<img
+						src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
+						alt="">
+				</c:if>
+				<c:if test="${not empty userEntity.photo}">
+					<img src="<c:url value='${userEntity.photo}'/>" alt="">
+				</c:if>
 
-				<img
-					src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
-					alt="">
 
 			</div>
 			<!--user-pro-img end-->

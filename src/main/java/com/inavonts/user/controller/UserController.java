@@ -85,7 +85,7 @@ public class UserController {
 					+ userEntity.getId() + df.format(cal.getTime()) + "background";
 
 			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-			userEntity.setBackPhotoName("/" + nome.trim() + ".jpg");
+			
 			userEntity.setBackPhoto(foto);
 			daoUser.saveUpdate(userEntity);
 

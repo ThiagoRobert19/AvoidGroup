@@ -5,10 +5,14 @@
 	<div class="main-left-sidebar">
 		<div class="user_profile">
 			<div class="user-pro-img">
+				<c:if test="${empty clienteLogado.photo}">
+					<img src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
+						alt="">
+				</c:if>
+				<c:if test="${not empty clienteLogado.photo}">
+					<img src="<c:url value='${clienteLogado.photo}'/>" alt="">
+				</c:if>
 
-				<img id="tes"
-					src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
-					alt="">
 				<div class="add-dp">
 					<a class="post-jb active" href="#" title=""><label for="file"><i
 							class="fas fa-camera"></i></label></a>
@@ -82,7 +86,7 @@
 		<div class="post-project-fields">
 			<div class="containercropround">
 				<form action="<c:url value='/user/picture'/>" method="POST"
-				enctype="multipart/form-data">
+					enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-lg-12">
 							<input type="file" id="picuser" name="picuser">
