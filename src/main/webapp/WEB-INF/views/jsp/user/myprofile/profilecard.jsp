@@ -81,7 +81,8 @@
 		<h3>Change profile photo</h3>
 		<div class="post-project-fields">
 			<div class="containercropround">
-				<form>
+				<form action="<c:url value='/user/picture'/>" method="POST"
+				enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-lg-12">
 							<input type="file" id="picuser" name="picuser">

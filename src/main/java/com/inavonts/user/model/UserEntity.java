@@ -32,6 +32,9 @@ public class UserEntity implements Serializable, EntidadeBase {
 
 	private String photo;
 	private String photoName;
+	
+	private String backPhoto;
+	private String backPhotoName;
 
 	private String phone;
 
@@ -40,6 +43,25 @@ public class UserEntity implements Serializable, EntidadeBase {
 
 	public String getFollow() {
 		return follow;
+	}
+
+
+	public String getBackPhoto() {
+		return backPhoto;
+	}
+
+
+	public void setBackPhoto(String backPhoto) {
+		this.backPhoto = backPhoto;
+	}
+
+
+	public String getBackPhotoName() {
+		return backPhotoName;
+	}
+
+	public void setBackPhotoName(String backPhotoName) {
+		this.backPhotoName = backPhotoName;
 	}
 
 	public void setFollow(String follow) {

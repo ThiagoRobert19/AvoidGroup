@@ -1,6 +1,10 @@
 package com.inavonts.user.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +31,7 @@ import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
 import com.inavonts.util.Common;
 import com.inavonts.util.Criptografia;
+import com.inavonts.util.DropBoxUtil;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -53,6 +58,47 @@ public class UserController {
 	private GenericDao<FollowRequestEntity> daoRequest;
 	@Autowired
 	private GenericDao<GeneralPublicationEntity> daoPublication;
+
+	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
+	public ModelAndView changeback(UserEntity userEntity, ModelAndView model, HttpServletRequest request,
+			HttpSession session, MultipartFile userback) throws IllegalStateException, IOException {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+		Integer id = userEntity.getId();
+		userEntity = daoUser.buscaId(UserEntity.class, id);
+
+		if (userback.toString() != null && !userback.getOriginalFilename().equals("")) {
+			System.out.println("nao eh null");
+			File path = new File(request.getRealPath("/img/"));
+			if (!path.exists()) {
+				path.mkdir();
+			}
+
+			File convFile = new File(request.getRealPath("/img/") + userback.getOriginalFilename());
+
+			userback.transferTo(convFile);
+
+			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			final Calendar cal = Calendar.getInstance();
+
+			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+					+ userEntity.getId() + df.format(cal.getTime()) + "background";
+
+			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
+			userEntity.setBackPhotoName("/" + nome.trim() + ".jpg");
+			userEntity.setBackPhoto(foto);
+			daoUser.saveUpdate(userEntity);
+
+			userEntity = daoUser.buscaId(UserEntity.class, id);
+
+			session.setAttribute("clienteLogado", userEntity);
+
+			convFile.delete();
+
+		}
+		model.setViewName("redirect:/user/myprofile");
+		return model;
+	}
 
 	@RequestMapping(value = { "/changeimage" }, method = RequestMethod.POST)
 	public ModelAndView changeimage(UserEntity userEntity, ModelAndView model, HttpSession session,
