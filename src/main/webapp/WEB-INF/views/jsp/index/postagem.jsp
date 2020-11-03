@@ -62,8 +62,7 @@
 				</div>
 				<div class="job-status-bar">
 					<ul class="like-com">
-						<li><a href="#"><i class="fas fa-heart"></i> Like
-								${listPub.countLike}</a></li>
+						<li><a href="#"><i class="fas fa-heart"></i> Like ${listPub.countLike}</a></li>
 						<li><a
 							href="<c:url value="/publication/share/${listPub.id}"/>"><i
 								class="fas fa-share"></i>Shares ${listPub.countShared}</a></li>
