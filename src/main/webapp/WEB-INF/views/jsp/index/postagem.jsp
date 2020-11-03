@@ -154,18 +154,19 @@
 
 				var publisherName = escapeHTML(jsonObj[i].publisher.name);
 				var publisherUserName = escapeHTML(jsonObj[i].publisher.userName);
-				var photoPublisher;
+				
 				
 				var shared=jsonObj[i].shared;
 				if(shared=="yes"){
-					photoPublisher=jsonObj[i].sharer.photoName;
+					var sharerName = escapeHTML(jsonObj[i].sharer.name);
+					var sharerUserName = escapeHTML(jsonObj[i].sharer.userName);
 					$("#publicaqui")
 					.append('<div class="post-bar"> '
 														+ '<div class="post_topbar">'
 																+ '<div class="usy-dt">'
-																		+ '<img src="'+photoPublisher+'" alt="no image">'
+																		+ '<img src="'+jsonObj[i].sharer.photoName+'" alt="no image">'
 																		+ '<div class="usy-name">' + '<h3>'
-																				+ publisherName
+																				+ sharerName
 																				+ '</h3>'
 																				+ '	<span>'
 																				+ jsonObj[i].dateOfShare
@@ -186,7 +187,7 @@
 												+'<div class="post-bar"> '
 														+ '<div class="post_topbar">'
 																+ '<div class="usy-dt">'
-																		+ '<img src="'+photoPublisher+'" alt="no image">'
+																		+ '<img src="'+jsonObj[i].publisher.photoName+'" alt="no image">'
 																		+ '<div class="usy-name">'
 																				+ '<h3>'
 																					+ publisherName  +'<i class="fas fa-share"></i>'
@@ -238,13 +239,13 @@
 					
 				}
 				if(shared!="yes"){
-					photoPublisher=jsonObj[i].publisher.photoName;
+				
 					$("#publicaqui")
 					.append(
 							'<div class="post-bar"> '
 									+ '<div class="post_topbar">'
 										+ '<div class="usy-dt">'
-											+ '<img src="'+photoPublisher+'" alt="no image">'
+											+ '<img src="'+jsonObj[i].publisher.photoName+'" alt="no image">'
 											+ '<div class="usy-name">' + '<h3>'
 												+ publisherName
 											+ '</h3>'

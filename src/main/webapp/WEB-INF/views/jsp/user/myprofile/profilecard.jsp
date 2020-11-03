@@ -6,25 +6,18 @@
 		<div class="user_profile">
 			<div class="user-pro-img">
 
-				<img
+				<img id="tes"
 					src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
 					alt="">
 				<div class="add-dp">
-					<form action="<c:url value='/user/changeimage'/>" method="post" id="myForm"
-						enctype="multipart/form-data">
-						
-
-						<input type="file" value="teste" id="fileInput" name="photoFile" onchange="javascript:this.form.submit();"> <label
-							for="file"><i class="fas fa-camera"></i></label>
-					</form>
-
-
-
+					<a class="post-jb active" href="#" title=""><label for="file"><i
+							class="fas fa-camera"></i></label></a>
 				</div>
 			</div>
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
 				<ul class="flw-status">
+
 					<li><span>Following</span> <b>${countfollowing}</b></li>
 					<li><span>Followers</span> <b>${countfollowers}</b></li>
 				</ul>
@@ -82,10 +75,130 @@
 	<!--main-left-sidebar end-->
 </div>
 
+<!-- #################################POP UP FOTO PERFIL -->
+<div class="post-popup job_post">
+	<div class="post-project">
+		<h3>Change profile photo</h3>
+		<div class="post-project-fields">
+			<div class="containercropround">
+				<form>
+					<div class="row">
+						<div class="col-lg-12">
+							<input type="file" id="picuser" name="picuser">
+
+						</div>
+
+						<div class="col-lg-12">
+							<img id="picuserpreview" />
+
+						</div>
+						<div class="col-lg-12">
+							<ul>
+								<li><button type="button" onclick="myCrop()">Make
+										Crop</button></li>
+
+							</ul>
+						</div>
+
+						<div class="col-lg-12">
+							<div id="result"></div>
+
+						</div>
+						<div class="col-lg-12">
+							<ul>
+								<li><button type="button" id="button">Crop</button></li>
+								<li><button class="active" type="submit" value="post">Post</button></li>
+								<li><a href="#" title="">Cancel</a></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+		<!--post-project-fields end-->
+		<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+	</div>
+	<!--post-project end-->
+</div>
+<!--post-project-popup end-->
 <script>
-document.getElementById("fileInput").onchange = function()  {
-	alert('asd');
-	
-	  $('#myForm').submit();
-	});
+	document.getElementById("picuser").onchange = function() {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			// get loaded data and render thumbnail.
+			document.getElementById("picuserpreview").src = e.target.result;
+		};
+
+		// read the image file as a data URL.
+		reader.readAsDataURL(this.files[0]);
+	};
+
 </script>
+<script>
+function myCrop() {
+	
+	 var image = document.getElementById('picuserpreview').src;
+	 console.log('testanso o src')
+	 console.log(image1);
+	 
+
+	     
+	      var button = document.getElementById('button');
+	      var result = document.getElementById('result');
+	      var croppable = false;
+	      var cropper = new Cropper(image, {
+	        aspectRatio: 1,
+	        viewMode: 1,
+	        ready: function () {
+	          croppable = true;
+	        },
+	      });
+
+	      button.onclick = function () {
+	        var croppedCanvas;
+	        var roundedCanvas;
+	        var roundedImage;
+
+	        if (!croppable) {
+	          return;
+	        }
+
+	        // Crop
+	        croppedCanvas = cropper.getCroppedCanvas();
+
+	        // Round
+	        roundedCanvas = getRoundedCanvas(croppedCanvas);
+
+	        // Show
+	        roundedImage = document.createElement('img');
+	        roundedImage.src = roundedCanvas.toDataURL()
+	        result.innerHTML = '';
+	        result.appendChild(roundedImage);
+	      };
+	 }
+
+
+    function getRoundedCanvas(sourceCanvas) {
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      var width = sourceCanvas.width;
+      var height = sourceCanvas.height;
+
+      canvas.width = width;
+      canvas.height = height;
+      context.imageSmoothingEnabled = true;
+      context.drawImage(sourceCanvas, 0, 0, width, height);
+      context.globalCompositeOperation = 'destination-in';
+      context.beginPath();
+      context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+      context.fill();
+      return canvas;
+    }
+    
+   
+    
+
+
+  </script>

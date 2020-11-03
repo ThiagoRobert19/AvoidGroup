@@ -1,6 +1,7 @@
 package com.inavonts.user.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
 import com.inavonts.friendship.model.FollowRequestEntity;
+import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
 import com.inavonts.util.Common;
@@ -49,22 +51,22 @@ public class UserController {
 	private FollowRequestEntity followRequestEntity;
 	@Autowired
 	private GenericDao<FollowRequestEntity> daoRequest;
+	@Autowired
+	private GenericDao<GeneralPublicationEntity> daoPublication;
 
-	
 	@RequestMapping(value = { "/changeimage" }, method = RequestMethod.POST)
-	public ModelAndView changeimage(UserEntity userEntity, ModelAndView model, HttpSession session, MultipartFile photoFile) {
+	public ModelAndView changeimage(UserEntity userEntity, ModelAndView model, HttpSession session,
+			MultipartFile photoFile) {
 		System.out.println("troca de foto de perfil");
-		if (photoFile.toString() != null &&
-				!photoFile.getOriginalFilename().equals("")) {
+		if (photoFile.toString() != null && !photoFile.getOriginalFilename().equals("")) {
 			System.out.println("Tem imagem");
-			
+
 		}
-		
+
 		model.setViewName("redirect:/user/myprofile");
 		return model;
 	}
-	
-	
+
 	@RequestMapping(value = { "/pesquisa" }, method = RequestMethod.POST)
 	public ModelAndView pesquisa(String texto, HttpServletRequest request, ModelAndView model) {
 
@@ -114,12 +116,29 @@ public class UserController {
 
 	@RequestMapping(value = { "/view/{id}" }, method = RequestMethod.GET)
 	public ModelAndView view(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
+		List<GeneralPublicationEntity> listPub = new ArrayList<GeneralPublicationEntity>();
+
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		UserEntity user = new UserEntity();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
 		if (daoUser.exist(UserEntity.class, map, "and")) {
+
+			Map<String, Object> mapP = new HashMap<String, Object>();
+			mapP.put("publisher.id", Integer.parseInt(id));
+
+			listPub = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
+
+			Collections.sort(listPub);
+			Collections.reverse(listPub);
+
+			PagedListHolder<GeneralPublicationEntity> pagedListHolder = new PagedListHolder<GeneralPublicationEntity>(
+					listPub);
+			int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+
+			pagedListHolder.setPage(page);
+			pagedListHolder.setPageSize(10);
 
 			if (!userEntity.getId().equals(Integer.parseInt(id))) {
 
@@ -135,38 +154,38 @@ public class UserController {
 
 				if (daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("unfollow");
-					
+
 				}
 				if (daoFollow.exist(FollowEntity.class, mapfollowed, "and")
 						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("followback");
-					
+
 				}
 				if (!daoFollow.exist(FollowEntity.class, mapfollowed, "and")
 						&& !daoFollow.exist(FollowEntity.class, mapfollower, "and")) {
 					user.setFollow("follow");
-					
+
 				}
 				Map<String, Object> maprequest = new HashMap<String, Object>();
 				maprequest.put("follower.id", userEntity.getId());
 				maprequest.put("followed.id", Integer.parseInt(id));
 				maprequest.put("status", "pending");
-				if(daoRequest.exist(FollowRequestEntity.class, maprequest, "and")){
+				if (daoRequest.exist(FollowRequestEntity.class, maprequest, "and")) {
 					user.setFollow("requested");
 				}
-				
-				
+
 				int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
 				int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
 
-				
+				model.addObject("pagedListHolder", pagedListHolder);
 				model.addObject("userEntity", user);
-				
+
 				model.addObject("countfollowers", countfollowers);
 				model.addObject("countfollowing", countfollowing);
 				model.setViewName("user/view/profile");
 				return model;
 			} else {
+
 				model.setViewName("redirect:/user/myprofile");
 				return model;
 			}
@@ -191,23 +210,33 @@ public class UserController {
 	@RequestMapping(value = { "/myprofile" }, method = RequestMethod.GET)
 	public ModelAndView myprofile(HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-		String id= userEntity.getId().toString();
+		String id = userEntity.getId().toString();
 		int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
 		int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
 
-		
-	
-		
+		Map<String, Object> mapP = new HashMap<String, Object>();
+		mapP.put("publisher.id", userEntity.getId());
+		List<GeneralPublicationEntity> listPub = new ArrayList<GeneralPublicationEntity>();
+		listPub = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
+
+		Collections.sort(listPub);
+		Collections.reverse(listPub);
+
+		PagedListHolder<GeneralPublicationEntity> pagedListHolder = new PagedListHolder<GeneralPublicationEntity>(
+				listPub);
+		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+
+		pagedListHolder.setPage(page);
+		pagedListHolder.setPageSize(10);
+
+		model.addObject("pagedListHolder", pagedListHolder);
 		model.addObject("countfollowers", countfollowers);
 		model.addObject("countfollowing", countfollowing);
-		
-		
+
 		model.addObject("userEntity", userEntity);
 		model.setViewName("user/myprofile/myprofile");
 		return model;
 	}
-
-	
 
 	@RequestMapping(value = { "/doLogin" }, method = RequestMethod.POST)
 	public ModelAndView doLogin(UserEntity userEntity, ModelAndView model, HttpSession session) {

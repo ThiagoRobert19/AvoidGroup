@@ -53,6 +53,24 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/lib/slick/slick-theme.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/responsive.css'/>">
+	
+	
+	<style>
+    .containercropround {
+      
+      max-width: 100%;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .cropper-view-box,
+    .cropper-face {
+      border-radius: 50%;
+    }
+  </style>
+	
 </head>
 <body>	
 

@@ -13,5 +13,14 @@
 <script type="text/javascript" src="<c:url value='/resources/js/scrollbar.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/script.js'/>"></script>
 
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.min.css">
+
+
 </body>
 </html>
