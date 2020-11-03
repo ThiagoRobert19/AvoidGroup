@@ -225,52 +225,13 @@ public class PublicationController {
 
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
-		Map<String, Object> mapfollow = new HashMap<String, Object>();
-		mapfollow.put("follower.id", userEntity.getId());
+		
 
 		PublicationUtil pubUtil = new PublicationUtil();
 
 		List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
-
-		if (daoFollow.exist(FollowEntity.class, mapfollow, "and")) {
-
-			listaPublication = pubUtil.getPublication(userEntity);
-
-		} else {
-			List<GeneralPublicationEntity> listPassa = new ArrayList<GeneralPublicationEntity>();
-			Map<String, Object> mapP = new HashMap<String, Object>();
-			mapP.put("publisher.id", userEntity.getId());
-
-			listPassa = daoPublication.listarProperty(GeneralPublicationEntity.class, mapP, "and");
-
-			Collections.sort(listPassa);
-			Collections.reverse(listPassa);
-
-			for (GeneralPublicationEntity pub : listPassa) {
-				// for(GeneralPublicationEntity pub : listaPublication){
-				Integer countComment = daoComment.count("GeneralCommentEntity", "publication.id",
-						pub.getId().toString());
-				Integer countLike = daoLike.count("GeneralLikeEntity", "publication.id", pub.getId().toString());
-				Integer countShared = daoPublication.count2Properties("GeneralPublicationEntity", "shared", "yes",
-						"originalID", pub.getId().toString());
-
-				pub.setCountComment(countComment);
-				pub.setCountLike(countLike);
-				pub.setCountShared(countShared);
-
-				Map<String, Object> mapLike = new HashMap<String, Object>();
-				mapLike.put("publication.id", pub.getId());
-				mapLike.put("liker.id", userEntity.getId());
-
-				if (daoLike.exist(GeneralLikeEntity.class, mapLike, "and")) {
-					pub.setYouLiked("yes");
-				} else {
-					pub.setYouLiked("no");
-				}
-				listaPublication.add(pub);
-			}
-
-		}
+		listaPublication=pubUtil.getAll(userEntity);
+	
 
 		String json = new Gson().toJson(listaPublication);
 		response.setContentType("application/json");

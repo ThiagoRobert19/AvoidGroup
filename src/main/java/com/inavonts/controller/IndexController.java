@@ -1,5 +1,6 @@
 package com.inavonts.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,16 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
+import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
 import com.inavonts.util.Common;
+import com.inavonts.util.PublicationUtil;
 
 @Controller
 public class IndexController {
@@ -52,6 +57,23 @@ public class IndexController {
 			session.setAttribute("listNotification", listNotification);
 			
 			
+			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+			
+
+			PublicationUtil pubUtil = new PublicationUtil();
+
+			List<GeneralPublicationEntity> listaPublication = new ArrayList<GeneralPublicationEntity>();
+			listaPublication=pubUtil.getAll(userEntity);
+			
+			PagedListHolder<GeneralPublicationEntity> pagedListHolder = new PagedListHolder<GeneralPublicationEntity>(
+					listaPublication);
+			int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+
+			pagedListHolder.setPage(page);
+			pagedListHolder.setPageSize(10);
+			
+			model.addObject("pagedListHolder", pagedListHolder);
 			model.addObject("countfollowers", countfollowers);
 			model.addObject("countfollowing", countfollowing);
 
