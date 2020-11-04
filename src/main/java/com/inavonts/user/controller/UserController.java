@@ -106,7 +106,7 @@ public class UserController {
 		System.out.println("troca de foto de perfil");
 		if (photoFile.toString() != null && !photoFile.getOriginalFilename().equals("")) {
 			System.out.println("Tem imagem");
-
+		//	https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
 		}
 
 		model.setViewName("redirect:/user/myprofile");

@@ -6,7 +6,8 @@
 		<div class="user_profile">
 			<div class="user-pro-img">
 				<c:if test="${empty clienteLogado.photo}">
-					<img src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
+					<img
+						src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
 						alt="">
 				</c:if>
 				<c:if test="${not empty clienteLogado.photo}">
@@ -92,11 +93,13 @@
 							<input type="file" id="picuser" name="picuser">
 
 						</div>
-
-						<div class="col-lg-12">
+						
+						<div>
 							<img id="picuserpreview" />
-
 						</div>
+						
+						
+						
 						<div class="col-lg-12">
 							<ul>
 								<li><button type="button" onclick="myCrop()">Make
@@ -107,14 +110,19 @@
 
 						<div class="col-lg-12">
 							<div id="result"></div>
+							
 
 						</div>
 						<div class="col-lg-12">
 							<ul>
-								<li><button type="button" id="button">Crop</button></li>
-								<li><button class="active" type="submit" value="post">Post</button></li>
+								<li><button type="button" id="button"   style="visibility: hidden;">Crop</button></li>
+								<li><button id="post" class="active" type="submit" value="post"  style="visibility: hidden;">Post</button></li>
 								<li><a href="#" title="">Cancel</a></li>
 							</ul>
+						</div>
+						<div>
+						<input type="file" id="123" name="123">
+							
 						</div>
 					</div>
 				</form>
@@ -124,67 +132,7 @@
 		<!--post-project-fields end-->
 		<a href="#" title=""><i class="la la-times-circle-o"></i></a>
 	</div>
-	<!--post-project end-->
-</div>
-<!--post-project-popup end-->
 <script>
-	document.getElementById("picuser").onchange = function() {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-			// get loaded data and render thumbnail.
-			document.getElementById("picuserpreview").src = e.target.result;
-		};
-
-		// read the image file as a data URL.
-		reader.readAsDataURL(this.files[0]);
-	};
-
-</script>
-<script>
-function myCrop() {
-	
-	 var image = document.getElementById('picuserpreview').src;
-	 console.log('testanso o src')
-	 console.log(image1);
-	 
-
-	     
-	      var button = document.getElementById('button');
-	      var result = document.getElementById('result');
-	      var croppable = false;
-	      var cropper = new Cropper(image, {
-	        aspectRatio: 1,
-	        viewMode: 1,
-	        ready: function () {
-	          croppable = true;
-	        },
-	      });
-
-	      button.onclick = function () {
-	        var croppedCanvas;
-	        var roundedCanvas;
-	        var roundedImage;
-
-	        if (!croppable) {
-	          return;
-	        }
-
-	        // Crop
-	        croppedCanvas = cropper.getCroppedCanvas();
-
-	        // Round
-	        roundedCanvas = getRoundedCanvas(croppedCanvas);
-
-	        // Show
-	        roundedImage = document.createElement('img');
-	        roundedImage.src = roundedCanvas.toDataURL()
-	        result.innerHTML = '';
-	        result.appendChild(roundedImage);
-	      };
-	 }
-
-
     function getRoundedCanvas(sourceCanvas) {
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
@@ -201,9 +149,68 @@ function myCrop() {
       context.fill();
       return canvas;
     }
+    function myCrop() {
+    	  document.getElementById("button").style.visibility = "visible";
+    	 
+    	 var image = document.getElementById('picuserpreview');
+         var button = document.getElementById('button');
+         var result = document.getElementById('result');
+         var croppable = false;
+         var cropper = new Cropper(image, {
+           aspectRatio: 1,
+           viewMode: 1,
+           ready: function () {
+             croppable = true;
+           },
+         });
+         button.onclick = function () {
+        	 document.getElementById("post").style.visibility = "visible";
+        	 var croppedCanvas;
+             var roundedCanvas;
+             var roundedImage;
+
+            
+             // Crop
+             croppedCanvas = cropper.getCroppedCanvas();
+
+             // Round
+             roundedCanvas = getRoundedCanvas(croppedCanvas);
+
+             // Show
+             roundedImage = document.createElement('img');
+             roundedImage.src = roundedCanvas.toDataURL()
+             result.innerHTML = '';
+             result.appendChild(roundedImage);
+             document.getElementById('123').value=roundedImage.src;
+        	};
+      }
     
+  
    
     
-
-
+    
   </script>
+</div>
+<!--post-project-popup end-->
+<script>
+	document.getElementById("picuser").onchange = function() {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			// get loaded data and render thumbnail.
+			
+			document.getElementById("picuserpreview").src = e.target.result;
+			
+		
+			
+		//	document.getElementById("picuserpreview").src = e.target.result;
+			crop();
+		};
+
+		// read the image file as a data URL.
+		reader.readAsDataURL(this.files[0]);
+	};
+	
+	
+	
+</script>
