@@ -60,7 +60,7 @@ public class UserController {
 	private GenericDao<GeneralPublicationEntity> daoPublication;
 
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
-	public ModelAndView changeback(UserEntity userEntity, ModelAndView model, HttpServletRequest request,
+	public ModelAndView changeback(ModelAndView model, HttpServletRequest request,
 			HttpSession session, MultipartFile userback) throws IllegalStateException, IOException {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
@@ -101,11 +101,42 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/changeimage" }, method = RequestMethod.POST)
-	public ModelAndView changeimage(UserEntity userEntity, ModelAndView model, HttpSession session,
-			MultipartFile photoFile) {
-		System.out.println("troca de foto de perfil");
-		if (photoFile.toString() != null && !photoFile.getOriginalFilename().equals("")) {
+	public ModelAndView changeimage( String formData,HttpServletRequest request, ModelAndView model, HttpSession session,
+			String croppedlocation) {
+		System.out.println("IMAGEMMMM: "+formData);
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		Integer id = userEntity.getId();
+		System.out.println("arquivo: "+croppedlocation);
+		
+		if (croppedlocation != null && !croppedlocation.equals("")) {
 			System.out.println("Tem imagem");
+			
+			File path = new File(request.getRealPath("/img/"));
+			if (!path.exists()) {
+				path.mkdir();
+			}
+
+			File convFile = new File(request.getRealPath("/img/") + croppedlocation);
+
+			//userback.transferTo(convFile);
+
+			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			final Calendar cal = Calendar.getInstance();
+
+			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+					+ userEntity.getId() + df.format(cal.getTime()) + "background";
+
+			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
+			
+			userEntity.setPhoto(foto);
+			daoUser.saveUpdate(userEntity);
+
+			userEntity = daoUser.buscaId(UserEntity.class, id);
+
+			session.setAttribute("clienteLogado", userEntity);
+
+			convFile.delete();
+			
 		//	https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
 		}
 

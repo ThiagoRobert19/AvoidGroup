@@ -86,20 +86,20 @@
 		<h3>Change profile photo</h3>
 		<div class="post-project-fields">
 			<div class="containercropround">
-				<form action="<c:url value='/user/picture'/>" method="POST"
+				<form action="<c:url value='/user/changeimage'/>" method="POST"
 					enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-lg-12">
 							<input type="file" id="picuser" name="picuser">
 
 						</div>
-						
+
 						<div>
 							<img id="picuserpreview" />
 						</div>
-						
-						
-						
+
+
+
 						<div class="col-lg-12">
 							<ul>
 								<li><button type="button" onclick="myCrop()">Make
@@ -110,19 +110,22 @@
 
 						<div class="col-lg-12">
 							<div id="result"></div>
-							
+
 
 						</div>
 						<div class="col-lg-12">
 							<ul>
-								<li><button type="button" id="button"   style="visibility: hidden;">Crop</button></li>
-								<li><button id="post" class="active" type="submit" value="post"  style="visibility: hidden;">Post</button></li>
+								<li><button type="button" id="button"
+										style="visibility: hidden;">Crop</button></li>
+								<li><button id="post" class="active" type="submit"
+										value="post" style="visibility: hidden;">Post</button></li>
 								<li><a href="#" title="">Cancel</a></li>
 							</ul>
 						</div>
 						<div>
-						<input type="file" id="123" name="123">
-							
+							<input type="text" id="123" name="croppedlocation"
+								readonly="readonly">
+
 						</div>
 					</div>
 				</form>
@@ -132,6 +135,31 @@
 		<!--post-project-fields end-->
 		<a href="#" title=""><i class="la la-times-circle-o"></i></a>
 	</div>
+
+</div>
+<!--post-project-popup end-->
+<script>
+	document.getElementById("picuser").onchange = function() {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			// get loaded data and render thumbnail.
+			
+			document.getElementById("picuserpreview").src = e.target.result;
+			
+		
+			
+		//	document.getElementById("picuserpreview").src = e.target.result;
+			
+		};
+
+		// read the image file as a data URL.
+		reader.readAsDataURL(this.files[0]);
+	};
+	
+	
+	
+</script>
 <script>
     function getRoundedCanvas(sourceCanvas) {
       var canvas = document.createElement('canvas');
@@ -181,36 +209,48 @@
              roundedImage.src = roundedCanvas.toDataURL()
              result.innerHTML = '';
              result.appendChild(roundedImage);
+            
+             
+             
+             
              document.getElementById('123').value=roundedImage.src;
-        	};
-      }
+             
+             roundedCanvas.toBlob(function (blob) {
+            	 
+            	 var formData = new FormData();
+
+                 formData.append('avatar', blob, 'avatar.jpg');
+                 alert('tenta formatar para imagem'+formData.values());  
+                 
+                 
+                 $.ajax('http://localhost:8080/InAvonts/user/changeimage', {
+                     method: 'POST',
+                     data: formData,
+                     processData: false,
+                     contentType: false,
+                     
+                     
+                     success: function () {
+                    	 console.log('Success');  
+                       },
+
+                       error: function () {
+                         avatar.src = initialAvatarURL;
+                         console.log('Erro');  
+                       },
+
+                       complete: function () {
+                    	   console.log('Completo');  
+                       },
+                     
+                 });
+                 
+      		});
+             
+         }
     
-  
+    }
    
     
     
   </script>
-</div>
-<!--post-project-popup end-->
-<script>
-	document.getElementById("picuser").onchange = function() {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-			// get loaded data and render thumbnail.
-			
-			document.getElementById("picuserpreview").src = e.target.result;
-			
-		
-			
-		//	document.getElementById("picuserpreview").src = e.target.result;
-			crop();
-		};
-
-		// read the image file as a data URL.
-		reader.readAsDataURL(this.files[0]);
-	};
-	
-	
-	
-</script>
