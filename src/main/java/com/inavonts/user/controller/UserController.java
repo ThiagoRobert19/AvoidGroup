@@ -1,15 +1,21 @@
 package com.inavonts.user.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -60,8 +66,8 @@ public class UserController {
 	private GenericDao<GeneralPublicationEntity> daoPublication;
 
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
-	public ModelAndView changeback(ModelAndView model, HttpServletRequest request,
-			HttpSession session, MultipartFile userback) throws IllegalStateException, IOException {
+	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
+			MultipartFile userback) throws IllegalStateException, IOException {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		Integer id = userEntity.getId();
@@ -85,7 +91,7 @@ public class UserController {
 					+ userEntity.getId() + df.format(cal.getTime()) + "background";
 
 			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-			
+
 			userEntity.setBackPhoto(foto);
 			daoUser.saveUpdate(userEntity);
 
@@ -101,33 +107,45 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/changeimage" }, method = RequestMethod.POST)
-	public ModelAndView changeimage( String formData,HttpServletRequest request, ModelAndView model, HttpSession session,
-			String croppedlocation) {
-		System.out.println("IMAGEMMMM: "+formData);
+	public ModelAndView changeimage(String imgBase64, HttpServletRequest request, ModelAndView model,
+			HttpSession session) {
+
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 		Integer id = userEntity.getId();
-		System.out.println("arquivo: "+croppedlocation);
+		System.out.println("imgBase64: " + imgBase64);
 		
-		if (croppedlocation != null && !croppedlocation.equals("")) {
-			System.out.println("Tem imagem");
+		
+		
+		if (imgBase64 != null && !imgBase64.equals("")) {
+			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			final Calendar cal = Calendar.getInstance();
+			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+					+ userEntity.getId() + df.format(cal.getTime()) + "front";
 			
+			String caminho = request.getRealPath("/img/"+nome+".jpg");
+			 try (FileOutputStream imageOutFile = new FileOutputStream(caminho)) {
+				    // Converting a Base64 String into Image byte array
+				    byte[] imageByteArray = Base64.getDecoder().decode(imgBase64);
+				    imageOutFile.write(imageByteArray);
+				    System.out.println("fez");
+				  } catch (FileNotFoundException e) {
+				    System.out.println("Image not found" + e);
+				  } catch (IOException ioe) {
+				    System.out.println("Exception while reading the Image " + ioe);
+				  }
+			
+
 			File path = new File(request.getRealPath("/img/"));
 			if (!path.exists()) {
 				path.mkdir();
 			}
 
-			File convFile = new File(request.getRealPath("/img/") + croppedlocation);
+			File convFile = new File(caminho);
 
-			//userback.transferTo(convFile);
-
-			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-			final Calendar cal = Calendar.getInstance();
-
-			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
-					+ userEntity.getId() + df.format(cal.getTime()) + "background";
+			
 
 			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-			
+
 			userEntity.setPhoto(foto);
 			daoUser.saveUpdate(userEntity);
 
@@ -136,8 +154,8 @@ public class UserController {
 			session.setAttribute("clienteLogado", userEntity);
 
 			convFile.delete();
-			
-		//	https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
+
+			// https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
 		}
 
 		model.setViewName("redirect:/user/myprofile");

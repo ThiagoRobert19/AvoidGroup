@@ -2669,7 +2669,7 @@ footer {
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
 	-o-border-radius: 100px;
-	border-radius: 100px;
+	border-radius: 50%;
 	float: none;
 	border: 5px solid #fff;
 }

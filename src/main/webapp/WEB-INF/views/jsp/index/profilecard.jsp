@@ -8,16 +8,9 @@
 				<div class="username-dt">
 					<div class="usr-pic">
 
-						<c:if test="${empty clienteLogado.photo}">
-							<img src="<c:url value='https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png'/>"
-								alt="">
-						</c:if>
-						<c:if test="${not empty clienteLogado.photo}">
-							<img src="<c:url value='${clienteLogado.photo}'/>" alt="">
-							<img src="<c:url value='/resources/images/resources/user3.png'/>"
-								alt="">
-						</c:if>
-					</div>
+						<img src="<c:url value='${clienteLogado.photo}'/>" alt="no image">
+							
+						</div>
 				</div>
 				<!--username-dt end-->
 				<div class="user-specs">

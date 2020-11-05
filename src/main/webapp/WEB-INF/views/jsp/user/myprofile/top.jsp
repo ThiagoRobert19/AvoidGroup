@@ -2,16 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <section class="cover-sec">
-	<c:if test="${not empty clienteLogado.backPhoto}">
-
-		<img src="<c:url value='${clienteLogado.backPhoto}'/>" alt=""
+	<img src="${clienteLogado.backPhoto}" alt=" no image"
 			width="1600px" height="400px">
-	</c:if>
-	<c:if test="${empty clienteLogado.backPhoto}">
-
-		<img src="<c:url value='/images/resources/cover-img.jpg'/>" alt=""
-			width="1600px" height="400px">
-	</c:if>
+	
 	<!--img src="<c:url value='/resources/images/resources/cover-img.jpg'/>"alt=""-->
 	<div class="add-pic-box">
 		<div class="container">

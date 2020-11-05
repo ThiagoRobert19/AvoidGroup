@@ -14,7 +14,7 @@
 
 
 							<img src="<c:url value="${listPub.sharer.photo}"/>"
-								alt="no image">
+								alt="no image" style="width: 80px">
 							<div class="usy-name">
 								<h3>${listPub.sharer.name}</h3>
 								<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
@@ -41,7 +41,7 @@
 
 
 								<img src="<c:url value="${listPub.publisher.photo}"/>"
-									alt="no image">
+									alt="no image" style="width: 80px">
 								<div class="usy-name">
 									<h3>
 										${listPub.publisher.name} <i class="fas fa-share"></i>
@@ -53,7 +53,7 @@
 
 						</div>
 						<div class="job_descp">
-							<h3>${listPub.publisher.userName}</h3>
+							
 							<p>${listPub.content}</p>
 							<ul class="skill-tags">
 								<li><a href="#" title="">HTML</a></li>
@@ -71,10 +71,7 @@
 								href="<c:url value="/publication/share/${listPub.id}"/>"><i
 									class="fas fa-share"></i>Shares ${listPub.countShared}</a></li>
 						</ul>
-						<a href="#" id="dropComment"
-							onClick="carregarComentarios(${listPub.id})"
-							data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment
-							${listPub.countComment} </a>
+						<a href="#" id="dropComment" onClick="carregarComentarios(${listPub.id})" data-toggle="dropdown"><i class="fas fa-comment-alt"></i>Comment ${listPub.countComment} </a>
 						<div id="dropComment"
 							class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5"
 							aria-labelledby="gedf-drop1">
@@ -104,7 +101,7 @@
 					<div class="post_topbar">
 						<div class="usy-dt">
 							<img src="<c:url value="${listPub.publisher.photo}"/>"
-								alt="no image">
+								alt="no image" style="width: 80px">
 							<div class="usy-name">
 								<h3>${listPub.publisher.name}</h3>
 								<span> ${listPub.dateOfPublication} </span> <span>
@@ -125,7 +122,7 @@
 						</c:if>
 					</div>
 					<div class="job_descp">
-						<h3>${listPub.publisher.userName}</h3>
+						
 						<p>${listPub.content}</p>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>

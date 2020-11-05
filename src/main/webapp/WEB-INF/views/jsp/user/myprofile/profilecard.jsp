@@ -5,14 +5,11 @@
 	<div class="main-left-sidebar">
 		<div class="user_profile">
 			<div class="user-pro-img">
-				<c:if test="${empty clienteLogado.photo}">
-					<img
-						src="<c:url value='/resources/images/resources/user-pro-img.png'/>"
-						alt="">
-				</c:if>
-				<c:if test="${not empty clienteLogado.photo}">
-					<img src="<c:url value='${clienteLogado.photo}'/>" alt="">
-				</c:if>
+
+
+				<img src="${clienteLogado.photo}" alt="No photo"
+					style="width: 200px">
+
 
 				<div class="add-dp">
 					<a class="post-jb active" href="#" title=""><label for="file"><i
@@ -99,15 +96,6 @@
 						</div>
 
 
-
-						<div class="col-lg-12">
-							<ul>
-								<li><button type="button" onclick="myCrop()">Make
-										Crop</button></li>
-
-							</ul>
-						</div>
-
 						<div class="col-lg-12">
 							<div id="result"></div>
 
@@ -115,18 +103,15 @@
 						</div>
 						<div class="col-lg-12">
 							<ul>
+								<li><button id="make" type="button" onclick="myCrop()">Make
+										Crop</button></li>
 								<li><button type="button" id="button"
 										style="visibility: hidden;">Crop</button></li>
-								<li><button id="post" class="active" type="submit"
-										value="post" style="visibility: hidden;">Post</button></li>
-								<li><a href="#" title="">Cancel</a></li>
+							
+								<li><a href="" <c:url value='/user/myprofile'/>"" title="">Cancel</a></li>
 							</ul>
 						</div>
-						<div>
-							<input type="text" id="123" name="croppedlocation"
-								readonly="readonly">
 
-						</div>
 					</div>
 				</form>
 			</div>
@@ -179,7 +164,7 @@
     }
     function myCrop() {
     	  document.getElementById("button").style.visibility = "visible";
-    	 
+    	  document.getElementById("make").style.visibility = "hidden";
     	 var image = document.getElementById('picuserpreview');
          var button = document.getElementById('button');
          var result = document.getElementById('result');
@@ -192,7 +177,8 @@
            },
          });
          button.onclick = function () {
-        	 document.getElementById("post").style.visibility = "visible";
+        	
+        	
         	 var croppedCanvas;
              var roundedCanvas;
              var roundedImage;
@@ -207,45 +193,26 @@
              // Show
              roundedImage = document.createElement('img');
              roundedImage.src = roundedCanvas.toDataURL()
-             result.innerHTML = '';
-             result.appendChild(roundedImage);
+         //    result.innerHTML = '';
+           //  result.appendChild(roundedImage);
             
-             
-             
-             
-             document.getElementById('123').value=roundedImage.src;
-             
-             roundedCanvas.toBlob(function (blob) {
-            	 
-            	 var formData = new FormData();
-
-                 formData.append('avatar', blob, 'avatar.jpg');
-                 alert('tenta formatar para imagem'+formData.values());  
-                 
-                 
-                 $.ajax('http://localhost:8080/InAvonts/user/changeimage', {
-                     method: 'POST',
-                     data: formData,
-                     processData: false,
-                     contentType: false,
-                     
-                     
-                     success: function () {
-                    	 console.log('Success');  
-                       },
-
-                       error: function () {
-                         avatar.src = initialAvatarURL;
-                         console.log('Erro');  
-                       },
-
-                       complete: function () {
-                    	   console.log('Completo');  
-                       },
-                     
-                 });
-                 
-      		});
+            
+             var  formData = roundedCanvas.toDataURL("image/jpeg").split(';base64,')[1];
+          
+           $.ajax({
+        	      type: "POST",
+        	      url:  "http://localhost:8080/InAvonts/user/changeimage",
+        	      data: { 
+        	         imgBase64: formData
+        	      }
+        	    }).done(function(o) {
+        	      console.log('saved'); 
+        	      window.location.reload();
+        	    });
+           
+        
+           
+         
              
          }
     

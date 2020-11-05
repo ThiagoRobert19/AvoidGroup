@@ -11,7 +11,7 @@
 					<div class="usy-dt">
 
 
-						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image">
+						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image"  style="width: 80px">
 						<div class="usy-name">
 							<h3>${listPub.sharer.name}</h3>
 							<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
@@ -38,7 +38,7 @@
 
 
 							<img src="<c:url value="${listPub.publisher.photo}"/>"
-								alt="no image">
+								alt="no image"  style="width: 80px">
 							<div class="usy-name">
 								<h3>
 									${listPub.publisher.name} <i class="fas fa-share"></i>
@@ -50,7 +50,7 @@
 
 					</div>
 					<div class="job_descp">
-						<h3>${listPub.publisher.userName}</h3>
+						
 						<p>${listPub.content}</p>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
@@ -100,7 +100,7 @@
 				<div class="post_topbar">
 					<div class="usy-dt">
 						<img src="<c:url value="${listPub.publisher.photo}"/>"
-							alt="no image">
+							alt="no image"  style="width: 80px">
 						<div class="usy-name">
 							<h3>${listPub.publisher.name}</h3>
 							<span> ${listPub.dateOfPublication} </span> <span>
@@ -121,7 +121,7 @@
 					</c:if>
 				</div>
 				<div class="job_descp">
-					<h3>${listPub.publisher.userName}</h3>
+					
 					<p>${listPub.content}</p>
 					<ul class="skill-tags">
 						<li><a href="#" title="">HTML</a></li>

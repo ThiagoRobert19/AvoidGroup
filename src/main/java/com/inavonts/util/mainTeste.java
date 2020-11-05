@@ -33,7 +33,33 @@ public class mainTeste {
 		//aws.delete();
 		System.out.println("ver lista");
 		aws.list();
-	
+	/*	
+		user-pro-img img {
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	-ms-border-radius: 100px;
+	-o-border-radius: 100px;
+	border-radius: 100px;
+	float: none;
+	border: 5px solid #fff;
+}
+		.usr-pic > img {
+			float: none;
+			border: 5px solid #fff;
+			-webkit-border-radius: 100px;
+			-moz-border-radius: 100px;
+			-ms-border-radius: 100px;
+			-o-border-radius: 100px;
+			border-radius: 100px;
+			width: 100%;
+		}
+		.usr-pic {
+	width: 110px;
+	height: 110px;
+	margin: 0 auto;
+	margin-bottom: -48px;
+}
+*/	
 	}
 
 }
