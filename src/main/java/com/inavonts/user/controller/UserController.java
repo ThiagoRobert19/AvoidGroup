@@ -152,8 +152,11 @@ public class UserController {
 			userEntity = daoUser.buscaId(UserEntity.class, id);
 
 			session.setAttribute("clienteLogado", userEntity);
-
 			convFile.delete();
+			
+			
+			
+		//	convFile.delete();
 
 			// https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
 		}

@@ -146,7 +146,7 @@
 			<!--menu-btn end-->
 			<div class="user-account">
 				<div class="user-info">
-					<img src="<c:url value='/resources/images/resources/user3.png'/>"
+					<img src="${clienteLogado.photo}"
 						alt="" width="40" height="40"> <a href="#" title=""></a> <i
 						class="la la-sort-down"></i>
 				</div>

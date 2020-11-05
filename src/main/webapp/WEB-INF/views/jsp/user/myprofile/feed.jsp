@@ -44,7 +44,7 @@
 									alt="no image" style="width: 80px">
 								<div class="usy-name">
 									<h3>
-										${listPub.publisher.name} <i class="fas fa-share"></i>
+										<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a> <i class="fas fa-share"></i>
 									</h3>
 									<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
 									</span>

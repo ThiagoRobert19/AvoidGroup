@@ -13,7 +13,7 @@
 
 						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image"  style="width: 80px">
 						<div class="usy-name">
-							<h3>${listPub.sharer.name}</h3>
+							<h3><a href="<c:url value="/user/view/${listPub.sharer.id}"/>">${listPub.sharer.name}</a></h3>
 							<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
 							</span>
 						</div>
@@ -41,7 +41,7 @@
 								alt="no image"  style="width: 80px">
 							<div class="usy-name">
 								<h3>
-									${listPub.publisher.name} <i class="fas fa-share"></i>
+									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a> <i class="fas fa-share"></i>
 								</h3>
 								<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
 								</span>
@@ -102,7 +102,7 @@
 						<img src="<c:url value="${listPub.publisher.photo}"/>"
 							alt="no image"  style="width: 80px">
 						<div class="usy-name">
-							<h3>${listPub.publisher.name}</h3>
+							<h3> <a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a></h3>
 							<span> ${listPub.dateOfPublication} </span> <span>
 								${listPub.timeOfPublication} </span>
 						</div>

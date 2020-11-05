@@ -19,7 +19,7 @@
 				<div class="accept-feat">
 					<ul>
 					<li><a href="<c:url value='/setting/request/accept/${listRequest.id}'/>" class="accept-req">Accept</a></li>
-						<li><a href="<c:url value='/setting/request/acceptandfollow/${listRequest.id}'/>" class="accept-req">Accept and Follow</a></li>
+						<!-- li><a href="<c:url value='/setting/request/acceptandfollow/${listRequest.id}'/>" class="accept-req">Accept and Follow</a></li-->
 						<li><a href="<c:url value='/setting/request/deny/${listRequest.id}'/>" class="close-req">
 								<i class="la la-close"></i>
 							</a></li>
