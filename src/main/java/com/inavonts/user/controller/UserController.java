@@ -35,6 +35,7 @@ import com.inavonts.friendship.model.FollowRequestEntity;
 import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
+import com.inavonts.util.AWSAPI;
 import com.inavonts.util.Common;
 import com.inavonts.util.Criptografia;
 import com.inavonts.util.DropBoxUtil;
@@ -50,6 +51,8 @@ public class UserController {
 
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
+
+	private AWSAPI amazon = new AWSAPI();
 
 	@Autowired
 	private GenericDao<FollowEntity> daoFollow;
@@ -68,38 +71,47 @@ public class UserController {
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
 	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
 			MultipartFile userback) throws IllegalStateException, IOException {
+
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
 		Integer id = userEntity.getId();
 		userEntity = daoUser.buscaId(UserEntity.class, id);
 
+		if (userEntity.getBackPhotoName() != null && !userEntity.getBackPhotoName().equals("")) {
+			amazon.delete(userEntity.getBackPhotoName());
+		}
+
 		if (userback.toString() != null && !userback.getOriginalFilename().equals("")) {
-			System.out.println("nao eh null");
 			File path = new File(request.getRealPath("/img/"));
 			if (!path.exists()) {
 				path.mkdir();
 			}
+			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
+			final Calendar cal = Calendar.getInstance();
+			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
+					+ userEntity.getId() + df.format(cal.getTime()) + "back";
 
-			File convFile = new File(request.getRealPath("/img/") + userback.getOriginalFilename());
+			nome = nome.trim().replaceAll(" ", "") + ".jpg";
+
+			String caminho = request.getRealPath("/img/" + nome);
+
+			File convFile = new File(caminho);
 
 			userback.transferTo(convFile);
 
-			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
-			final Calendar cal = Calendar.getInstance();
+			AWSAPI amazon = new AWSAPI();
+			amazon.uploadfile(convFile, nome);
+			String path1 = amazon.getPath();
 
-			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
-					+ userEntity.getId() + df.format(cal.getTime()) + "background";
-
-			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-
-			userEntity.setBackPhoto(foto);
+			userEntity.setBackPhoto(path1 + nome);
+			userEntity.setBackPhotoName(nome);
 			daoUser.saveUpdate(userEntity);
 
 			userEntity = daoUser.buscaId(UserEntity.class, id);
 
 			session.setAttribute("clienteLogado", userEntity);
-
 			convFile.delete();
+			// ===========
 
 		}
 		model.setViewName("redirect:/user/myprofile");
@@ -112,53 +124,53 @@ public class UserController {
 
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 		Integer id = userEntity.getId();
-		System.out.println("imgBase64: " + imgBase64);
-		
-		
-		
+		userEntity = daoUser.buscaId(UserEntity.class, id);
+
+		if (userEntity.getPhotoName() != null && !userEntity.getPhotoName().equals("")) {
+			amazon.delete(userEntity.getPhotoName());
+		}
+	
+		File path = new File(request.getRealPath("/img/"));
+		if (!path.exists()) {
+			path.mkdir();
+		}
+
 		if (imgBase64 != null && !imgBase64.equals("")) {
+
 			SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
 			final Calendar cal = Calendar.getInstance();
 			String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
 					+ userEntity.getId() + df.format(cal.getTime()) + "front";
-			
-			String caminho = request.getRealPath("/img/"+nome+".jpg");
-			 try (FileOutputStream imageOutFile = new FileOutputStream(caminho)) {
-				    // Converting a Base64 String into Image byte array
-				    byte[] imageByteArray = Base64.getDecoder().decode(imgBase64);
-				    imageOutFile.write(imageByteArray);
-				    System.out.println("fez");
-				  } catch (FileNotFoundException e) {
-				    System.out.println("Image not found" + e);
-				  } catch (IOException ioe) {
-				    System.out.println("Exception while reading the Image " + ioe);
-				  }
-			
 
-			File path = new File(request.getRealPath("/img/"));
-			if (!path.exists()) {
-				path.mkdir();
+			nome = nome.trim().replaceAll(" ", "") + ".jpg";
+
+			String caminho = request.getRealPath("/img/" + nome);
+
+			try (FileOutputStream imageOutFile = new FileOutputStream(caminho)) {
+
+				byte[] imageByteArray = Base64.getDecoder().decode(imgBase64);
+				imageOutFile.write(imageByteArray);
+				System.out.println("fez");
+			} catch (FileNotFoundException e) {
+				System.out.println("Image not found" + e);
+			} catch (IOException ioe) {
+				System.out.println("Exception while reading the Image " + ioe);
 			}
 
 			File convFile = new File(caminho);
+			AWSAPI amazon = new AWSAPI();
+			amazon.uploadfile(convFile, nome);
+			String path1 = amazon.getPath();
 
-			
-
-			String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-
-			userEntity.setPhoto(foto);
+			userEntity.setPhoto(path1 + nome);
+			userEntity.setPhotoName(nome);
 			daoUser.saveUpdate(userEntity);
 
 			userEntity = daoUser.buscaId(UserEntity.class, id);
 
 			session.setAttribute("clienteLogado", userEntity);
 			convFile.delete();
-			
-			
-			
-		//	convFile.delete();
 
-			// https://inavontsbucket.s3.us-east-2.amazonaws.com/foto.png
 		}
 
 		model.setViewName("redirect:/user/myprofile");

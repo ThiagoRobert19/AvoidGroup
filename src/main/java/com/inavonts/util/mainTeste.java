@@ -24,7 +24,7 @@ public class mainTeste {
 
 	public static void main(String args[]) throws Exception {
 
-		AWSAPI aws = new AWSAPI();
+	/*	AWSAPI aws = new AWSAPI();
 		System.out.println("tenta upload");
 		aws.uploadfile();
 		System.out.println("fez");
@@ -32,7 +32,7 @@ public class mainTeste {
 		aws.list();
 		//aws.delete();
 		System.out.println("ver lista");
-		aws.list();
+		aws.list();*/
 	/*	
 		user-pro-img img {
 	-webkit-border-radius: 100px;
