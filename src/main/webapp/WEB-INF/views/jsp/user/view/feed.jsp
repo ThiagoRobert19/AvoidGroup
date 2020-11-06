@@ -53,8 +53,18 @@
 
 						</div>
 						<div class="job_descp">
-							
-							<p>${listPub.content}</p>
+
+							<div class="row">
+								<c:if test="${not empty listPub.image}">
+									<p>
+										<img src="<c:url value="${listPub.image}"/>" alt="no image"
+											style="width: 700px">
+									</p>
+								</c:if>
+							</div>
+							<div class="row">
+								<p>${listPub.content}</p>
+							</div>
 							<ul class="skill-tags">
 								<li><a href="#" title="">HTML</a></li>
 								<li><a href="#" title="">PHP</a></li>
@@ -125,8 +135,18 @@
 						</c:if>
 					</div>
 					<div class="job_descp">
-						
-						<p>${listPub.content}</p>
+
+						<div class="row">
+							<c:if test="${not empty listPub.image}">
+								<p>
+									<img src="<c:url value="${listPub.image}"/>" alt="no image"
+										style="width: 700px">
+								</p>
+							</c:if>
+						</div>
+						<div class="row">
+							<p>${listPub.content}</p>
+						</div>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
 							<li><a href="#" title="">PHP</a></li>

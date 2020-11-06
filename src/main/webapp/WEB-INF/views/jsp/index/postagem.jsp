@@ -11,9 +11,12 @@
 					<div class="usy-dt">
 
 
-						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image"  style="width: 80px">
+						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image"
+							style="width: 80px">
 						<div class="usy-name">
-							<h3><a href="<c:url value="/user/view/${listPub.sharer.id}"/>">${listPub.sharer.name}</a></h3>
+							<h3>
+								<a href="<c:url value="/user/view/${listPub.sharer.id}"/>">${listPub.sharer.name}</a>
+							</h3>
 							<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
 							</span>
 						</div>
@@ -38,10 +41,11 @@
 
 
 							<img src="<c:url value="${listPub.publisher.photo}"/>"
-								alt="no image"  style="width: 80px">
+								alt="no image" style="width: 80px">
 							<div class="usy-name">
 								<h3>
-									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a> <i class="fas fa-share"></i>
+									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a>
+									<i class="fas fa-share"></i>
 								</h3>
 								<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
 								</span>
@@ -50,8 +54,17 @@
 
 					</div>
 					<div class="job_descp">
-						
-						<p>${listPub.content}</p>
+						<div class="row">
+							<c:if test="${not empty listPub.image}">
+								<p>
+									<img src="<c:url value="${listPub.image}"/>" alt="no image"
+										style="width: 700px">
+								</p>
+							</c:if>
+						</div>
+						<div class="row">
+							<p>${listPub.content}</p>
+						</div>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
 							<li><a href="#" title="">PHP</a></li>
@@ -62,7 +75,8 @@
 				</div>
 				<div class="job-status-bar">
 					<ul class="like-com">
-						<li><a href="#"><i class="fas fa-heart"></i> Like ${listPub.countLike}</a></li>
+						<li><a href="#"><i class="fas fa-heart"></i> Like
+								${listPub.countLike}</a></li>
 						<li><a
 							href="<c:url value="/publication/share/${listPub.id}"/>"><i
 								class="fas fa-share"></i>Shares ${listPub.countShared}</a></li>
@@ -97,12 +111,15 @@
 
 			<!-- #########################################################if(shared!="yes"){ -->
 			<div class="post-bar">
+
 				<div class="post_topbar">
 					<div class="usy-dt">
 						<img src="<c:url value="${listPub.publisher.photo}"/>"
-							alt="no image"  style="width: 80px">
+							alt="no image" style="width: 80px">
 						<div class="usy-name">
-							<h3> <a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a></h3>
+							<h3>
+								<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a>
+							</h3>
 							<span> ${listPub.dateOfPublication} </span> <span>
 								${listPub.timeOfPublication} </span>
 						</div>
@@ -121,8 +138,17 @@
 					</c:if>
 				</div>
 				<div class="job_descp">
-					
-					<p>${listPub.content}</p>
+					<div class="row">
+						<c:if test="${not empty listPub.image}">
+							<p>
+								<img src="<c:url value="${listPub.image}"/>" alt="no image"
+									style="width: 700px">
+							</p>
+						</c:if>
+					</div>
+					<div class="row">
+						<p>${listPub.content}</p>
+					</div>
 					<ul class="skill-tags">
 						<li><a href="#" title="">HTML</a></li>
 						<li><a href="#" title="">PHP</a></li>
@@ -144,7 +170,7 @@
 					<div id="dropComment"
 						class="dropdown-menu dropdown-menu-right card-link pr-5 pl-5"
 						aria-labelledby="gedf-drop1">
-						
+
 						<form action="<c:url value="/comment/addCommentPublication"/>"
 							method="post">
 							<input type="hidden" name="publicationID" value="${listPub.id}">

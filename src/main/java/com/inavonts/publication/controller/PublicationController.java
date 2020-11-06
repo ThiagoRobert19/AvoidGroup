@@ -29,6 +29,7 @@ import com.inavonts.publication.model.GeneralCommentEntity;
 import com.inavonts.publication.model.GeneralLikeEntity;
 import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
+import com.inavonts.util.AWSAPI;
 import com.inavonts.util.DropBoxUtil;
 import com.inavonts.util.PublicationUtil;
 
@@ -43,7 +44,7 @@ public class PublicationController {
 	private GenericDao<GeneralCommentEntity> daoComment;
 	@Autowired
 	private UserEntity userEntity;
-
+	AWSAPI amazon = new AWSAPI();
 	@Autowired
 	private GenericDao<UserEntity> daoUser;
 	@Autowired
@@ -70,30 +71,37 @@ public class PublicationController {
 			entity.setShared("no");
 
 			if (file.toString() != null && !file.getOriginalFilename().equals("")) {
-				System.out.println("nao eh null");
 				File path = new File(request.getRealPath("/img/"));
-				if(!path.exists()){
-					 path.mkdir();
+				if (!path.exists()) {
+					path.mkdir();
 				}
-			      //Creating the directory
-			   
-				File convFile = new File(request.getRealPath("/img/") + file.getOriginalFilename());
-
-				file.transferTo(convFile);
-
 				SimpleDateFormat df = new SimpleDateFormat("ddMMyyyyHHmmss");
 				final Calendar cal = Calendar.getInstance();
-
 				String nome = userEntity.getName().toLowerCase() + userEntity.getUserName().toLowerCase()
 						+ userEntity.getId() + df.format(cal.getTime()) + "publication";
 
-				String foto = DropBoxUtil.uploadFile(convFile, "/" + nome.trim() + ".jpg");
-				entity.setPhotoName("/" + nome.trim() + ".jpg");
-				entity.setImage(foto);
+				nome = nome.trim().replaceAll(" ", "") + ".jpg";
+
+				String caminho = request.getRealPath("/img/" + nome);
+
+				File convFile = new File(caminho);
+
+				file.transferTo(convFile);
+
+				
+				amazon.uploadfile(convFile, nome);
+				String path1 = amazon.getPath();
+
+				entity.setImage(path1 + nome);
+				entity.setPhotoName(nome);
+				
+			
 				convFile.delete();
+				// ===========
 
 			} else {
 				entity.setImage(null);
+				entity.setPhotoName("");
 			}
 
 			daoPublication.saveUpdate(entity);
@@ -191,7 +199,8 @@ public class PublicationController {
 				return model;
 			} else {
 				if (publication.getPhotoName() != null && !publication.getPhotoName().equals("")) {
-					DropBoxUtil.deleteFile(publication.getPhotoName());
+				
+					amazon.delete(publication.getPhotoName());
 				}
 
 				Map<String, Object> mapOriginal = new HashMap<String, Object>();
