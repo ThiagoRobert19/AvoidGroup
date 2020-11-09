@@ -33,6 +33,8 @@ import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
 import com.inavonts.friendship.model.FollowRequestEntity;
 import com.inavonts.publication.model.GeneralPublicationEntity;
+import com.inavonts.team.model.TeamEntity;
+import com.inavonts.team.model.TeamUserEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
 import com.inavonts.util.AWSAPI;
@@ -68,6 +70,18 @@ public class UserController {
 	@Autowired
 	private GenericDao<GeneralPublicationEntity> daoPublication;
 
+	@Autowired
+	private List<TeamEntity> listTeam;
+	
+	@Autowired
+	private GenericDao<TeamEntity> daoTeam;
+	
+	@Autowired
+	private List<TeamUserEntity> listTeamUser;
+	
+	@Autowired
+	private GenericDao<TeamUserEntity> daoTeamUser;
+	
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
 	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
 			MultipartFile userback) throws IllegalStateException, IOException {
@@ -339,6 +353,11 @@ public class UserController {
 		pagedListHolder.setPage(page);
 		pagedListHolder.setPageSize(10);
 
+		Map<String, Object> mapTeamUser = new HashMap<String, Object>();
+		mapTeamUser.put("userEntity.id", userEntity.getId());
+		listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
+		
+		model.addObject("listTeamUser", listTeamUser);
 		model.addObject("pagedListHolder", pagedListHolder);
 		model.addObject("countfollowers", countfollowers);
 		model.addObject("countfollowing", countfollowing);

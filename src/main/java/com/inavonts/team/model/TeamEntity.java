@@ -27,7 +27,8 @@ public class TeamEntity implements Serializable, EntidadeBase {
 
 	private String uuid;
 
-	private String image;
+	private String photo;
+	private String photoName;
 
 	private String about;
 
@@ -36,18 +37,13 @@ public class TeamEntity implements Serializable, EntidadeBase {
 	@OneToOne
 	@JoinColumn(name = "owner_id")
 	private UserEntity owner;
+	@OneToOne
+	@JoinColumn(name = "admin_id")
+	private UserEntity admin;
 
 	@OneToOne
 	@JoinColumn(name = "game_id")
 	private GameEntity game;
-
-	public String getModality() {
-		return modality;
-	}
-
-	public void setModality(String modality) {
-		this.modality = modality;
-	}
 
 	public Integer getId() {
 		return id;
@@ -55,6 +51,14 @@ public class TeamEntity implements Serializable, EntidadeBase {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public UserEntity getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(UserEntity admin) {
+		this.admin = admin;
 	}
 
 	public String getName() {
@@ -73,12 +77,20 @@ public class TeamEntity implements Serializable, EntidadeBase {
 		this.uuid = uuid;
 	}
 
-	public String getImage() {
-		return image;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 
 	public String getAbout() {
@@ -87,6 +99,14 @@ public class TeamEntity implements Serializable, EntidadeBase {
 
 	public void setAbout(String about) {
 		this.about = about;
+	}
+
+	public String getModality() {
+		return modality;
+	}
+
+	public void setModality(String modality) {
+		this.modality = modality;
 	}
 
 	public UserEntity getOwner() {
@@ -111,8 +131,9 @@ public class TeamEntity implements Serializable, EntidadeBase {
 
 	@Override
 	public String toString() {
-		return "TeamEntity [id=" + id + ", name=" + name + ", uuid=" + uuid + ", image=" + image + ", about=" + about
-				+ ", modality=" + modality + ", owner=" + owner + ", game=" + game + "]";
+		return "TeamEntity [id=" + id + ", name=" + name + ", uuid=" + uuid + ", photo=" + photo + ", photoName="
+				+ photoName + ", about=" + about + ", modality=" + modality + ", owner=" + owner + ", game=" + game
+				+ "]";
 	}
 
 }

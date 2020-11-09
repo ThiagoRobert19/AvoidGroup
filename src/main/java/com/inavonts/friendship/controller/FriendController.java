@@ -1,7 +1,9 @@
 package com.inavonts.friendship.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,9 @@ public class FriendController {
 	private UserEntity userEntity;
 
 	@Autowired
+	private List<FollowEntity> listFollow;
+
+	@Autowired
 	private GenericDao<UserEntity> daoUser;
 	@Autowired
 	private FollowEntity followEntity;
@@ -42,6 +47,45 @@ public class FriendController {
 	private FollowRequestEntity followRequestEntity;
 	@Autowired
 	private GenericDao<FollowRequestEntity> daoRequest;
+
+	@RequestMapping(value = { "/following/{id}" }, method = RequestMethod.GET)
+	public ModelAndView following(@PathVariable(value = "id") String id, HttpServletRequest request,
+			ModelAndView model) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("follower.id", Integer.parseInt(id));
+
+		listFollow = daoFollow.listarProperty(FollowEntity.class, map, "and");
+		List<UserEntity> listUser = new ArrayList<UserEntity>();
+		for (FollowEntity f : listFollow) {
+			listUser.add(f.getFollowed());
+		}
+
+		model.addObject("listUser", listUser);
+
+		model.setViewName("user/following");
+
+		return model;
+	}
+
+	@RequestMapping(value = { "/followers/{id}" }, method = RequestMethod.GET)
+	public ModelAndView followers(@PathVariable(value = "id") String id, HttpServletRequest request,
+			ModelAndView model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("followed.id", Integer.parseInt(id));
+
+		listFollow = daoFollow.listarProperty(FollowEntity.class, map, "and");
+		List<UserEntity> listUser = new ArrayList<UserEntity>();
+		for (FollowEntity f : listFollow) {
+			listUser.add(f.getFollower());
+		}
+
+		model.addObject("listUser", listUser);
+
+		model.setViewName("user/followers");
+
+		return model;
+	}
 
 	@RequestMapping(value = { "/cancelrequest/{id}" }, method = RequestMethod.GET)
 	public ModelAndView cancelrequest(@PathVariable(value = "id") String id, HttpServletRequest request,

@@ -22,10 +22,10 @@
 			<!--user-profile end-->
 			<ul class="user-fw-status">
 				<li>
-					<h4>Following</h4> <span>${countfollowing}</span>
+					<h4><a href="<c:url value='/friend/following/${clienteLogado.id}'/>">Following</a></h4> <span>${countfollowing}</span>
 				</li>
 				<li>
-					<h4>Followers</h4> <span>${countfollowers}</span>
+					<h4><a href="<c:url value='/friend/followers/${clienteLogado.id}'/>">Followers</a></h4> <span>${countfollowers}</span>
 				</li>
 				<li><a href="<c:url value='/user/myprofile'/>" title="">View
 						Profile</a></li>

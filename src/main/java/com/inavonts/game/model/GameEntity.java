@@ -1,14 +1,17 @@
 package com.inavonts.game.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
 
+import com.inavonts.user.model.UserInterestEntity;
 import com.inavonts.util.EntidadeBase;
 
 @Component("GameEntity")
@@ -26,6 +29,9 @@ public class GameEntity implements Serializable, EntidadeBase {
 	private String imagedDefault;
 
 	private String imageName;
+	
+	
+
 
 	public Integer getId() {
 		return id;

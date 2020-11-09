@@ -65,18 +65,24 @@
 						<div class="row">
 							<p>${listPub.content}</p>
 						</div>
-						<ul class="skill-tags">
+						<!--ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
 							<li><a href="#" title="">PHP</a></li>
 							<li><a href="#" title="">JAVA</a></li>
-						</ul>
+						</ul-->
 					</div>
 
 				</div>
 				<div class="job-status-bar">
 					<ul class="like-com">
-						<li><a href="#"><i class="fas fa-heart"></i> Like
-								${listPub.countLike}</a></li>
+						<c:if test="${listPub.youLiked=='no'}">
+							<li><a href="<c:url value="/like/add/${listPub.id}"/>"><i
+									class="fas fa-heart"></i> Like ${listPub.countLike}</a></li>
+						</c:if>
+						<c:if test="${listPub.youLiked=='yes'}">
+							<li><a href="<c:url value="/like/remove/${listPub.id}"/>"><i
+									class="fas fa-heart"></i> Liked ${listPub.countLike}</a></li>
+						</c:if>
 						<li><a
 							href="<c:url value="/publication/share/${listPub.id}"/>"><i
 								class="fas fa-share"></i>Shares ${listPub.countShared}</a></li>
@@ -149,16 +155,25 @@
 					<div class="row">
 						<p>${listPub.content}</p>
 					</div>
-					<ul class="skill-tags">
-						<li><a href="#" title="">HTML</a></li>
-						<li><a href="#" title="">PHP</a></li>
-						<li><a href="#" title="">JAVA</a></li>
-					</ul>
+					<!--ul class="skill-tags">
+							<li><a href="#" title="">HTML</a></li>
+							<li><a href="#" title="">PHP</a></li>
+							<li><a href="#" title="">JAVA</a></li>
+						</ul-->
 				</div>
 				<div class="job-status-bar">
 					<ul class="like-com">
-						<li><a href="#"><i class="fas fa-heart"></i> Like
-								${listPub.countLike}</a></li>
+						<c:if test="${listPub.youLiked=='no'}">
+							<li><a href="<c:url value="/like/add/${listPub.id}"/>"><i
+									class="fas fa-heart"></i> Like ${listPub.countLike}</a></li>
+						</c:if>
+						<c:if test="${listPub.youLiked=='yes'}">
+							<li><a href="<c:url value="/like/remove/${listPub.id}"/>"><i
+									class="fas fa-heart"></i> Liked ${listPub.countLike}</a></li>
+						</c:if>
+
+
+
 						<li><a
 							href="<c:url value="/publication/share/${listPub.id}"/>"><i
 								class="fas fa-share"></i>Shares ${listPub.countShared}</a></li>

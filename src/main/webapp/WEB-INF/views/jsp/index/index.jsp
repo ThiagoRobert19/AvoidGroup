@@ -17,6 +17,5 @@
 </div>
 </main>
 
-<c:import url="/WEB-INF/views/jsp/index/postprojectpopup.jsp" />
-<c:import url="/WEB-INF/views/jsp/index/postjobpopup.jsp" />
+
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />

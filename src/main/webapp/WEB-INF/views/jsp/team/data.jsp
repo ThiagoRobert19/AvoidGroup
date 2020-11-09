@@ -4,227 +4,52 @@
 <c:import url="/WEB-INF/cabecalho/menu.jsp" />
 <section class="companies-info">
 	<div class="container">
-	<div class="row">
-		<div class="search-sec">
-			<div class="container">
-				<div class="search-box">
-					<form>
-						<input type="text" name="search" placeholder="Search keywords">
-						<button type="submit">Search</button>
-					</form>
+		<div class="row">
+			<div class="right-sidebar">
+				<div class="message-btn">
+					<button title="Create a Team" class="ask-question">Create a
+						Team</button>
+
 				</div>
-				<!--search-box end-->
 			</div>
 		</div>
+		<div class="row">
+			<div class="search-sec">
+				<div class="container">
+					<div class="search-box">
+						<form>
+							<input type="text" name="search" placeholder="Search keywords">
+							<button type="submit">Search</button>
+						</form>
+					</div>
+					<!--search-box end-->
+				</div>
+			</div>
 		</div>
-		<br/>
+		<br />
 		<!--search-sec end-->
 		<div class="companies-list">
 			<div class="row">
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon.png" alt="">
-							<h3>Facebook Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
+				<c:forEach var="listTeam" items="${pagedListHolder.pageList}">
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="company_profile_info">
+							<div class="company-up-info">
+
+								<img src="<c:url value='${listTeam.photo}'/>" alt="">
+								<h3>${listTeam.name}</h3>
+								<h4>${listTeam.about}</h4>
+								<ul>
+									<li><a href="#" title="" class="follow">Follow</a></li>
+									<li><a href="#" title="" class="message-us"><i
+											class="fa fa-envelope"></i></a></li>
+								</ul>
+							</div>
+							<a href="company-profile.html" title="" class="view-more-pro">View
+								Profile</a>
 						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
+						<!--company_profile_info end-->
 					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon1.png" alt="">
-							<h3>Google Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon2.png" alt="">
-							<h3>Pinterest</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon3.png" alt="">
-							<h3>Microsoft Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon4.png" alt="">
-							<h3>Line Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon5.png" alt="">
-							<h3>Linked In</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon6.png" alt="">
-							<h3>Apple Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon7.png" alt="">
-							<h3>Samsung Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon8.png" alt="">
-							<h3>Oppo</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon9.png" alt="">
-							<h3>Game loft</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon10.png" alt="">
-							<h3>Android Inc.</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="company_profile_info">
-						<div class="company-up-info">
-							<img src="images/resources/cmp-icon11.png" alt="">
-							<h3>Oracle</h3>
-							<h4>Establish Feb, 2004</h4>
-							<ul>
-								<li><a href="#" title="" class="follow">Follow</a></li>
-								<li><a href="#" title="" class="message-us"><i
-										class="fa fa-envelope"></i></a></li>
-							</ul>
-						</div>
-						<a href="company-profile.html" title="" class="view-more-pro">View
-							Profile</a>
-					</div>
-					<!--company_profile_info end-->
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 		<!--companies-list end-->
@@ -238,5 +63,21 @@
 		<!--process-comm end-->
 	</div>
 </section>
+<div class="overview-box" id="question-box">
+	<div class="overview-edit">
+		<h3>Create a Team</h3>
+		<form>
+			<input type="text" name="question" placeholder="Type Question Here">
+			<input type="text" name="tags" placeholder="Tags">
+			<textarea placeholder="Description"></textarea>
+			<button type="submit" class="save">Submit</button>
+			<button type="submit" class="cancel">Cancel</button>
+		</form>
+		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
+	</div>
+	<!--overview-edit end-->
+</div>
+<!--overview-box end-->
 <!--companies-info end-->
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />
+

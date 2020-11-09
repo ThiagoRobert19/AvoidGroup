@@ -28,8 +28,6 @@ public class GenericDao<T extends EntidadeBase> {
 			for (String nam : nameOfClasses) {
 				String key1 = nam.replaceAll("\\.", "");
 
-				// query.setParameter(key, clazz.get(nam));
-
 				String hql = "delete from " + clazz.get(nam);
 				if (parametros != null && parametros.size() > 0) {
 					Set<String> params = parametros.keySet();
@@ -435,13 +433,6 @@ public class GenericDao<T extends EntidadeBase> {
 		manager = EntityManagerHelper.getEntityManager();
 		List<T> lista = new ArrayList<T>();
 
-		/*
-		 * lista = manager.
-		 * createQuery("select ge from GeneralPublicationEntity ge inner join UserEntity"
-		 * + " ue on ge.publisher.id = ue.id inner join FollowEntity fe " +
-		 * " on fe.follower.id = ue.id  where fe.follower.id = '" + id +
-		 * "'  ORDER  BY ge.id ASC") .getResultList();
-		 */
 		lista = manager.createQuery("select ge from GeneralPublicationEntity ge inner join FollowEntity"
 				+ " fe on ge.publisher.id = '" + id + "' or ge.publisher.id = fe.followed.id ORDER  BY ge.id ASC")
 				.getResultList();
@@ -449,13 +440,5 @@ public class GenericDao<T extends EntidadeBase> {
 		EntityManagerHelper.closeEntityManager();
 		return lista;
 	}
-	/*
-	 * lista = manager.
-	 * createQuery("select ge from GeneralPublicationEntity ge inner join ProfileEntity"
-	 * + " pe on ge.publisher.id = pe.id inner join FriendEntity fe " +
-	 * " on fe.profile1.id = pe.id or fe.profile2.id = pe.id where fe.profile1.id = '"
-	 * + id + "' or fe.profile2.id = '" + id + "' ORDER  BY ge.id ASC")
-	 * .getResultList();
-	 */
-
+	
 }

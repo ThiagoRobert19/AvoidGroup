@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
+import com.inavonts.friendship.model.SuggestionEntity;
 import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.user.model.UserEntity;
 import com.inavonts.user.model.UserNotificationEntity;
@@ -30,18 +31,36 @@ public class IndexController {
 	private UserEntity userEntity;
 	@Autowired
 	private GenericDao<FollowEntity> daoFollow;
+	
+	@Autowired
+	private List<FollowEntity> listFollow;
+	
+	@Autowired
+	private GenericDao<SuggestionEntity> daoSuggestion;
+	
+	@Autowired
+	private List<SuggestionEntity> listSuggestion;
+	
+	
 	@Autowired
 	private List<UserNotificationEntity> listNotification;
 	@Autowired
 	private GenericDao<UserNotificationEntity> daoNotification;
 	
+	
+	
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, ModelAndView model,HttpSession session) {
-
+		
+		
+		
+		
 		Common comum = new Common();
 		if (comum.checkOnline(request)) {
 			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 			String id = userEntity.getId().toString();
+			
+			
 			int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
 			int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
 
