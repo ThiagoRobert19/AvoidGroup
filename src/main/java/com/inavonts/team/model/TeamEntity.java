@@ -2,6 +2,7 @@ package com.inavonts.team.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,10 @@ public class TeamEntity implements Serializable, EntidadeBase {
 	private String photo;
 	private String photoName;
 
+	private String backPhoto;
+	private String backPhotoName;
+	@Column(length = 500)
 	private String about;
-
-	private String modality;
 
 	@OneToOne
 	@JoinColumn(name = "owner_id")
@@ -49,16 +51,24 @@ public class TeamEntity implements Serializable, EntidadeBase {
 		return id;
 	}
 
+	public String getBackPhoto() {
+		return backPhoto;
+	}
+
+	public void setBackPhoto(String backPhoto) {
+		this.backPhoto = backPhoto;
+	}
+
+	public String getBackPhotoName() {
+		return backPhotoName;
+	}
+
+	public void setBackPhotoName(String backphotoName) {
+		this.backPhotoName = backphotoName;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public UserEntity getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(UserEntity admin) {
-		this.admin = admin;
 	}
 
 	public String getName() {
@@ -101,20 +111,20 @@ public class TeamEntity implements Serializable, EntidadeBase {
 		this.about = about;
 	}
 
-	public String getModality() {
-		return modality;
-	}
-
-	public void setModality(String modality) {
-		this.modality = modality;
-	}
-
 	public UserEntity getOwner() {
 		return owner;
 	}
 
 	public void setOwner(UserEntity owner) {
 		this.owner = owner;
+	}
+
+	public UserEntity getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(UserEntity admin) {
+		this.admin = admin;
 	}
 
 	public GameEntity getGame() {
@@ -132,8 +142,8 @@ public class TeamEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "TeamEntity [id=" + id + ", name=" + name + ", uuid=" + uuid + ", photo=" + photo + ", photoName="
-				+ photoName + ", about=" + about + ", modality=" + modality + ", owner=" + owner + ", game=" + game
-				+ "]";
+				+ photoName + ", backPhoto=" + backPhoto + ", backPhotoName=" + backPhotoName + ", about=" + about
+				+ ", owner=" + owner + ", admin=" + admin + ", game=" + game + "]";
 	}
 
 }

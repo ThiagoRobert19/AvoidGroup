@@ -4,15 +4,11 @@
 <c:import url="/WEB-INF/cabecalho/menu.jsp" />
 <section class="companies-info">
 	<div class="container">
-		<div class="row">
-			<div class="right-sidebar">
-				<div class="message-btn">
-					<button title="Create a Team" class="ask-question">Create a
-						Team</button>
-
-				</div>
-			</div>
-		</div>
+	<div class="row">
+		<div class="right-sidebar">
+						<div class="message-btn">
+							<a href="<c:url value='/team/create'/>" title=""> Create a Team</a>
+						</div></div></div>
 		<div class="row">
 			<div class="search-sec">
 				<div class="container">

@@ -7,48 +7,46 @@
 			<div class="user-pro-img">
 
 
-				<img src="${clienteLogado.photo}" alt="No photo"
-					style="width: 200px">
+				<img src="${teamEntity.photo}" alt="No photo" style="width: 200px">
 
 
-				<div class="add-dp">
-					<a class="post-jb active" href="#" title=""><label for="file"><i
-							class="fas fa-camera"></i></label></a>
-				</div>
+				
 			</div>
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
 				<ul class="flw-status">
 
-					<li><span>Following</span> <b>${countfollowing}</b></li>
-					<li><span>Followers</span> <b>${countfollowers}</b></li>
+					<li><span>Players</span> <b>${countPlayer}</b></li>
 				</ul>
 			</div>
 			<!--user_pro_status end-->
 			<ul class="social_links">
-				<li><a href="#" title=""><i class="la la-globe"></i>
-						www.example.com</a></li>
-				<li><a href="#" title=""><i class="fa fa-facebook-square"></i>
-						Http://www.facebook.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-twitter"></i>
-						Http://www.Twitter.com/john...</a></li>
-				<li><a href="#" title=""><i
-						class="fa fa-google-plus-square"></i>
-						Http://www.googleplus.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-behance-square"></i>
-						Http://www.behance.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-pinterest"></i>
-						Http://www.pinterest.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-instagram"></i>
-						Http://www.instagram.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-youtube"></i>
-						Http://www.youtube.com/john...</a></li>
+				<c:forEach var="listTeamLink" items="${listTeamLink}">
+					<c:if test="${listTeamLink.linkFor == 'facebook'}">
+						<li><a href="#" title=""><i class="fa fa-facebook-square"></i>
+								${listTeamLink.url}</a></li>
+					</c:if>
+					<c:if test="${listTeamLink.linkFor == 'twitter'}">
+						<li><a href="#" title=""><i class="fa fa-twitter"></i>
+								${listTeamLink.url}</a></li>
+					</c:if>
+					<c:if test="${listTeamLink.linkFor == 'instagram'}">
+						<li><a href="#" title=""><i class="fa fa-instagram"></i>
+								${listTeamLink.url}</a></li>
+					</c:if>
+					<c:if test="${listTeamLink.linkFor == 'youtube'}">
+						<li><a href="#" title=""><i class="fa fa-youtube"></i>
+								${listTeamLink.url}</a></li>
+					</c:if>
+
+
+				</c:forEach>
 			</ul>
 		</div>
 		<!--user_profile end-->
 		<div class="suggestions full-width">
 			<div class="sd-title">
-				<h3>My Teams</h3>
+				<h3>Players</h3>
 				<i class="la la-ellipsis-v"></i>
 			</div>
 			<!--sd-title end-->
@@ -58,9 +56,10 @@
 					<div class="suggestion-usd">
 
 
-						<img src="<c:url value='${listTeamUser.teamEntity.photo}'/>" alt="" style="width: 50px">
+						<img src="<c:url value='${listTeamUser.userEntity.photo}'/>"
+							alt="" style="width: 50px">
 						<div class="sgt-text">
-							<h4><a href="<c:url value='/team/view/${listTeamUser.teamEntity.id}'/>">${listTeamUser.teamEntity.name}</a></h4>
+							<h4><a href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>">${listTeamUser.userEntity.userName}</a></h4>
 							<!--span>${listTeamUser.teamEntity.about}</span-->
 						</div>
 						

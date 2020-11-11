@@ -67,6 +67,52 @@ public class GenericDao<T extends EntidadeBase> {
 
 	}
 
+	public boolean existLower(Class<T> classe, Map<String, Object> parametros, String tipoBusca) {
+
+		boolean resp = false;
+		EntityManager manager;
+		manager = EntityManagerHelper.getEntityManager();
+
+		try {
+			String hql = "from " + classe.getSimpleName();
+			if (parametros != null && parametros.size() > 0) {
+				Set<String> params = parametros.keySet();
+				boolean primeiro = true;
+				for (String param : params) {
+					String key = param.replaceAll("\\.", "");
+					if (primeiro) {
+						hql += " where lower(" + param + ") = :" + key;
+						primeiro = false;
+					} else {
+						hql += " " + tipoBusca + " lower(" + param + ") = :" + key;
+					}
+				}
+			}
+
+			Query query = manager.createQuery(hql);
+
+			if (parametros != null && parametros.size() > 0) {
+				Set<String> params = parametros.keySet();
+				for (String param : params) {
+					String key = param.replaceAll("\\.", "");
+
+					query.setParameter(key, parametros.get(param));
+				}
+			}
+
+			resp = !query.getResultList().isEmpty();
+
+			EntityManagerHelper.closeEntityManager();
+			return resp;
+		} catch (Exception e) {
+			System.out.println("visualizando erro");
+			System.out.println("erro: " + e.getMessage().toString());
+		}
+
+		return false;
+
+	}
+
 	public boolean exist(Class<T> classe, Map<String, Object> parametros, String tipoBusca) {
 
 		boolean resp = false;
@@ -371,23 +417,6 @@ public class GenericDao<T extends EntidadeBase> {
 		return lista;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> listBy3PropertyLike(Class<T> entidade, String clazz, String property, String property2,
-			String property3, String value) {
-		EntityManager manager;
-		manager = EntityManagerHelper.getEntityManager();
-
-		List<T> lista = new ArrayList<T>();
-
-		lista = manager
-				.createQuery("select u from " + clazz + " u where u." + property + " LIKE '" + value + "%' or u."
-						+ property2 + " LIKE '" + value + "%' or u." + property3 + " LIKE '" + value + "%'")
-				.getResultList();
-
-		EntityManagerHelper.closeEntityManager();
-		return lista;
-	}
-
 	public int count(String clazz, String property, String value) {
 		EntityManager manager;
 		manager = EntityManagerHelper.getEntityManager();
@@ -406,7 +435,7 @@ public class GenericDao<T extends EntidadeBase> {
 		EntityManager manager;
 		manager = EntityManagerHelper.getEntityManager();
 
-		int count = ((Long) manager.createQuery("select count(*) from " + clazz + "' ").getSingleResult()).intValue();
+		int count = ((Long) manager.createQuery("select count(*) from " + clazz).getSingleResult()).intValue();
 
 		EntityManagerHelper.closeEntityManager();
 
@@ -440,5 +469,5 @@ public class GenericDao<T extends EntidadeBase> {
 		EntityManagerHelper.closeEntityManager();
 		return lista;
 	}
-	
+
 }

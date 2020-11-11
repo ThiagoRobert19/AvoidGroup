@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
+import com.inavonts.team.model.TeamEntity;
 import com.inavonts.user.model.UserInterestEntity;
 import com.inavonts.util.EntidadeBase;
 
@@ -30,8 +33,18 @@ public class GameEntity implements Serializable, EntidadeBase {
 
 	private String imageName;
 	
-	
+	@OneToOne
+	@JoinColumn(name = "modalityEntity_id")
+	private ModalityEntity modalityEntity;
 
+
+	public ModalityEntity getModalityEntity() {
+		return modalityEntity;
+	}
+
+	public void setModalityEntity(ModalityEntity modalityEntity) {
+		this.modalityEntity = modalityEntity;
+	}
 
 	public Integer getId() {
 		return id;
@@ -80,7 +93,9 @@ public class GameEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "GameEntity [id=" + id + ", name=" + name + ", description=" + description + ", imagedDefault="
-				+ imagedDefault + ", imageName=" + imageName + "]";
+				+ imagedDefault + ", imageName=" + imageName + ", modalityEntity=" + modalityEntity + "]";
 	}
+
+	
 
 }
