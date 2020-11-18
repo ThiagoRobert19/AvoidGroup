@@ -34,7 +34,7 @@
 
 									<li data-tab="portfolio-dd"><a href="#" title=""> <img
 											src="<c:url value='/resources/images/ic3.png'/>" alt="">
-											<span>Portfolio</span>
+											<span>Images</span>
 									</a></li>
 									<li data-tab="rewivewdata"><a href="#" title=""> <img
 											src="<c:url value='/resources/images/review.png'/>" alt="">

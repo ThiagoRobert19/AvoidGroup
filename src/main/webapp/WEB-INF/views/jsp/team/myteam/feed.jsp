@@ -51,12 +51,16 @@
 								${listPub.timeOfPublication} </span>
 						</div>
 					</div>
-					<c:if test="${listPub.publisher.id==clienteLogado.id}">
+					<c:if
+						test="${listPub.publisher.id==clienteLogado.id || teamEntity.owner.id==clienteLogado.id || teamEntity.admin.id==clienteLogado.id}">
 						<div class="ed-opts">
 							<a href="#" title="" class="ed-opts-open"><i
 								class="la la-ellipsis-v"></i></a>
 							<ul class="ed-options">
-								<li><a href="#" title="">Edit Post</a></li>
+								<c:if test="${listPub.publisher.id==clienteLogado.id}">
+									<li><a href="#" title="">Edit Post</a></li>
+								</c:if>
+
 								<li><a
 									href="<c:url value="/team/publication/delete/${listPub.id}"/>"
 									title="">Delete</a></li>
@@ -69,14 +73,15 @@
 					<div class="row">
 						<c:if test="${not empty listPub.image}">
 							<p>
-								<img src="<c:url value="${listPub.image}"/>" alt="no image" style="width: 700px">
+								<img src="<c:url value="${listPub.image}"/>" alt="no image"
+									style="width: 700px">
 							</p>
 						</c:if>
 					</div>
 					<div class="row">
 						<p>${listPub.content}</p>
 					</div>
-					
+
 				</div>
 				<div class="job-status-bar">
 					<ul class="like-com">

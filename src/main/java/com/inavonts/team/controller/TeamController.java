@@ -26,6 +26,8 @@ import com.inavonts.dao.GenericDao;
 import com.inavonts.friendship.model.FollowEntity;
 import com.inavonts.friendship.model.FollowRequestEntity;
 import com.inavonts.game.model.GameEntity;
+import com.inavonts.publication.model.GeneralCommentEntity;
+import com.inavonts.publication.model.GeneralLikeEntity;
 import com.inavonts.publication.model.GeneralPublicationEntity;
 import com.inavonts.team.model.TeamEntity;
 import com.inavonts.team.model.TeamLinkEntity;
@@ -77,9 +79,87 @@ public class TeamController {
 	private GenericDao<TeamPublicationEntity> daoPub;
 
 	@Autowired
+	private TeamPublicationEntity teamPubEntity;
+
+	@Autowired
 	private List<TeamUserEntity> listTeamUser;
 
 	AWSAPI amazon = new AWSAPI();
+
+	@RequestMapping(value = "/about/edit", method = RequestMethod.POST)
+	public ModelAndView changeAbout(String teamID, String changeAbout, HttpServletRequest request, ModelAndView model)
+			throws IllegalStateException, IOException {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(teamID));
+
+		if (daoTeam.exist(TeamEntity.class, map, "and")) {
+			teamEntity = daoTeam.findByProperty(TeamEntity.class, map, "and");
+			if ((teamEntity.getOwner().getId().equals(userEntity.getId()))
+					|| (teamEntity.getAdmin().getId().equals(userEntity.getId()))) {
+				teamEntity.setAbout(changeAbout);
+				daoTeam.saveUpdate(teamEntity);
+
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			} else {
+				model.setViewName("redirect:/");
+				return model;
+			}
+
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
+
+	}
+
+	@RequestMapping(value = { "/publication/delete/{id}" }, method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable(value = "id") String id, ModelAndView model, HttpServletRequest request) {
+		String teamID = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(id));
+
+		if (daoPub.exist(TeamPublicationEntity.class, map, "and")) {
+			teamPubEntity = daoPub.buscaId(TeamPublicationEntity.class, Integer.parseInt(id));
+			teamID = teamPubEntity.getTeamEntity().getId().toString();
+			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+			if (!teamPubEntity.getPublisher().getId().equals(userEntity.getId())) {
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			} else {
+				if (teamPubEntity.getPhotoName() != null && !teamPubEntity.getPhotoName().equals("")) {
+
+					amazon.delete(teamPubEntity.getPhotoName());
+				}
+
+				Map<String, Object> mapOriginal = new HashMap<String, Object>();
+				mapOriginal.put("originalID", Integer.parseInt(id));
+
+				daoPub.delete(TeamPublicationEntity.class, mapOriginal, "and");
+
+				Map<String, Object> mapLikeComment = new HashMap<String, Object>();
+				mapLikeComment.put("publication.id", Integer.parseInt(id));
+				/*
+				 * daoLike.delete(GeneralLikeEntity.class, mapLikeComment,
+				 * "and");
+				 * 
+				 * daoComment.delete(GeneralCommentEntity.class, mapLikeComment,
+				 * "and");
+				 */
+				daoPub.remove(TeamPublicationEntity.class, Integer.parseInt(id));
+
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			}
+		} else {
+			model.setViewName("redirect:/team/view/" + teamID);
+			return model;
+		}
+
+	}
 
 	@RequestMapping(value = "/publication/add", method = RequestMethod.POST)
 	public ModelAndView add(TeamPublicationEntity entity, String teamID, HttpServletRequest request, MultipartFile file,
@@ -88,14 +168,16 @@ public class TeamController {
 		if (entity.getContent() != null && !entity.getContent().trim().equals("")) {
 			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 			teamEntity = daoTeam.buscaId(TeamEntity.class, Integer.parseInt(teamID));
-			
+
 			Calendar date1 = Calendar.getInstance();
 			entity.setPublisher(userEntity);
 			entity.setDateOfPublication(date1.getTime());
 			entity.setTimeOfPublication(date1.getTime());
 			entity.setTeamEntity(teamEntity);
-			
+			entity.setPrivacy("private");
+
 			if (file.toString() != null && !file.getOriginalFilename().equals("")) {
+
 				File path = new File(request.getRealPath("/img/"));
 				if (!path.exists()) {
 					path.mkdir();
@@ -120,7 +202,6 @@ public class TeamController {
 				entity.setPhotoName(nome);
 
 				convFile.delete();
-				// ===========
 
 			} else {
 				entity.setImage(null);
@@ -130,7 +211,7 @@ public class TeamController {
 			daoPub.saveUpdate(entity);
 
 		}
-		model.setViewName("redirect:/team/view/"+teamID);
+		model.setViewName("redirect:/team/view/" + teamID);
 
 		return model;
 
@@ -161,11 +242,20 @@ public class TeamController {
 
 				listTeamLink = daoTeamLink.listarProperty(TeamLinkEntity.class, mapTeam, "and");
 
+				PagedListHolder<TeamPublicationEntity> pagedListHolder = new PagedListHolder<TeamPublicationEntity>(
+						listPub);
+				int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+
+				pagedListHolder.setPage(page);
+				pagedListHolder.setPageSize(10);
+
+				model.addObject("pagedListHolder", pagedListHolder);
+
 				int countPlayer = daoTeam.count("TeamUserEntity", "teamEntity.id", id);
 				model.addObject("countPlayer", countPlayer);
 				model.addObject("listTeamLink", listTeamLink);
 				model.addObject("listTeamUser", listTeamUser);
-				model.addObject("listPub", listPub);
+				model.addObject("pagedListHolder", pagedListHolder);
 				model.addObject("teamEntity", teamEntity);
 				model.setViewName("team/myteam/myteam");
 				return model;

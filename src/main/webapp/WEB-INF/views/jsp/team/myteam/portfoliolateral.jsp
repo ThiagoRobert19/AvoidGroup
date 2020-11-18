@@ -12,7 +12,7 @@
 						</div>
 						<div class="widget widget-portfolio">
 							<div class="wd-heady">
-								<h3>Portfolio</h3>
+								<h3>Images</h3>
 								
 								<img src="<c:url value='/resources/images/photo-icon.png'/>" alt="">
 							</div>

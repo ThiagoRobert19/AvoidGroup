@@ -4,46 +4,61 @@
 <div class="product-feed-tab" id="info-dd">
 	<div class="user-profile-ov">
 		<h3>
-			<a href="#" title="" class="overview-open">About</a> <a href="#"
-				title="" class="overview-open"><i class="fa fa-pencil"></i></a>
+			<c:if
+				test="${teamEntity.owner.id==clienteLogado.id || teamEntity.admin.id==clienteLogado.id}">
+				<a href="#" title="" class="overview-open">About</a>
+				<a href="#" title="" class="overview-open"><i
+					class="fa fa-pencil"></i></a>
+			</c:if>
+			<c:if
+				test="${teamEntity.owner.id!=clienteLogado.id && teamEntity.admin.id!=clienteLogado.id}">
+						About
+		</c:if>
 		</h3>
 		<p>${teamEntity.about}</p>
 	</div>
+	<div class="usy-dt">
 
-	
+		<img src="<c:url value="${teamEntity.owner.photo}"/>" alt="no image"
+			style="width: 80px">
+		<div class="usy-name">
+			<h3>
+				<a href="<c:url value="/user/view/${teamEntity.owner.id}"/>">${teamEntity.owner.userName}</a>
+			</h3>
+			<spam>Owner</spam>
+
+		</div>
+	</div>
+	<c:if test="${not empty teamEntity.admin.id}">
+		<div class="usy-dt">
+
+			<img src="<c:url value="${teamEntity.admin.photo}"/>" alt="no image"
+				style="width: 80px">
+			<div class="usy-name">
+				<h3>
+					<a href="<c:url value="/user/view/${teamEntity.admin.id}"/>">${teamEntity.admin.userName}</a>
+				</h3>
+				<spam>Admin</spam>
+
+			</div>
+		</div>
+	</c:if>
 </div>
-
-
 
 
 <div class="overview-box" id="overview-box">
 	<div class="overview-edit">
 		<h3>About</h3>
-		
-		<form>
-			<textarea></textarea>
+
+		<form action="<c:url value='/team/about/edit'/>" method="POST"
+			enctype="multipart/form-data">
+			<input type="hidden" name="teamID" value="${teamEntity.id}" />
+			<textarea name="changeAbout">${teamEntity.about}</textarea>
 			<button type="submit" class="save">Save</button>
-			<button type="submit" class="cancel">Cancel</button>
+
 		</form>
 		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
 	</div>
 	<!--overview-edit end-->
 </div>
 <!--overview-box end-->
-<div class="overview-box" id="skills-box">
-			<div class="overview-edit">
-				<h3>Skills</h3>
-				<ul>
-					<li><a href="#" title="" class="skl-name">HTML</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-					<li><a href="#" title="" class="skl-name">php</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-					<li><a href="#" title="" class="skl-name">css</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-				</ul>
-				<form>
-					<input type="text" name="skills" placeholder="Skills">
-					<button type="submit" class="save">Save</button>
-					<button type="submit" class="save-add">Save & Add More</button>
-					<button type="submit" class="cancel">Cancel</button>
-				</form>
-				<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-			</div><!--overview-edit end-->
-		</div><!--overview-box end-->

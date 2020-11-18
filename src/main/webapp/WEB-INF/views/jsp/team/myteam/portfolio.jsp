@@ -3,10 +3,10 @@
 
 <div class="product-feed-tab" id="portfolio-dd">
 	<div class="portfolio-gallery-sec">
-		<h3>Portfolio</h3>
+		<h3>Images</h3>
 		<div class="portfolio-btn">
 			<a href="#" title=""><i class="fas fa-plus-square"></i> Add
-				Portfolio</a>
+				Image</a>
 		</div>
 		<div class="gallery_pf">
 			<div class="row">

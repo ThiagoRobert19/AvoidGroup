@@ -39,7 +39,7 @@ public class TeamPublicationEntity implements Serializable, EntidadeBase, Compar
 	private UserEntity publisher;
 	
 	@OneToOne
-	@JoinColumn(name = "tamEntity_id")
+	@JoinColumn(name = "teamEntity_id")
 	private TeamEntity teamEntity;
 
 	@Temporal(TemporalType.DATE)
