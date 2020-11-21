@@ -9,7 +9,7 @@ public class EntityManagerHelper {
 	private static final ThreadLocal<EntityManager> threadLocal;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("InAvonts");
+		emf = Persistence.createEntityManagerFactory("AvoidGroup");
 		threadLocal = new ThreadLocal<EntityManager>();
 	}
 
