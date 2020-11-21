@@ -202,7 +202,7 @@
           
            $.ajax({
         	      type: "POST",
-        	      url:  "http://localhost:8080/InAvonts/user/changeimage",
+        	      url:  "http://localhost:8080/AvoidGroup/user/changeimage",
         	      data: { 
         	         imgBase64: formData
         	      }

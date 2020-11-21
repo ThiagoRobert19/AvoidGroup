@@ -12,13 +12,16 @@
 						</div>
 						<div class="widget widget-portfolio">
 							<div class="wd-heady">
-								<h3>Images</h3>
+								<h3>Private Images</h3>
 								
 								<img src="<c:url value='/resources/images/photo-icon.png'/>" alt="">
 							</div>
 							<div class="pf-gallery">
 								<ul>
-								
+								<c:forEach var="listTeamAlbumPrivate" items="${listTeamAlbumPrivate}">
+									<li><a href="#" title=""><img
+											src="<c:url value='${listTeamAlbumPrivate.image}'/>" alt=""></a></li>
+								</c:forEach>
 								
 									<li><a href="#" title=""><img
 											src="<c:url value='/resources/images/resources/pf-gallery1.png'/>" alt=""></a></li>
@@ -26,18 +29,32 @@
 											src="<c:url value='/resources/images/resources/pf-gallery2.png'/>" alt=""></a></li>
 									<li><a href="#" title=""><img
 											src="<c:url value='/resources/images/resources/pf-gallery3.png'/>" alt=""></a></li>
+									
+									
+								</ul>
+							</div>
+							<!--pf-gallery end-->
+						</div>
+						<div class="widget widget-portfolio">
+							<div class="wd-heady">
+								<h3>Public Images</h3>
+								
+								<img src="<c:url value='/resources/images/photo-icon.png'/>" alt="">
+							</div>
+							<div class="pf-gallery">
+								<ul>
+								<c:forEach var="listTeamAlbum" items="${listTeamAlbumPublic}">
 									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery4.png'/>" alt=""></a></li>
+											src="<c:url value='${listTeamAlbumPublic.image}'/>" alt=""></a></li>
+								</c:forEach>
+								
 									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery5.png'/>" alt=""></a></li>
+											src="<c:url value='/resources/images/resources/pf-gallery1.png'/>" alt=""></a></li>
 									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery6.png'/>" alt=""></a></li>
+											src="<c:url value='/resources/images/resources/pf-gallery2.png'/>" alt=""></a></li>
 									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery7.png'/>" alt=""></a></li>
-									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery8.png'/>" alt=""></a></li>
-									<li><a href="#" title=""><img
-											src="<c:url value='/resources/images/resources/pf-gallery9.png'/>" alt=""></a></li>
+											src="<c:url value='/resources/images/resources/pf-gallery3.png'/>" alt=""></a></li>
+									
 									
 								</ul>
 							</div>

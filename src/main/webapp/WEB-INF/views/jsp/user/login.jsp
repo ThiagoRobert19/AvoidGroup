@@ -10,8 +10,8 @@
 						<div class="cm-logo">
 
 
-							<img src="<c:url value='/resources/images/logo192.png'/>" alt="">
-							<p>InAvonts, is a global Social Network focused in the Gaming
+							<img src="<c:url value='/resources/_img/_favicon/mstile-150x150.png'/>" alt="">
+							<p>AvoidGroup, is a global Social Network focused in the Gaming
 								world!</p>
 							<p>We focus in bringing the best gaming content related,
 								gaming tournaments, news and more!</p>

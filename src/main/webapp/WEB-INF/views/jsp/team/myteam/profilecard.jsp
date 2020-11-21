@@ -10,7 +10,7 @@
 				<img src="${teamEntity.photo}" alt="No photo" style="width: 200px">
 
 
-				
+
 			</div>
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
@@ -47,7 +47,15 @@
 		<div class="suggestions full-width">
 			<div class="sd-title">
 				<h3>Players</h3>
-				<i class="la la-ellipsis-v"></i>
+				<c:if
+					test="${(teamEntity.owner.id == clienteLogado.id) || (teamEntity.admin.id == clienteLogado.id)}">
+					<a href="#" title="" class="ed-opts-open"><i
+						class="la la-ellipsis-v"></i></a>
+					<ul class="ed-options">
+						<li><a href="<c:url value="/team/invite/${teamEntity.id}"/>"
+							title="">Invite</a></li>
+					</ul>
+				</c:if>
 			</div>
 			<!--sd-title end-->
 
@@ -59,10 +67,13 @@
 						<img src="<c:url value='${listTeamUser.userEntity.photo}'/>"
 							alt="" style="width: 50px">
 						<div class="sgt-text">
-							<h4><a href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>">${listTeamUser.userEntity.userName}</a></h4>
+							<h4>
+								<a
+									href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>">${listTeamUser.userEntity.userName}</a>
+							</h4>
 							<!--span>${listTeamUser.teamEntity.about}</span-->
 						</div>
-						
+
 					</div>
 				</c:forEach>
 

@@ -4,12 +4,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>InAvonts</title>
+	<title>AvoidGroup</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="description" content="InAvonts - Social Games Networking" />
-	<meta name="keywords" content="games game-online inavonts most-popular-games profile online-social-games-networking" />
-	<meta name="author" content="InAvonts Group" />
+	<meta name="description" content="AvoidGroup - Social Games Networking" />
+	<meta name="keywords" content="games game-online avoidgroup most-popular-games profile online-social-games-networking" />
+	<meta name="author" content="AvoidGroup" />
 	
 	
 	<!-- FAVICON -->

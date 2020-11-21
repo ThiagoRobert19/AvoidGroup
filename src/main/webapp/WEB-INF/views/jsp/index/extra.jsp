@@ -3,8 +3,8 @@
 <div class="col-lg-3 pd-right-none no-pd">
 	<div class="right-sidebar">
 		<div class="widget widget-about">
-			<img src="<c:url value='/resources/images/logo192.png'/>" alt="">
-			<h3>InAvonts - Seja bem vindo(a) ${clienteLogado.name}</h3>
+			<img src="<c:url value='/resources/_img/_favicon/mstile-150x150.png'/>" alt="">
+			<h3>AvoidGroup - Seja bem vindo(a) ${clienteLogado.name}</h3>
 			<span>Pay only for the Hours worked</span>
 			<div class="sign_link">
 				<h3>
