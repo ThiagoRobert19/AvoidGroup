@@ -19,7 +19,7 @@ public class AutorizacaoInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		String uri = request.getRequestURI();
-		if ((uri.endsWith("/user/logout") || uri.endsWith("/user/login") || uri.contains("resources")
+		if ((uri.endsWith("/user/logout") || uri.endsWith("/user/login") || uri.contains("resources")|| uri.endsWith("/erros")
 				|| uri.endsWith("/user/register") || uri.endsWith("/user/doLogin"))
 				|| (request.getSession().getAttribute("clienteLogado") != null)) {
 
