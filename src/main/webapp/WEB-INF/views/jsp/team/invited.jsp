@@ -6,33 +6,29 @@
 	<div class="container">
 
 		<div class="row">
-			<div class="company-up-info">
-
-				<img src="<c:url value='${teamEntity.photo}'/>" alt="">
-				<h3>${teamEntity.name}</h3>
-				<h4>It will appear only people you follow!</h4>
-
-			</div>
-
+			<h3>
+				<b>Invinted for ${teamEntity.name}</b>
+			</h3>
 
 		</div>
-
 		<br />
 		<!--search-sec end-->
 		<div class="companies-list">
 			<div class="row">
-				<c:forEach var="listUser" items="${listUser}">
+				<c:forEach var="listTeamInvite" items="${listTeamInvite}">
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<div class="company_profile_info">
 							<div class="company-up-info">
 
-								<img src="<c:url value='${listUser.photo}'/>" alt="">
-								<h3>${listUser.name}</h3>
-								<h4>${listUser.userName}</h4>
+								<img src="<c:url value='${listTeamInvite.userEntity.photo}'/>"
+									alt="">
+								<h3>${listTeamInvite.userEntity.name}</h3>
+								<h4>${listTeamInvite.userEntity.userName}</h4>
+								<h4>${listTeamInvite.dateOfPublication}</h4>
 								<ul>
 									<li><a
-										href="<c:url value='/teaminvitation/makeinvitation/${listUser.id}/${teamEntity.id}'/>"
-										title="" class="follow">Invite</a></li>
+										href="<c:url value='/teaminvitation/invitation/cancel/${listTeamInvite.id}'/>"
+										title="" class="follow">Cancel</a></li>
 
 								</ul>
 							</div>

@@ -52,8 +52,10 @@
 					<a href="#" title="" class="ed-opts-open"><i
 						class="la la-ellipsis-v"></i></a>
 					<ul class="ed-options">
-						<li><a href="<c:url value="/team/invite/${teamEntity.id}"/>"
+						<li><a href="<c:url value="/teaminvitation/invite/${teamEntity.id}"/>"
 							title="">Invite</a></li>
+							<li><a href="<c:url value="/teaminvitation/invited/${teamEntity.id}"/>"
+							title="">Invited</a></li>
 					</ul>
 				</c:if>
 			</div>

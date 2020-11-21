@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.avoidgroup.publication.model.GeneralLikeEntity;
 import com.avoidgroup.publication.model.GeneralPublicationEntity;
 import com.avoidgroup.team.model.TeamAlbumEntity;
 import com.avoidgroup.team.model.TeamEntity;
+import com.avoidgroup.team.model.TeamInviteEntity;
 import com.avoidgroup.team.model.TeamLinkEntity;
 import com.avoidgroup.team.model.TeamPublicationEntity;
 import com.avoidgroup.team.model.TeamUserEntity;
@@ -43,7 +45,8 @@ import com.avoidgroup.util.Common;
 public class TeamController {
 	@Autowired
 	private UserEntity userEntity;
-
+	@Autowired
+	private GenericDao<UserEntity> daoUser;
 	@Autowired
 	private TeamEntity teamEntity;
 
@@ -67,6 +70,9 @@ public class TeamController {
 	@Autowired
 	private List<TeamLinkEntity> listTeamLink;
 
+
+	
+	
 	@Autowired
 	private GameEntity gameEntity;
 
@@ -102,57 +108,15 @@ public class TeamController {
 
 	@Autowired
 	private GenericDao<TeamAlbumEntity> daoTeamAlbum;
+	@Autowired
+	private GenericDao<TeamInviteEntity> daoTeamInvite;
+	
+	@Autowired
+	private List<TeamInviteEntity> listTeamInvite;
 
 	AWSAPI amazon = new AWSAPI();
 
-	@RequestMapping(value = { "/invite/{id}" }, method = RequestMethod.GET)
-	public ModelAndView invite(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
-		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", Integer.parseInt(id));
-		if (daoTeam.exist(TeamEntity.class, map, "and")) {
-
-			teamEntity = daoTeam.findByProperty(TeamEntity.class, map, "and");
-
-			if (teamEntity.getAdmin() != null && !teamEntity.getAdmin().equals("")) {
-				if (teamEntity.getAdmin().getId() == userEntity.getId()) {
-
-					Map<String, Object> mapFollow = new HashMap<String, Object>();
-					mapFollow.put("followed.id", userEntity.getId());
-
-					listFollow = daoFollow.listarProperty(FollowEntity.class, mapFollow, "and");
-					for (FollowEntity f : listFollow) {
-						listUser.add(f.getFollower());
-					}
-
-					model.addObject("listUser", listUser);
-					model.addObject("teamEntity", teamEntity);
-					model.setViewName("team/invite");
-					return model;
-				}
-			}
-			if (teamEntity.getOwner().getId() == userEntity.getId()) {
-				Map<String, Object> mapFollow = new HashMap<String, Object>();
-				mapFollow.put("followed.id", userEntity.getId());
-
-				listFollow = daoFollow.listarProperty(FollowEntity.class, mapFollow, "and");
-				for (FollowEntity f : listFollow) {
-					listUser.add(f.getFollower());
-				}
-
-				model.addObject("listUser", listUser);
-				model.addObject("teamEntity", teamEntity);
-				model.setViewName("team/invite");
-				return model;
-			} else {
-				model.setViewName("redirect:/team/view/" + id);
-				return model;
-			}
-		}
-		model.setViewName("redirect:/team/view/" + id);
-		return model;
-	}
+	
 
 	@RequestMapping(value = { "/view/{id}" }, method = RequestMethod.GET)
 	public ModelAndView view(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
