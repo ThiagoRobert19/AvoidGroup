@@ -72,16 +72,16 @@ public class UserController {
 
 	@Autowired
 	private List<TeamEntity> listTeam;
-	
+
 	@Autowired
 	private GenericDao<TeamEntity> daoTeam;
-	
+
 	@Autowired
 	private List<TeamUserEntity> listTeamUser;
-	
+
 	@Autowired
 	private GenericDao<TeamUserEntity> daoTeamUser;
-	
+
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
 	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
 			MultipartFile userback) throws IllegalStateException, IOException {
@@ -143,7 +143,7 @@ public class UserController {
 		if (userEntity.getPhotoName() != null && !userEntity.getPhotoName().equals("")) {
 			amazon.delete(userEntity.getPhotoName());
 		}
-	
+
 		File path = new File(request.getRealPath("/img/"));
 		if (!path.exists()) {
 			path.mkdir();
@@ -356,7 +356,7 @@ public class UserController {
 		Map<String, Object> mapTeamUser = new HashMap<String, Object>();
 		mapTeamUser.put("userEntity.id", userEntity.getId());
 		listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
-		
+
 		model.addObject("listTeamUser", listTeamUser);
 		model.addObject("pagedListHolder", pagedListHolder);
 		model.addObject("countfollowers", countfollowers);
@@ -371,7 +371,7 @@ public class UserController {
 	public ModelAndView doLogin(UserEntity userEntity, ModelAndView model, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", userEntity.getEmail());
-		System.out.println("Senha digitada: " + userEntity.getPassword());
+
 		if (daoUser.exist(UserEntity.class, map, "and")) {
 			Map<String, Object> mappassword = new HashMap<String, Object>();
 			mappassword.put("email", userEntity.getEmail());

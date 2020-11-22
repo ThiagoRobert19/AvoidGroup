@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avoidgroup.dao.GenericDao;
 import com.avoidgroup.friendship.model.FollowEntity;
 import com.avoidgroup.friendship.model.FollowRequestEntity;
+import com.avoidgroup.team.model.TeamInviteEntity;
 import com.avoidgroup.user.model.UserEntity;
 import com.avoidgroup.user.model.UserNotificationEntity;
 import com.avoidgroup.util.Common;
@@ -36,6 +37,15 @@ public class SettingController {
 
 	@Autowired
 	private List<FollowRequestEntity> listRequest;
+	
+	@Autowired
+	private List<TeamInviteEntity> listTeamInvite;
+	
+	@Autowired
+	private GenericDao<TeamInviteEntity> daoTeamInvite;
+	
+	@Autowired
+	private TeamInviteEntity teamInviteEntity;
 
 	
 	@Autowired
@@ -208,6 +218,13 @@ public class SettingController {
 
 		listRequest = daoRequest.listarProperty(FollowRequestEntity.class, map, "and");
 
+		Map<String, Object> mapTeamInvite = new HashMap<String, Object>();
+		mapTeamInvite.put("userEntity.id", userEntity.getId());
+		mapTeamInvite.put("status", "invited");
+		
+		listTeamInvite=daoTeamInvite.listarProperty(TeamInviteEntity.class, mapTeamInvite, "and");
+		
+		model.addObject("listTeamInvite", listTeamInvite);
 		model.addObject("listRequest", listRequest);
 		model.addObject("userEntity", userEntity);
 		model.setViewName("user/settings/setting");

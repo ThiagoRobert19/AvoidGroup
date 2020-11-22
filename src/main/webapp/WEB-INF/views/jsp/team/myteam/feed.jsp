@@ -5,7 +5,7 @@
 	<div class="posts-section">
 		<div class="post-topbar">
 
-			<form action="<c:url value='/team/publication/add'/>" method="POST"
+			<form action="<c:url value='/teampublication/add'/>" method="POST"
 				enctype="multipart/form-data">
 				<input type="hidden" name="teamID" value="${teamEntity.id}" />
 				<div class="form-group">
@@ -62,7 +62,7 @@
 								</c:if>
 
 								<li><a
-									href="<c:url value="/team/publication/delete/${listPub.id}"/>"
+									href="<c:url value="/teampublication/delete/${listPub.id}"/>"
 									title="">Delete</a></li>
 							</ul>
 						</div>

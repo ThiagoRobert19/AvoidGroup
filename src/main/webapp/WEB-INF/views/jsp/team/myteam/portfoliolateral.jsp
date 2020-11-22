@@ -4,7 +4,7 @@
 					<div class="right-sidebar">
 						<div class="message-btn">
 						<c:if test="${teamEntity.owner.id == clienteLogado.id || teamEntity.admin.id == clienteLogado.id}">
-						<a href="<c:url value='/team/setting/settings'/>" title=""><i
+						<a href="<c:url value='/teamsetting/settings/${teamEntity.id}'/>" title=""><i
 								class="fas fa-cog"></i> Setting</a>
 						
 						</c:if>

@@ -55,15 +55,63 @@ public class TeamInvitationController {
 
 	@RequestMapping(value = { "/invitation/accept/{id}" }, method = RequestMethod.GET)
 	public ModelAndView accept(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
-		
-		return model;
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		Map<String, Object> mapTeamInvitation = new HashMap<String, Object>();
+		mapTeamInvitation.put("id", Integer.parseInt(id));
+
+		if (daoTeamInvite.exist(TeamInviteEntity.class, mapTeamInvitation, "and")) {
+			teamInviteEntity = daoTeamInvite.findByProperty(TeamInviteEntity.class, mapTeamInvitation, "and");
+
+			teamEntity = teamInviteEntity.getTeamEntity();
+
+			teamInviteEntity.setStatus("accepted");
+
+			Calendar date1 = Calendar.getInstance();
+
+			teamInviteEntity.setDateAccept(date1.getTime());
+
+			daoTeamInvite.saveUpdate(teamInviteEntity);
+
+			TeamUserEntity teamUser = new TeamUserEntity();
+			teamUser.setTeamEntity(teamEntity);
+			teamUser.setUserEntity(userEntity);
+			daoTeamUser.saveUpdate(teamUser);
+
+			model.setViewName("redirect:/team/view/" + teamEntity.getId());
+			return model;
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
 	}
-	@RequestMapping(value = { "/invitation/denie/{id}" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/invitation/deny/{id}" }, method = RequestMethod.GET)
 	public ModelAndView denie(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
-		
-		return model;
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		Map<String, Object> mapTeamInvitation = new HashMap<String, Object>();
+		mapTeamInvitation.put("id", Integer.parseInt(id));
+
+		if (daoTeamInvite.exist(TeamInviteEntity.class, mapTeamInvitation, "and")) {
+			teamInviteEntity = daoTeamInvite.findByProperty(TeamInviteEntity.class, mapTeamInvitation, "and");
+
+			teamEntity = teamInviteEntity.getTeamEntity();
+
+			teamInviteEntity.setStatus("denied");
+
+			Calendar date1 = Calendar.getInstance();
+
+			teamInviteEntity.setDateDeny(date1.getTime());
+
+			daoTeamInvite.saveUpdate(teamInviteEntity);
+
+			model.setViewName("redirect:/setting/settings");
+			return model;
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
 	}
-	
+
 	@RequestMapping(value = { "/invitation/cancel/{id}" }, method = RequestMethod.GET)
 	public ModelAndView cancel(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
@@ -177,11 +225,11 @@ public class TeamInvitationController {
 					Calendar date1 = Calendar.getInstance();
 					TeamInviteEntity teamInvite = new TeamInviteEntity();
 					teamInvite.setStatus("invited");
-					teamInvite.setDateOfPublication(date1.getTime());
+					teamInvite.setDateOfInvitation(date1.getTime());
 					teamInvite.setTeamEntity(teamEntity);
 					teamInvite.setUserEntity(invited);
 					teamInvite.setWhoInvited(userEntity);
-					teamInvite.setTimeOfPublication(date1.getTime());
+
 					daoTeamInvite.saveUpdate(teamInvite);
 					model.setViewName("redirect:/teaminvitation/invited/" + teamID);
 					return model;

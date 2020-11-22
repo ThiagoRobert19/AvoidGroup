@@ -3,7 +3,7 @@
 
 <section class="cover-sec">
 	<img src="${clienteLogado.backPhoto}" alt=" no image"
-			width="1600px" height="400px">
+			class="back-user">
 	
 	<!--img src="<c:url value='/resources/images/resources/cover-img.jpg'/>"alt=""-->
 	<div class="add-pic-box">

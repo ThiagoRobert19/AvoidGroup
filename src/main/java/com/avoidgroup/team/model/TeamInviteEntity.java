@@ -40,11 +40,13 @@ public class TeamInviteEntity implements Serializable, EntidadeBase {
 	private UserEntity whoInvited;
 
 	@Temporal(TemporalType.DATE)
-	private Date dateOfPublication;
-
-	@DateTimeFormat(pattern = "HH:mm:ss")
-	@Temporal(TemporalType.TIME)
-	private Date timeOfPublication;
+	private Date dateOfInvitation;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateAccept;
+	
+	@Temporal(TemporalType.DATE)
+	private Date dateDeny;
 
 	public Integer getId() {
 		return id;
@@ -86,20 +88,28 @@ public class TeamInviteEntity implements Serializable, EntidadeBase {
 		this.whoInvited = whoInvited;
 	}
 
-	public Date getDateOfPublication() {
-		return dateOfPublication;
+	public Date getDateOfInvitation() {
+		return dateOfInvitation;
 	}
 
-	public void setDateOfPublication(Date dateOfPublication) {
-		this.dateOfPublication = dateOfPublication;
+	public void setDateOfInvitation(Date dateOfInvitation) {
+		this.dateOfInvitation = dateOfInvitation;
 	}
 
-	public Date getTimeOfPublication() {
-		return timeOfPublication;
+	public Date getDateAccept() {
+		return dateAccept;
 	}
 
-	public void setTimeOfPublication(Date timeOfPublication) {
-		this.timeOfPublication = timeOfPublication;
+	public void setDateAccept(Date dateAccept) {
+		this.dateAccept = dateAccept;
+	}
+
+	public Date getDateDeny() {
+		return dateDeny;
+	}
+
+	public void setDateDeny(Date dateDeny) {
+		this.dateDeny = dateDeny;
 	}
 
 	public static long getSerialversionuid() {
@@ -109,8 +119,11 @@ public class TeamInviteEntity implements Serializable, EntidadeBase {
 	@Override
 	public String toString() {
 		return "TeamInviteEntity [id=" + id + ", status=" + status + ", userEntity=" + userEntity + ", teamEntity="
-				+ teamEntity + ", whoInvited=" + whoInvited + ", dateOfPublication=" + dateOfPublication
-				+ ", timeOfPublication=" + timeOfPublication + "]";
+				+ teamEntity + ", whoInvited=" + whoInvited + ", dateOfInvitation=" + dateOfInvitation + ", dateAccept="
+				+ dateAccept + ", dateDeny=" + dateDeny + "]";
 	}
+
+	
+
 
 }
