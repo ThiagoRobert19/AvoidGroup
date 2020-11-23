@@ -224,6 +224,8 @@ public class SettingController {
 		
 		listTeamInvite=daoTeamInvite.listarProperty(TeamInviteEntity.class, mapTeamInvite, "and");
 		
+		
+		
 		model.addObject("listTeamInvite", listTeamInvite);
 		model.addObject("listRequest", listRequest);
 		model.addObject("userEntity", userEntity);
@@ -237,6 +239,28 @@ public class SettingController {
 		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 		Integer id = userEntity.getId();
 		userEntity.setPerfil(tipoPerfil);
+		daoUser.saveUpdate(userEntity);
+
+		userEntity = daoUser.buscaId(UserEntity.class, id);
+
+		session.setAttribute("clienteLogado", userEntity);
+
+		model.setViewName("redirect:/setting/settings");
+
+		return model;
+	}
+	@RequestMapping(value = { "/changesocial" }, method = RequestMethod.POST)
+	public ModelAndView changesocial(UserEntity user , ModelAndView model, HttpSession session,
+			HttpServletRequest request) {
+		
+		Integer id = user.getId();
+		userEntity = daoUser.buscaId(UserEntity.class, id);
+		
+		userEntity.setFacebook(user.getFacebook());
+		userEntity.setInstagram(user.getInstagram());
+		userEntity.setTwitter(user.getTwitter());
+		userEntity.setYoutube(user.getYoutube());
+		
 		daoUser.saveUpdate(userEntity);
 
 		userEntity = daoUser.buscaId(UserEntity.class, id);

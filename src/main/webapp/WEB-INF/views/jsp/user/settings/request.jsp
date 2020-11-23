@@ -1,7 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<div class="tab-pane fade" id="privcy" role="tabpanel"
-	aria-labelledby="nav-privcy-tab">
+<div class="tab-pane fade" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
 	<div class="acc-setting">
 		<h3>Requests</h3>
 		<c:forEach var="listRequest" items="${listRequest}">
@@ -12,8 +11,8 @@
 					<img src="<c:url value='/resources/images/resources/r-img1.png'/>" alt="">
 				</div>
 				<div class="request-info">
-					<h3>${listRequest.follower.name}</h3>
-					<span>${listRequest.follower.userName}</span>
+					<h3><c:out value="${listRequest.follower.name}" /></h3>
+					<span><c:out value="${listRequest.follower.userName}" /></span>
 					
 				</div>
 				<div class="accept-feat">

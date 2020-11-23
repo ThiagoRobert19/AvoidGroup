@@ -6,9 +6,15 @@
 		<div class="user_profile">
 			<div class="user-pro-img">
 
+				<c:if test="${empty userEntity.photo}">
+					<img
+						src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+						alt="teste" style="width: 200px">
+				</c:if>
+				<c:if test="${not empty userEntity.photo}">
+					<img src="${userEntity.photo}" alt="no photo" style="width: 200px">
+				</c:if>
 
-				<img src="${clienteLogado.photo}" alt="No photo"
-					style="width: 200px">
 
 
 				<div class="add-dp">
@@ -26,23 +32,22 @@
 			</div>
 			<!--user_pro_status end-->
 			<ul class="social_links">
-				<li><a href="#" title=""><i class="la la-globe"></i>
-						www.example.com</a></li>
-				<li><a href="#" title=""><i class="fa fa-facebook-square"></i>
-						Http://www.facebook.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-twitter"></i>
-						Http://www.Twitter.com/john...</a></li>
-				<li><a href="#" title=""><i
-						class="fa fa-google-plus-square"></i>
-						Http://www.googleplus.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-behance-square"></i>
-						Http://www.behance.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-pinterest"></i>
-						Http://www.pinterest.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-instagram"></i>
-						Http://www.instagram.com/john...</a></li>
-				<li><a href="#" title=""><i class="fa fa-youtube"></i>
-						Http://www.youtube.com/john...</a></li>
+				<c:if test="${not empty userEntity.facebook}">
+					<li><a href="${userEntity.facebook}" target="_blank"><i class="fa fa-facebook-square"></i>
+							<c:out value="${userEntity.facebook}" /></a></li>
+				</c:if>
+				<c:if test="${not empty userEntity.twitter}">
+					<li><a href="${userEntity.twitter}" target="_blank"><i class="fa fa-twitter"></i>
+							<c:out value="${userEntity.twitter}" /></a></li>
+				</c:if>
+				<c:if test="${not empty userEntity.instagram}">
+					<li><a href="${userEntity.instagram}" target="_blank"><i class="fa fa-instagram"></i>
+							<c:out value="${userEntity.instagram}" /></a></li>
+				</c:if>
+				<c:if test="${not empty userEntity.youtube}">
+					<li><a href="${userEntity.youtube}" target="_blank"><i class="fa fa-youtube"></i>
+							<c:out value="${userEntity.youtube}" /></a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!--user_profile end-->
@@ -58,12 +63,16 @@
 					<div class="suggestion-usd">
 
 
-						<img src="<c:url value='${listTeamUser.teamEntity.photo}'/>" alt="" style="width: 50px">
+						<img src="<c:url value='${listTeamUser.teamEntity.photo}'/>"
+							alt="" style="width: 50px">
 						<div class="sgt-text">
-							<h4><a href="<c:url value='/team/view/${listTeamUser.teamEntity.id}'/>">${listTeamUser.teamEntity.name}</a></h4>
+							<h4>
+								<a
+									href="<c:url value='/team/view/${listTeamUser.teamEntity.id}'/>"><c:out value="${listTeamUser.teamEntity.name}" /></a>
+							</h4>
 							<!--span>${listTeamUser.teamEntity.about}</span-->
 						</div>
-						
+
 					</div>
 				</c:forEach>
 

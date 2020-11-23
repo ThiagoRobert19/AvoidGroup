@@ -19,6 +19,7 @@ import com.avoidgroup.dao.GenericDao;
 import com.avoidgroup.friendship.model.FollowEntity;
 import com.avoidgroup.team.model.TeamEntity;
 import com.avoidgroup.team.model.TeamInviteEntity;
+import com.avoidgroup.team.model.TeamPublicationEntity;
 import com.avoidgroup.team.model.TeamUserEntity;
 import com.avoidgroup.user.model.UserEntity;
 import com.avoidgroup.util.AWSAPI;
@@ -37,6 +38,9 @@ public class TeamInvitationController {
 	private GenericDao<TeamEntity> daoTeam;
 
 	@Autowired
+	private TeamUserEntity teamUserEntity;
+
+	@Autowired
 	private GenericDao<TeamUserEntity> daoTeamUser;
 
 	@Autowired
@@ -50,6 +54,12 @@ public class TeamInvitationController {
 
 	@Autowired
 	private TeamInviteEntity teamInviteEntity;
+
+	@Autowired
+	private GenericDao<TeamPublicationEntity> daoPub;
+
+	@Autowired
+	private TeamPublicationEntity teamPubEntity;
 
 	AWSAPI amazon = new AWSAPI();
 
@@ -303,6 +313,34 @@ public class TeamInvitationController {
 
 		} else {
 			model.setViewName("redirect:/team/view/" + id);
+			return model;
+		}
+
+	}
+
+	@RequestMapping(value = { "/leave/{id}" }, method = RequestMethod.GET)
+	public ModelAndView leave(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+		Map<String, Object> mapTeamUser = new HashMap<String, Object>();
+		mapTeamUser.put("teamEntity.id", Integer.parseInt(id));
+		mapTeamUser.put("userEntity.id", userEntity.getId());
+
+		if (daoTeamUser.exist(TeamUserEntity.class, mapTeamUser, "and")) {
+
+			teamUserEntity = daoTeamUser.findByProperty(TeamUserEntity.class, mapTeamUser, "and");
+
+			Map<String, Object> mapPub = new HashMap<String, Object>();
+			mapPub.put("teamEntity.id", teamUserEntity.getTeamEntity().getId());
+			mapPub.put("publisher.id", userEntity.getId());
+
+			daoPub.delete(TeamPublicationEntity.class, mapPub, "and");
+			daoTeamUser.delete(TeamUserEntity.class, mapTeamUser, "and");
+			model.setViewName("redirect:/team/view/" + id);
+			return model;
+
+		} else {
+			model.setViewName("redirect:/");
 			return model;
 		}
 

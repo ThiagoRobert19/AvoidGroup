@@ -9,7 +9,7 @@
 	</c:if>
 	<c:if test="${empty userEntity.backPhoto}">
 
-		<img src="<c:url value='/resources/images/resources/valorant.jpg'/>"
+		<img src="<c:url value='/resources/images/resources/cover-img.jpg'/>"
 			alt="" width="1600px" height="400px">
 	</c:if>
 

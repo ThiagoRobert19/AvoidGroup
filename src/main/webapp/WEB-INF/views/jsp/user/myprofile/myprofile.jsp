@@ -13,9 +13,9 @@
 				<div class="col-lg-6">
 					<div class="main-ws-sec">
 						<div class="user-tab-sec rewivew">
-							<h3>${userEntity.name}</h3>
+							<h3><c:out value="${userEntity.name}" /></h3>
 							<div class="star-descp">
-								<span>${userEntity.userName}</span>
+								<span><c:out value="${userEntity.userName}" /></span>
 								<ul>
 									<li><i class="fa fa-star"></i></li>
 									<li><i class="fa fa-star"></i></li>

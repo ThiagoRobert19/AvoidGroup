@@ -8,7 +8,7 @@
 							  					<div class="col-lg-3 col-md-6 col-sm-12">
 							  						<div class="profile-bx-info">
 							  							<div class="pro-bx">
-							  								<img src="images/pro-icon1.png" alt="">
+							  								<img src="<c:url value='/resources/images/pro-icon1.png'/>" alt="">
 							  								<div class="bx-info">
 							  									<h3>$5,145</h3>
 							  									<h5>Total Income</h5>
@@ -20,7 +20,7 @@
 							  					<div class="col-lg-3 col-md-6 col-sm-12">
 							  						<div class="profile-bx-info">
 							  							<div class="pro-bx">
-							  								<img src="images/pro-icon2.png" alt="">
+							  								<img src="<c:url value='/resources/images/pro-icon2.png'/>" alt="">
 							  								<div class="bx-info">
 							  									<h3>$4,745</h3>
 							  									<h5>Widthraw</h5>
@@ -32,7 +32,8 @@
 							  					<div class="col-lg-3 col-md-6 col-sm-12">
 							  						<div class="profile-bx-info">
 							  							<div class="pro-bx">
-							  								<img src="images/pro-icon3.png" alt="">
+							  							
+							  								<img src="<c:url value='/resources/images/pro-icon3.png'/>" alt="">
 							  								<div class="bx-info">
 							  									<h3>$1,145</h3>
 							  									<h5>Sent</h5>
@@ -44,7 +45,7 @@
 							  					<div class="col-lg-3 col-md-6 col-sm-12">
 							  						<div class="profile-bx-info">
 							  							<div class="pro-bx">
-							  								<img src="images/pro-icon4.png" alt="">
+							  								<img src="<c:url value='/resources/images/pro-icon4.png'/>" alt="">
 							  								<div class="bx-info">
 							  									<h3>130</h3>
 							  									<h5>Total Projects</h5>

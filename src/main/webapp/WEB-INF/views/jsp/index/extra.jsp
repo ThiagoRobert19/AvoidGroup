@@ -4,19 +4,29 @@
 	<div class="right-sidebar">
 		<div class="widget widget-about">
 			<img src="<c:url value='/resources/_img/_favicon/mstile-150x150.png'/>" alt="">
-			<h3>AvoidGroup - Seja bem vindo(a) ${clienteLogado.name}</h3>
-			<span>Pay only for the Hours worked</span>
+			<h3>
+			<c:out value="AvoidGroup - Seja bem vindo(a) ${clienteLogado.name}" />
+			</h3>
+			<span>
+			<c:out value="Pay only for the Hours worked" />
+			</span>
 			<div class="sign_link">
 				<h3>
-					<a href="sign-in.html" title="">Sign up</a>
+					<a href="sign-in.html" title="">
+					<c:out value="Sign up" />
+					</a>
 				</h3>
-				<a href="#" title="">Learn More</a>
+				<a href="#" title="">
+				<c:out value="Learn More" />
+				</a>
 			</div>
 		</div>
 		<!--widget-jobs end-->
 		<div class="widget suggestions full-width">
 			<div class="sd-title">
-				<h3>Most Popular Teams</h3>
+				<h3>
+				<c:out value="Most Popular Teams" />
+				</h3>
 				<i class="la la-ellipsis-v"></i>
 			</div>
 			<!--sd-title end-->

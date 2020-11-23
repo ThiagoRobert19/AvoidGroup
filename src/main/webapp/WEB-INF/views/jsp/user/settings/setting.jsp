@@ -12,6 +12,7 @@
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								<a class="nav-item nav-link active" id="nav-privacy-tab" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy" aria-selected="true"><i class="fa fa-paw"></i>Privacy</a>
+								 <a class="nav-item nav-link" id="social" data-toggle="tab" href="#socialmedia" role="tab" aria-controls="socialmedia" aria-selected="false"><i class="fas fa-icons"></i>Social Media</a>
 								    <!-- a class="nav-item nav-link " id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="false"><i class="la la-cogs"></i>Account Setting</a-->
 								    <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Status</a>
 								    <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
@@ -35,6 +36,7 @@
 						<div class="col-lg-9">
 							<div class="tab-content" id="nav-tabContent">
 							    <c:import url="/WEB-INF/views/jsp/user/settings/privacy.jsp" /> 
+							    <c:import url="/WEB-INF/views/jsp/user/settings/social.jsp" /> 
 								<c:import url="/WEB-INF/views/jsp/user/settings/account.jsp" />
 								<c:import url="/WEB-INF/views/jsp/user/settings/status.jsp" />  
 								<c:import url="/WEB-INF/views/jsp/user/settings/password.jsp" />    	

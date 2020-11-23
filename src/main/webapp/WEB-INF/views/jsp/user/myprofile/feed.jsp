@@ -16,8 +16,8 @@
 							<img src="<c:url value="${listPub.sharer.photo}"/>"
 								alt="no image" style="width: 80px">
 							<div class="usy-name">
-								<h3>${listPub.sharer.name}</h3>
-								<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
+								<h3><a href="<c:url value="/user/view/${listPub.sharer.id}"/>"><c:out value="${listPub.sharer.name}" /></a></h3>
+								<span> ${listPub.dateOfShare} ${listPub.timeOfShare}
 								</span>
 							</div>
 						</div>
@@ -44,9 +44,9 @@
 									alt="no image" style="width: 80px">
 								<div class="usy-name">
 									<h3>
-										<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a> <i class="fas fa-share"></i>
+										<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out value="${listPub.publisher.name}" /></a> <i class="fas fa-share"></i>
 									</h3>
-									<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
+									<span> ${listPub.dateOfPublication} ${listPub.timeOfPublication}
 									</span>
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 							</c:if>
 						</div>
 						<div class="row">
-							<p>${listPub.content}</p>
+							<p><c:out value="${listPub.content}" /></p>
 						</div>
 							<ul class="skill-tags">
 								<li><a href="#" title="">HTML</a></li>
@@ -113,9 +113,8 @@
 							<img src="<c:url value="${listPub.publisher.photo}"/>"
 								alt="no image" style="width: 80px">
 							<div class="usy-name">
-								<h3>${listPub.publisher.name}</h3>
-								<span> ${listPub.dateOfPublication} </span> <span>
-									${listPub.timeOfPublication} </span>
+								<h3><a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out value="${listPub.publisher.name}" /></a></h3>
+								<span> ${listPub.dateOfPublication} ${listPub.timeOfPublication} </span>
 							</div>
 						</div>
 						<c:if test="${listPub.publisher.id==clienteLogado.id}">
@@ -142,7 +141,7 @@
 							</c:if>
 						</div>
 						<div class="row">
-							<p>${listPub.content}</p>
+							<p><c:out value="${listPub.content}" /></p>
 						</div>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>

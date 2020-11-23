@@ -3,18 +3,7 @@
 
 <div class="product-feed-tab" id="info-dd">
 	<div class="user-profile-ov">
-		<h3>
-			<c:if
-				test="${teamEntity.owner.id==clienteLogado.id || teamEntity.admin.id==clienteLogado.id}">
-				<a href="#" title="" class="overview-open">About</a>
-				<a href="#" title="" class="overview-open"><i
-					class="fa fa-pencil"></i></a>
-			</c:if>
-			<c:if
-				test="${teamEntity.owner.id!=clienteLogado.id && teamEntity.admin.id!=clienteLogado.id}">
-						About
-		</c:if>
-		</h3>
+		<h3>About</h3>
 		<p><c:out value="${teamEntity.about}" /></p>
 	</div>
 	<div class="usy-dt">
@@ -45,20 +34,3 @@
 	</c:if>
 </div>
 
-
-<div class="overview-box" id="overview-box">
-	<div class="overview-edit">
-		<h3>About</h3>
-
-		<form action="<c:url value='/team/about/edit'/>" method="POST"
-			enctype="multipart/form-data">
-			<input type="hidden" name="teamID" value="${teamEntity.id}" />
-			<textarea name="changeAbout"><c:out value="${teamEntity.about}" /></textarea>
-			<button type="submit" class="save">Save</button>
-
-		</form>
-		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-	</div>
-	<!--overview-edit end-->
-</div>
-<!--overview-box end-->

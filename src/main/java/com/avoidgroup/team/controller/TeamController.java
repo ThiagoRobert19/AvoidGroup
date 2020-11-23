@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,15 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avoidgroup.dao.GenericDao;
-import com.avoidgroup.friendship.model.FollowEntity;
-import com.avoidgroup.friendship.model.FollowRequestEntity;
 import com.avoidgroup.game.model.GameEntity;
-import com.avoidgroup.publication.model.GeneralCommentEntity;
-import com.avoidgroup.publication.model.GeneralLikeEntity;
-import com.avoidgroup.publication.model.GeneralPublicationEntity;
 import com.avoidgroup.team.model.TeamAlbumEntity;
 import com.avoidgroup.team.model.TeamEntity;
-import com.avoidgroup.team.model.TeamInviteEntity;
 import com.avoidgroup.team.model.TeamLinkEntity;
 import com.avoidgroup.team.model.TeamPublicationEntity;
 import com.avoidgroup.team.model.TeamUserEntity;
@@ -45,8 +38,7 @@ import com.avoidgroup.util.Common;
 public class TeamController {
 	@Autowired
 	private UserEntity userEntity;
-	@Autowired
-	private GenericDao<UserEntity> daoUser;
+
 	@Autowired
 	private TeamEntity teamEntity;
 
@@ -69,16 +61,10 @@ public class TeamController {
 
 	@Autowired
 	private List<TeamLinkEntity> listTeamLink;
-
-
-	
-	
 	@Autowired
 	private GameEntity gameEntity;
-
 	@Autowired
 	private List<GameEntity> listGame;
-
 	@Autowired
 	private GenericDao<GameEntity> daoGame;
 
@@ -86,19 +72,7 @@ public class TeamController {
 	private GenericDao<TeamPublicationEntity> daoPub;
 
 	@Autowired
-	private TeamPublicationEntity teamPubEntity;
-
-	@Autowired
 	private List<TeamUserEntity> listTeamUser;
-
-	@Autowired
-	private List<UserEntity> listUser;
-
-	@Autowired
-	private List<FollowEntity> listFollow;
-
-	@Autowired
-	private GenericDao<FollowEntity> daoFollow;
 
 	@Autowired
 	private List<TeamAlbumEntity> listTeamAlbumPrivate;
@@ -108,15 +82,8 @@ public class TeamController {
 
 	@Autowired
 	private GenericDao<TeamAlbumEntity> daoTeamAlbum;
-	@Autowired
-	private GenericDao<TeamInviteEntity> daoTeamInvite;
-	
-	@Autowired
-	private List<TeamInviteEntity> listTeamInvite;
 
 	AWSAPI amazon = new AWSAPI();
-
-	
 
 	@RequestMapping(value = { "/view/{id}" }, method = RequestMethod.GET)
 	public ModelAndView view(@PathVariable(value = "id") String id, HttpServletRequest request, ModelAndView model) {
@@ -133,53 +100,59 @@ public class TeamController {
 			mapUserTeam.put("userEntity.id", userEntity.getId());
 
 			if (daoTeamUser.exist(TeamUserEntity.class, mapUserTeam, "and")) {
-				Map<String, Object> mapTeam = new HashMap<String, Object>();
-				mapTeam.put("teamEntity.id", Integer.parseInt(id));
-
-				Map<String, Object> mapAlbumPrivate = new HashMap<String, Object>();
-				mapAlbumPrivate.put("teamEntity.id", Integer.parseInt(id));
-				mapAlbumPrivate.put("privacy", "private");
-
-				Map<String, Object> mapAlbumPublic = new HashMap<String, Object>();
-				mapAlbumPublic.put("teamEntity.id", Integer.parseInt(id));
-				mapAlbumPublic.put("privacy", "public");
-
-				listPub = daoPub.listarProperty(TeamPublicationEntity.class, mapTeam, "and");
-				Collections.sort(listPub);
-				Collections.reverse(listPub);
-				listTeamAlbumPrivate = null;
-				listTeamAlbumPublic = null;
-				listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeam, "and");
-
-				listTeamLink = daoTeamLink.listarProperty(TeamLinkEntity.class, mapTeam, "and");
-
-				listTeamAlbumPrivate = daoTeamAlbum.listarProperty(TeamAlbumEntity.class, mapAlbumPrivate, "and");
-				listTeamAlbumPublic = daoTeamAlbum.listarProperty(TeamAlbumEntity.class, mapAlbumPublic, "and");
-
-				PagedListHolder<TeamPublicationEntity> pagedListHolder = new PagedListHolder<TeamPublicationEntity>(
-						listPub);
-				int page = ServletRequestUtils.getIntParameter(request, "p", 0);
-
-				pagedListHolder.setPage(page);
-				pagedListHolder.setPageSize(10);
-
-				model.addObject("pagedListHolder", pagedListHolder);
-
-				int countPlayer = daoTeam.count("TeamUserEntity", "teamEntity.id", id);
-
-				model.addObject("listTeamAlbumPrivate", listTeamAlbumPrivate);
-				model.addObject("listTeamAlbumPublic", listTeamAlbumPublic);
-				model.addObject("countPlayer", countPlayer);
-				model.addObject("listTeamLink", listTeamLink);
-				model.addObject("listTeamUser", listTeamUser);
-				model.addObject("pagedListHolder", pagedListHolder);
-				model.addObject("teamEntity", teamEntity);
+				model.addObject("teamUser", "yes");
 				model.setViewName("team/myteam/myteam");
-				return model;
-			} else {
-				model.setViewName("redirect:/");
-				return model;
+				System.out.println("aqui faz parte");
+
+			}else{
+				model.addObject("teamUser", "no");
+				model.setViewName("team/view/view");
+				System.out.println("aqui nao faz parte");
 			}
+			Map<String, Object> mapTeam = new HashMap<String, Object>();
+			mapTeam.put("teamEntity.id", Integer.parseInt(id));
+
+			Map<String, Object> mapAlbumPrivate = new HashMap<String, Object>();
+			mapAlbumPrivate.put("teamEntity.id", Integer.parseInt(id));
+			mapAlbumPrivate.put("privacy", "private");
+
+			Map<String, Object> mapAlbumPublic = new HashMap<String, Object>();
+			mapAlbumPublic.put("teamEntity.id", Integer.parseInt(id));
+			mapAlbumPublic.put("privacy", "public");
+
+			listPub = daoPub.listarProperty(TeamPublicationEntity.class, mapTeam, "and");
+			Collections.sort(listPub);
+			Collections.reverse(listPub);
+			listTeamAlbumPrivate = null;
+			listTeamAlbumPublic = null;
+			listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeam, "and");
+
+			listTeamLink = daoTeamLink.listarProperty(TeamLinkEntity.class, mapTeam, "and");
+
+			listTeamAlbumPrivate = daoTeamAlbum.listarProperty(TeamAlbumEntity.class, mapAlbumPrivate, "and");
+			listTeamAlbumPublic = daoTeamAlbum.listarProperty(TeamAlbumEntity.class, mapAlbumPublic, "and");
+
+			PagedListHolder<TeamPublicationEntity> pagedListHolder = new PagedListHolder<TeamPublicationEntity>(
+					listPub);
+			int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+
+			pagedListHolder.setPage(page);
+			pagedListHolder.setPageSize(10);
+
+			model.addObject("pagedListHolder", pagedListHolder);
+
+			int countPlayer = daoTeam.count("TeamUserEntity", "teamEntity.id", id);
+
+			model.addObject("listTeamAlbumPrivate", listTeamAlbumPrivate);
+			model.addObject("listTeamAlbumPublic", listTeamAlbumPublic);
+
+			model.addObject("countPlayer", countPlayer);
+			model.addObject("listTeamLink", listTeamLink);
+			model.addObject("listTeamUser", listTeamUser);
+			model.addObject("pagedListHolder", pagedListHolder);
+			model.addObject("teamEntity", teamEntity);
+			
+			return model;
 
 		} else {
 
@@ -289,8 +262,6 @@ public class TeamController {
 		}
 
 	}
-
-	
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView add(TeamEntity team, String gameID, String youtube, String instagram, String facebook,

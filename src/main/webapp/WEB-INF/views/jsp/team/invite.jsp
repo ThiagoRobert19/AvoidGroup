@@ -9,7 +9,7 @@
 			<div class="company-up-info">
 
 				<img src="<c:url value='${teamEntity.photo}'/>" alt="">
-				<h3>${teamEntity.name}</h3>
+				<h3><c:out value="${teamEntity.name}" /></h3>
 				<h4>It will appear only people you follow!</h4>
 
 			</div>
@@ -27,8 +27,8 @@
 							<div class="company-up-info">
 
 								<img src="<c:url value='${listUser.photo}'/>" alt="">
-								<h3>${listUser.name}</h3>
-								<h4>${listUser.userName}</h4>
+								<h3><c:out value="${listUser.name}" /></h3>
+								<h4><c:out value="${listUser.userName}" /></h4>
 								<ul>
 									<li><a
 										href="<c:url value='/teaminvitation/makeinvitation/${listUser.id}/${teamEntity.id}'/>"

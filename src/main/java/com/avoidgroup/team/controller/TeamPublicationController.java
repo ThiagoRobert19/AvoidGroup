@@ -23,10 +23,11 @@ import com.avoidgroup.team.model.TeamEntity;
 import com.avoidgroup.team.model.TeamPublicationEntity;
 import com.avoidgroup.user.model.UserEntity;
 import com.avoidgroup.util.AWSAPI;
+
 @Controller
 @RequestMapping(value = "/teampublication")
 public class TeamPublicationController {
-	
+
 	@Autowired
 	private UserEntity userEntity;
 	@Autowired
@@ -39,15 +40,73 @@ public class TeamPublicationController {
 
 	@Autowired
 	private GenericDao<TeamEntity> daoTeam;
-	
+
 	@Autowired
 	private GenericDao<TeamPublicationEntity> daoPub;
 
 	@Autowired
 	private TeamPublicationEntity teamPubEntity;
-	
+
 	AWSAPI amazon = new AWSAPI();
-	
+	@RequestMapping(value = { "/makeprivate/{id}" }, method = RequestMethod.GET)
+	public ModelAndView makeprivate(@PathVariable(value = "id") String id, ModelAndView model,
+			HttpServletRequest request) {
+		String teamID = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(id));
+
+		if (daoPub.exist(TeamPublicationEntity.class, map, "and")) {
+			teamPubEntity = daoPub.buscaId(TeamPublicationEntity.class, Integer.parseInt(id));
+			teamID = teamPubEntity.getTeamEntity().getId().toString();
+			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+			if (!teamPubEntity.getTeamEntity().getOwner().getId().equals(userEntity.getId())
+					&& !teamPubEntity.getTeamEntity().getAdmin().getId().equals(userEntity.getId())) {
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			} else {
+				teamPubEntity.setPrivacy("private");
+
+				daoPub.saveUpdate(teamPubEntity);
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			}
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
+
+	}
+	@RequestMapping(value = { "/makepublic/{id}" }, method = RequestMethod.GET)
+	public ModelAndView makepublic(@PathVariable(value = "id") String id, ModelAndView model,
+			HttpServletRequest request) {
+		String teamID = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", Integer.parseInt(id));
+
+		if (daoPub.exist(TeamPublicationEntity.class, map, "and")) {
+			teamPubEntity = daoPub.buscaId(TeamPublicationEntity.class, Integer.parseInt(id));
+			teamID = teamPubEntity.getTeamEntity().getId().toString();
+			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+
+			if (!teamPubEntity.getTeamEntity().getOwner().getId().equals(userEntity.getId())
+					&& !teamPubEntity.getTeamEntity().getAdmin().getId().equals(userEntity.getId())) {
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			} else {
+				teamPubEntity.setPrivacy("public");
+
+				daoPub.saveUpdate(teamPubEntity);
+				model.setViewName("redirect:/team/view/" + teamID);
+				return model;
+			}
+		} else {
+			model.setViewName("redirect:/");
+			return model;
+		}
+
+	}
+
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable(value = "id") String id, ModelAndView model, HttpServletRequest request) {
 		String teamID = "";
@@ -59,7 +118,9 @@ public class TeamPublicationController {
 			teamID = teamPubEntity.getTeamEntity().getId().toString();
 			userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
 
-			if (!teamPubEntity.getPublisher().getId().equals(userEntity.getId())) {
+			if (!teamPubEntity.getPublisher().getId().equals(userEntity.getId())
+					&& !teamPubEntity.getTeamEntity().getOwner().getId().equals(userEntity.getId())
+					&& !teamPubEntity.getTeamEntity().getAdmin().getId().equals(userEntity.getId())) {
 				model.setViewName("redirect:/team/view/" + teamID);
 				return model;
 			} else {
@@ -68,13 +129,16 @@ public class TeamPublicationController {
 					amazon.delete(teamPubEntity.getPhotoName());
 				}
 
-				//Map<String, Object> mapOriginal = new HashMap<String, Object>();
-				//mapOriginal.put("id", Integer.parseInt(id));
+				// Map<String, Object> mapOriginal = new HashMap<String,
+				// Object>();
+				// mapOriginal.put("id", Integer.parseInt(id));
 
-				//daoPub.delete(TeamPublicationEntity.class, mapOriginal, "and");
+				// daoPub.delete(TeamPublicationEntity.class, mapOriginal,
+				// "and");
 
-				//Map<String, Object> mapLikeComment = new HashMap<String, Object>();
-				//mapLikeComment.put("publication.id", Integer.parseInt(id));
+				// Map<String, Object> mapLikeComment = new HashMap<String,
+				// Object>();
+				// mapLikeComment.put("publication.id", Integer.parseInt(id));
 				/*
 				 * daoLike.delete(GeneralLikeEntity.class, mapLikeComment,
 				 * "and");

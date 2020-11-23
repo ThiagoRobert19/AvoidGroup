@@ -12,7 +12,7 @@
 					<img src="${listTeamInvite.teamEntity.photo}" alt="">
 				</div>
 				<div class="request-info">
-					<h3>${listTeamInvite.teamEntity.name}</h3>
+					<h3><c:out value="${listTeamInvite.teamEntity.name}" /></h3>
 					<span>${listTeamInvite.dateOfInvitation}</span>
 					
 				</div>

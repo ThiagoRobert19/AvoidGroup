@@ -9,7 +9,7 @@
 	<div class="container">
 		<div class="main-section-data">
 			<div class="row">
-				<c:import url="/WEB-INF/views/jsp/team/myteam/profilecard.jsp" />
+				<c:import url="/WEB-INF/views/jsp/team/view/profilecard.jsp" />
 				<div class="col-lg-6">
 					<div class="main-ws-sec">
 						<div class="user-tab-sec rewivew">
@@ -49,10 +49,10 @@
 						</div>
 						<!--user-tab-sec end-->
 
-						<c:import url="/WEB-INF/views/jsp/team/myteam/feed.jsp" />
-						<c:import url="/WEB-INF/views/jsp/team/myteam/info.jsp" />
-						<c:import url="/WEB-INF/views/jsp/team/myteam/portfolio.jsp" />
-						<c:import url="/WEB-INF/views/jsp/team/myteam/review.jsp" />
+						<c:import url="/WEB-INF/views/jsp/team/view/feed.jsp" />
+						<c:import url="/WEB-INF/views/jsp/team/view/info.jsp" />
+						<c:import url="/WEB-INF/views/jsp/team/view/portfolio.jsp" />
+						<c:import url="/WEB-INF/views/jsp/team/view/review.jsp" />
 
 						<!--product-feed-tab end-->
 
@@ -64,7 +64,7 @@
 					<!--main-ws-sec end-->
 				</div>
 				<c:import
-					url="/WEB-INF/views/jsp/team/myteam/portfoliolateral.jsp" />
+					url="/WEB-INF/views/jsp/team/view/portfoliolateral.jsp" />
 			</div>
 		</div>
 		<!-- main-section-data end-->

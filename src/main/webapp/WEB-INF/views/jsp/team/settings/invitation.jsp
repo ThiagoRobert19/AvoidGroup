@@ -12,8 +12,8 @@
 					<img src="${listTeamInvitation.userEntity.photo}" alt="">
 				</div>
 				<div class="request-info">
-					<h3>${listTeamInvitation.userEntity.name}</h3>
-					<span>Invited by ${listTeamInvitation.whoInvited.name}</span>
+					<h3><c:out value="${listTeamInvitation.userEntity.name}" /></h3>
+					<span>Invited by <c:out value="${listTeamInvitation.whoInvited.name}" /></span>
 					
 				</div>
 				<div class="accept-feat">

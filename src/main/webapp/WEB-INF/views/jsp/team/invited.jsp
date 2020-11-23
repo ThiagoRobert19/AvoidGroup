@@ -7,7 +7,7 @@
 
 		<div class="row">
 			<h3>
-				<b>Invinted for ${teamEntity.name}</b>
+				<b>Invinted for <c:out value="${teamEntity.name}" />}</b>
 			</h3>
 
 		</div>
@@ -22,9 +22,9 @@
 
 								<img src="<c:url value='${listTeamInvite.userEntity.photo}'/>"
 									alt="">
-								<h3>${listTeamInvite.userEntity.name}</h3>
-								<h4>${listTeamInvite.userEntity.userName}</h4>
-								<h4>${listTeamInvite.dateOfPublication}</h4>
+								<h3><c:out value="${listTeamInvite.userEntity.name}" /></h3>
+								<h4><c:out value="${listTeamInvite.userEntity.userName}" /></h4>
+								<h4>${listTeamInvite.dateOfInvitation}</h4>
 								<ul>
 									<li><a
 										href="<c:url value='/teaminvitation/invitation/cancel/${listTeamInvite.id}'/>"

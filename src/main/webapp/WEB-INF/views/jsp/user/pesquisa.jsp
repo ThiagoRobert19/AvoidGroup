@@ -24,10 +24,10 @@
 								</div>
 								<div class="usr_quest">
 									<h3>
-										<a href="<c:url value='/user/view/${listUser.id}'/>">${listUser.name}</a>
+										<a href="<c:url value='/user/view/${listUser.id}'/>"><c:out value="${listUser.name}" /></a>
 									</h3>
 									<div class="star-descp">
-										<span><a href="<c:url value='/user/view/${listUser.id}'/>">${listUser.userName}</a></span>
+										<span><a href="<c:url value='/user/view/${listUser.id}'/>"><c:out value="${listUser.userName}" /></a></span>
 										
 									</div>
 									<!--ul class="quest-tags">

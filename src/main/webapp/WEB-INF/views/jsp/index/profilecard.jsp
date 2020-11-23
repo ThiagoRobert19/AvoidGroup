@@ -8,9 +8,18 @@
 				<div class="username-dt">
 					<div class="usr-pic">
 
-						<img src="<c:url value='${clienteLogado.photo}'/>" alt="no image">
-							
-						</div>
+						<c:if test="${empty clienteLogado.photo}">
+							<img
+								src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+								alt="teste">
+						</c:if>
+						<c:if test="${not empty clienteLogado.photo}">
+							<img src="<c:url value='${clienteLogado.photo}'/>" alt="no image">
+						</c:if>
+
+
+
+					</div>
 				</div>
 				<!--username-dt end-->
 				<div class="user-specs">
@@ -22,10 +31,14 @@
 			<!--user-profile end-->
 			<ul class="user-fw-status">
 				<li>
-					<h4><a href="<c:url value='/friend/following/${clienteLogado.id}'/>">Following</a></h4> <span>${countfollowing}</span>
+					<h4>
+						<a href="<c:url value='/friend/following/${clienteLogado.id}'/>">Following</a>
+					</h4> <span>${countfollowing}</span>
 				</li>
 				<li>
-					<h4><a href="<c:url value='/friend/followers/${clienteLogado.id}'/>">Followers</a></h4> <span>${countfollowers}</span>
+					<h4>
+						<a href="<c:url value='/friend/followers/${clienteLogado.id}'/>">Followers</a>
+					</h4> <span>${countfollowers}</span>
 				</li>
 				<li><a href="<c:url value='/user/myprofile'/>" title="">View
 						Profile</a></li>
@@ -58,8 +71,8 @@
 					</div>
 					<span><i class="la la-plus"></i></span>
 				</div>
-				
-				
+
+
 				<div class="view-more">
 					<a href="#" title="">View More</a>
 				</div>

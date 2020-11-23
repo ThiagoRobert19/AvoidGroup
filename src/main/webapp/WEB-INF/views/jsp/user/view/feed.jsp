@@ -11,14 +11,24 @@
 				<div class="post-bar">
 					<div class="post_topbar">
 						<div class="usy-dt">
+							<c:if test="${empty listPub.sharer.photo}">
+								<img
+									src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+									alt="teste" style="width: 80px">
+
+							</c:if>
+							<c:if test="${not empty listPub.sharer.photo}">
+								<img src="<c:url value="${listPub.sharer.photo}"/>"
+									alt="no image" style="width: 80px">
+							</c:if>
 
 
-							<img src="<c:url value="${listPub.sharer.photo}"/>"
-								alt="no image" style="width: 80px">
 							<div class="usy-name">
-								<h3>${listPub.sharer.name}</h3>
-								<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
-								</span>
+								<h3>
+									<a href="<c:url value="/user/view/${listPub.sharer.id}"/>"><c:out
+											value="${listPub.sharer.name}" /></a>
+								</h3>
+								<span> ${listPub.dateOfShare} ${listPub.timeOfShare} </span>
 							</div>
 						</div>
 						<c:if test="${listPub.sharer.id==clienteLogado.id}">
@@ -37,17 +47,26 @@
 					<div class="post-bar">
 						<div class="post_topbar">
 							<div class="usy-dt">
+								<c:if test="${empty listPub.publisher.photo}">
+									<img
+										src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+										alt="teste" style="width: 80px">
+
+								</c:if>
+								<c:if test="${not empty listPub.publisher.photo}">
+									<img src="<c:url value="${listPub.publisher.photo}"/>"
+										alt="no image" style="width: 80px">
+								</c:if>
 
 
-
-								<img src="<c:url value="${listPub.publisher.photo}"/>"
-									alt="no image" style="width: 80px">
 								<div class="usy-name">
 									<h3>
-										${listPub.publisher.name} <i class="fas fa-share"></i>
+										<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out
+												value="${listPub.publisher.name}" /></a> <i
+											class="fas fa-share"></i>
 									</h3>
-									<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
-									</span>
+									<span> ${listPub.dateOfPublication}
+										${listPub.timeOfPublication} </span>
 								</div>
 							</div>
 
@@ -63,7 +82,9 @@
 								</c:if>
 							</div>
 							<div class="row">
-								<p>${listPub.content}</p>
+								<p>
+									<c:out value="${listPub.content}" />
+								</p>
 							</div>
 							<ul class="skill-tags">
 								<li><a href="#" title="">HTML</a></li>
@@ -113,11 +134,24 @@
 				<div class="post-bar">
 					<div class="post_topbar">
 						<div class="usy-dt">
-							<img src="<c:url value="${listPub.publisher.photo}"/>"
+						<c:if test="${empty listPub.publisher.photo}">
+								<img
+									src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+									alt="teste" style="width: 80px">
+									
+							</c:if>
+							<c:if test="${not empty listPub.publisher.photo}">
+								<img src="<c:url value="${listPub.publisher.photo}"/>"
 								alt="no image" style="width: 80px">
+							</c:if>
+						
+						
 							<div class="usy-name">
-								<h3>${listPub.publisher.name}</h3>
-								<span> ${listPub.dateOfPublication} </span> <span>
+								<h3>
+									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out
+											value="${listPub.publisher.name}" /></a>
+								</h3>
+								<span> ${listPub.dateOfPublication}
 									${listPub.timeOfPublication} </span>
 							</div>
 						</div>
@@ -145,7 +179,9 @@
 							</c:if>
 						</div>
 						<div class="row">
-							<p>${listPub.content}</p>
+							<p>
+								<c:out value="${listPub.content}" />
+							</p>
 						</div>
 						<ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>

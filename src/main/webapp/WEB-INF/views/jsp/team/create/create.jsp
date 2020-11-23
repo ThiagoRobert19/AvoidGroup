@@ -14,11 +14,13 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<h3>Create a new Team</h3>
-								<form class="radio-form" action="<c:url value='/team/add'/>" method="post" enctype="multipart/form-data">
+								<form class="radio-form" action="<c:url value='/team/add'/>"
+									method="post" enctype="multipart/form-data">
 									<div class="cp-field">
 										<h5>Name</h5>
 										<div class="cpp-fiel">
-											<input type="text" name="name" placeholder="Name" required="required">
+											<input type="text" name="name" placeholder="Name"
+												required="required">
 										</div>
 									</div>
 									<div class="cp-field">
@@ -34,9 +36,10 @@
 										<h5>Game</h5>
 										<div class="cpp-fiel">
 											<select name="gameID" class="form-control">
-												
+
 												<c:forEach var="listGame" items="${listGame}">
-													<option value="${listGame.id}">${listGame.name}</option>
+													<option value="${listGame.id}">
+														<c:out value="${listGame.name}" /></option>
 												</c:forEach>
 											</select>
 
@@ -45,15 +48,15 @@
 									<div class="cp-field">
 										<h5>Image Profile</h5>
 										<div class="cpp-fiel">
-											<input type="file" name="imageProfile" id="imageProfile" required="required">
-											<i class="far fa-image"></i>
+											<input type="file" name="imageProfile" id="imageProfile"
+												required="required"> <i class="far fa-image"></i>
 										</div>
 									</div>
 									<div class="cp-field">
 										<h5>Image Background</h5>
 										<div class="cpp-fiel">
-											<input type="file" name="imageBack" id="imageBack" required="required"> <i
-												class="far fa-image"></i>
+											<input type="file" name="imageBack" id="imageBack"
+												required="required"> <i class="far fa-image"></i>
 										</div>
 									</div>
 									<div class="cp-field">

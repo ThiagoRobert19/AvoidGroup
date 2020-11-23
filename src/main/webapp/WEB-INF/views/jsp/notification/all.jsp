@@ -13,8 +13,8 @@
 						alt="">
 				</div>
 				<div class="request-info">
-					<h3>${listNotification.follow.name}</h3>
-					<span>${listNotification.extra}</span> <span>${listNotification.dateOfNotification}
+					<h3><c:out value="${listNotification.follow.name}" /></h3>
+					<span>${listNotification.extra} ${listNotification.dateOfNotification}
 					</span>
 
 				</div>

@@ -9,15 +9,24 @@
 			<div class="post-bar">
 				<div class="post_topbar">
 					<div class="usy-dt">
+						<c:if test="${empty listPub.sharer.photo}">
+							<img
+								src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+								alt="teste" style="width: 80px">
+						</c:if>
+						<c:if test="${not empty listPub.sharer.photo}">
+							<img src="<c:url value="${listPub.sharer.photo}"/>"
+								alt="no image" style="width: 80px">
+						</c:if>
 
 
-						<img src="<c:url value="${listPub.sharer.photo}"/>" alt="no image"
-							style="width: 80px">
+
 						<div class="usy-name">
 							<h3>
-								<a href="<c:url value="/user/view/${listPub.sharer.id}"/>">${listPub.sharer.name}</a>
+								<a href="<c:url value="/user/view/${listPub.sharer.id}"/>">
+								<c:out value="${listPub.sharer.name}" /></a>
 							</h3>
-							<span> ${listPub.dateOfShare} </span> <span>${listPub.timeOfShare}
+							<span> ${listPub.dateOfShare} ${listPub.timeOfShare}
 							</span>
 						</div>
 					</div>
@@ -37,17 +46,24 @@
 				<div class="post-bar">
 					<div class="post_topbar">
 						<div class="usy-dt">
+							<c:if test="${empty listPub.publisher.photo}">
+								<img
+									src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+									alt="teste" style="width: 80px">
+							</c:if>
+							<c:if test="${not empty listPub.publisher.photo}">
+								<img src="<c:url value="${listPub.publisher.photo}"/>"
+									alt="no image" style="width: 80px">
+							</c:if>
 
 
-
-							<img src="<c:url value="${listPub.publisher.photo}"/>"
-								alt="no image" style="width: 80px">
+							
 							<div class="usy-name">
 								<h3>
-									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a>
+									<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out value="${listPub.publisher.name}" /></a>
 									<i class="fas fa-share"></i>
 								</h3>
-								<span> ${listPub.dateOfPublication} </span> <span>${listPub.timeOfPublication}
+								<span> ${listPub.dateOfPublication} ${listPub.timeOfPublication}
 								</span>
 							</div>
 						</div>
@@ -63,7 +79,9 @@
 							</c:if>
 						</div>
 						<div class="row">
-							<p>${listPub.content}</p>
+							<p>
+							<c:out value="${listPub.content}" />
+							</p>
 						</div>
 						<!--ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
@@ -71,6 +89,7 @@
 							<li><a href="#" title="">JAVA</a></li>
 						</ul-->
 					</div>
+					
 
 				</div>
 				<div class="job-status-bar">
@@ -120,14 +139,22 @@
 
 				<div class="post_topbar">
 					<div class="usy-dt">
-						<img src="<c:url value="${listPub.publisher.photo}"/>"
-							alt="no image" style="width: 80px">
+						<c:if test="${empty listPub.publisher.photo}">
+							<img
+								src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+								alt="teste" style="width: 80px">
+						</c:if>
+						<c:if test="${not empty listPub.publisher.photo}">
+							<img src="<c:url value="${listPub.publisher.photo}"/>"
+								alt="no image" style="width: 80px">
+						</c:if>
+
+
 						<div class="usy-name">
 							<h3>
-								<a href="<c:url value="/user/view/${listPub.publisher.id}"/>">${listPub.publisher.name}</a>
+								<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out value="${listPub.publisher.name}" /></a>
 							</h3>
-							<span> ${listPub.dateOfPublication} </span> <span>
-								${listPub.timeOfPublication} </span>
+							<span> ${listPub.dateOfPublication} ${listPub.timeOfPublication} </span>
 						</div>
 					</div>
 					<c:if test="${listPub.publisher.id==clienteLogado.id}">
@@ -137,7 +164,7 @@
 							<ul class="ed-options">
 								<li><a href="#" title="">Edit Post</a></li>
 								<li><a
-									href="<c:url value="/publication/delete/${listPub.id}/shared"/>"
+									href="<c:url value="/publication/delete/${listPub.id}"/>"
 									title="">Delete</a></li>
 							</ul>
 						</div>
@@ -153,7 +180,9 @@
 						</c:if>
 					</div>
 					<div class="row">
-						<p>${listPub.content}</p>
+						<p>
+						<c:out value="${listPub.content}" />
+						</p>
 					</div>
 					<!--ul class="skill-tags">
 							<li><a href="#" title="">HTML</a></li>
@@ -161,6 +190,7 @@
 							<li><a href="#" title="">JAVA</a></li>
 						</ul-->
 				</div>
+				
 				<div class="job-status-bar">
 					<ul class="like-com">
 						<c:if test="${listPub.youLiked=='no'}">

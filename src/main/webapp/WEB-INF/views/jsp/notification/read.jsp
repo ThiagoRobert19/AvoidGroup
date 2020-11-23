@@ -13,8 +13,8 @@
 					alt="">
 			</div>
 			<div class="request-info">
-				<h3>${notificationEntity.follow.name}</h3>
-				<span>${notificationEntity.extra}</span> <span>${notificationEntity.dateOfNotification}
+				<h3><c:out value="${notificationEntity.follow.name}" /></h3>
+				<span>${notificationEntity.extra} ${notificationEntity.dateOfNotification}
 				</span>
 
 			</div>

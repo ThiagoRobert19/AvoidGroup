@@ -1,11 +1,9 @@
 package com.avoidgroup.user.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -15,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -40,7 +37,7 @@ import com.avoidgroup.user.model.UserNotificationEntity;
 import com.avoidgroup.util.AWSAPI;
 import com.avoidgroup.util.Common;
 import com.avoidgroup.util.Criptografia;
-import com.avoidgroup.util.DropBoxUtil;
+
 
 @Controller
 @RequestMapping(value = "/user")
@@ -81,6 +78,8 @@ public class UserController {
 
 	@Autowired
 	private GenericDao<TeamUserEntity> daoTeamUser;
+
+	
 
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
 	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
@@ -357,6 +356,8 @@ public class UserController {
 		mapTeamUser.put("userEntity.id", userEntity.getId());
 		listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
 
+		
+		
 		model.addObject("listTeamUser", listTeamUser);
 		model.addObject("pagedListHolder", pagedListHolder);
 		model.addObject("countfollowers", countfollowers);

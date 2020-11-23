@@ -4,7 +4,6 @@
 <div class="product-feed-tab current" id="feed-dd">
 	<div class="posts-section">
 		<div class="post-topbar">
-
 			<form action="<c:url value='/teampublication/add'/>" method="POST"
 				enctype="multipart/form-data">
 				<input type="hidden" name="teamID" value="${teamEntity.id}" />
@@ -13,42 +12,39 @@
 						<textarea class="form-control" rows="3"
 							placeholder="What are you thinking?" name="content"></textarea>
 					</div>
-
 					<div class="row">
 						<input class="form-control" type="file" id="customFile"
 							name="file">
 						<div id="filedrag"></div>
 						<img id="image" />
-
 					</div>
-
 					<div class="row post-st">
-
 						<ul>
-
-
 							<li><button type="submit" class="btn botaopreto">
 									Post</button></li>
-
 						</ul>
-
 					</div>
 				</div>
 			</form>
-
 		</div>
-
 		<c:forEach var="listPub" items="${pagedListHolder.pageList}">
-
 			<div class="post-bar">
 				<div class="post_topbar">
 					<div class="usy-dt">
-						<img src="<c:url value="${listPub.publisher.photo}"/>"
-							alt="no image" style="width: 80px">
+						<c:if test="${empty listPub.publisher.photo}">
+							<img
+								src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+								alt="no image" style="width: 80px">
+						</c:if>
+						<c:if test="${not empty listPub.publisher.photo}">
+							<img src="<c:url value="${listPub.publisher.photo}"/>"
+								alt="no image" style="width: 80px">
+						</c:if>
 						<div class="usy-name">
-							<h3>${listPub.publisher.name}</h3>
-							<span> ${listPub.dateOfPublication} </span> <span>
-								${listPub.timeOfPublication} </span>
+							<h3>
+								<a href="<c:url value="/user/view/${listPub.publisher.id}"/>"><c:out value="${listPub.publisher.name}" /></a>
+							</h3>
+							<span> ${listPub.dateOfPublication} ${listPub.timeOfPublication} (${listPub.privacy})</span>
 						</div>
 					</div>
 					<c:if
@@ -59,6 +55,18 @@
 							<ul class="ed-options">
 								<c:if test="${listPub.publisher.id==clienteLogado.id}">
 									<li><a href="#" title="">Edit Post</a></li>
+								</c:if>
+								<c:if
+									test="${(teamEntity.owner.id==clienteLogado.id || teamEntity.admin.id==clienteLogado.id) && listPub.privacy=='private'}">
+									<li><a
+										href="<c:url value="/teampublication/makepublic/${listPub.id}"/>"
+										title="">Make Public</a></li>
+								</c:if>
+								<c:if
+									test="${(teamEntity.owner.id==clienteLogado.id || teamEntity.admin.id==clienteLogado.id) && listPub.privacy!='private'}">
+									<li><a
+										href="<c:url value="/teampublication/makeprivate/${listPub.id}"/>"
+										title="">Make Private</a></li>
 								</c:if>
 
 								<li><a
@@ -79,7 +87,7 @@
 						</c:if>
 					</div>
 					<div class="row">
-						<p>${listPub.content}</p>
+						<p><c:out value="${listPub.content}" /></p>
 					</div>
 
 				</div>

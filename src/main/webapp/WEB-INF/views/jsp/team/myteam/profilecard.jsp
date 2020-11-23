@@ -5,12 +5,14 @@
 	<div class="main-left-sidebar">
 		<div class="user_profile">
 			<div class="user-pro-img">
-
-
-				<img src="${teamEntity.photo}" alt="No photo" style="width: 200px">
-
-
-
+				<c:if test="${empty teamEntity.photo}">
+					<img
+						src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+						alt="teste" style="width: 200px">
+				</c:if>
+				<c:if test="${not empty teamEntity.photo}">
+					<img src="${teamEntity.photo}" alt="no photo" style="width: 200px">
+				</c:if>
 			</div>
 			<!--user-pro-img end-->
 			<div class="user_pro_status">
@@ -52,9 +54,11 @@
 					<a href="#" title="" class="ed-opts-open"><i
 						class="la la-ellipsis-v"></i></a>
 					<ul class="ed-options">
-						<li><a href="<c:url value="/teaminvitation/invite/${teamEntity.id}"/>"
+						<li><a
+							href="<c:url value="/teaminvitation/invite/${teamEntity.id}"/>"
 							title="">Invite</a></li>
-							<li><a href="<c:url value="/teaminvitation/invited/${teamEntity.id}"/>"
+						<li><a
+							href="<c:url value="/teaminvitation/invited/${teamEntity.id}"/>"
 							title="">Invited</a></li>
 					</ul>
 				</c:if>
@@ -64,14 +68,23 @@
 			<div class="suggestions-list">
 				<c:forEach var="listTeamUser" items="${listTeamUser}">
 					<div class="suggestion-usd">
+						<c:if test="${empty listTeamUser.userEntity.photo}">
+							<img
+								src="<c:url value='/resources/images/resources/pf-icon2.png'/>"
+								alt="teste" style="width: 50px">
+						</c:if>
+						<c:if test="${not empty listTeamUser.userEntity.photo}">
+							<img src="${listTeamUser.userEntity.photo}" alt="no photo"
+								style="width: 50px">
+						</c:if>
 
 
-						<img src="<c:url value='${listTeamUser.userEntity.photo}'/>"
-							alt="" style="width: 50px">
+
+
 						<div class="sgt-text">
 							<h4>
 								<a
-									href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>">${listTeamUser.userEntity.userName}</a>
+									href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>"><c:out value="${listTeamUser.userEntity.userName}" /></a>
 							</h4>
 							<!--span>${listTeamUser.teamEntity.about}</span-->
 						</div>

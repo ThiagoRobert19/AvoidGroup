@@ -32,16 +32,16 @@
 							<div class="company-up-info">
 
 								<img src="<c:url value='${listTeam.photo}'/>" alt="">
-								<h3>${listTeam.name}</h3>
-								<h4>${listTeam.about}</h4>
+								<h3><c:out value="${listTeam.name}" /></h3>
+								<h4><c:out value="${listTeam.about}" /></h4>
 								<ul>
 									<li><a href="#" title="" class="follow">Follow</a></li>
 									<li><a href="#" title="" class="message-us"><i
 											class="fa fa-envelope"></i></a></li>
 								</ul>
 							</div>
-							<a href="company-profile.html" title="" class="view-more-pro">View
-								Profile</a>
+							<a href="<c:url value='/team/view/${listTeam.id}'/>" title="" class="view-more-pro">View
+								Team</a>
 						</div>
 						<!--company_profile_info end-->
 					</div>
