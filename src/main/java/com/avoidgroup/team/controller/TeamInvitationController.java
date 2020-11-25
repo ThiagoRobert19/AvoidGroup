@@ -70,6 +70,8 @@ public class TeamInvitationController {
 		mapTeamInvitation.put("id", Integer.parseInt(id));
 
 		if (daoTeamInvite.exist(TeamInviteEntity.class, mapTeamInvitation, "and")) {
+			
+			
 			teamInviteEntity = daoTeamInvite.findByProperty(TeamInviteEntity.class, mapTeamInvitation, "and");
 
 			teamEntity = teamInviteEntity.getTeamEntity();
@@ -165,6 +167,7 @@ public class TeamInvitationController {
 
 		Map<String, Object> mapTeam = new HashMap<String, Object>();
 		mapTeam.put("id", Integer.parseInt(teamID));
+		mapTeam.put("status", "active");
 		if (daoTeam.exist(TeamEntity.class, mapTeam, "and")) {
 
 			teamEntity = daoTeam.findByProperty(TeamEntity.class, mapTeam, "and");
@@ -211,6 +214,7 @@ public class TeamInvitationController {
 
 		Map<String, Object> mapTeam = new HashMap<String, Object>();
 		mapTeam.put("id", Integer.parseInt(teamID));
+		mapTeam.put("status", "active");
 
 		if ((daoUser.exist(UserEntity.class, mapUser, "and")) && (daoTeam.exist(TeamEntity.class, mapTeam, "and"))) {
 
@@ -278,6 +282,7 @@ public class TeamInvitationController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
+		map.put("status", "active");
 		if ((daoTeam.exist(TeamEntity.class, map, "and")) && (daoTeam.exist(TeamEntity.class, mapOwner, "and")
 				|| daoTeam.exist(TeamEntity.class, mapAdmin, "and"))) {
 

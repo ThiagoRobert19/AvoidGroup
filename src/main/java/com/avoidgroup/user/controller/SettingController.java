@@ -221,7 +221,7 @@ public class SettingController {
 		Map<String, Object> mapTeamInvite = new HashMap<String, Object>();
 		mapTeamInvite.put("userEntity.id", userEntity.getId());
 		mapTeamInvite.put("status", "invited");
-		
+		mapTeamInvite.put("teamEntity.status", "active");
 		listTeamInvite=daoTeamInvite.listarProperty(TeamInviteEntity.class, mapTeamInvite, "and");
 		
 		

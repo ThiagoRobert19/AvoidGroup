@@ -300,6 +300,18 @@ public class UserController {
 				int countfollowers = daoFollow.count("FollowEntity", "followed.id", id);
 				int countfollowing = daoFollow.count("FollowEntity", "follower.id", id);
 
+				Map<String, Object> mapTeamUser = new HashMap<String, Object>();
+				mapTeamUser.put("userEntity.id", user.getId());
+				mapTeamUser.put("teamEntity.status", "active");
+				
+				
+				listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
+
+				
+				
+				model.addObject("listTeamUser", listTeamUser);
+				
+				
 				model.addObject("pagedListHolder", pagedListHolder);
 				model.addObject("userEntity", user);
 
@@ -354,6 +366,9 @@ public class UserController {
 
 		Map<String, Object> mapTeamUser = new HashMap<String, Object>();
 		mapTeamUser.put("userEntity.id", userEntity.getId());
+		mapTeamUser.put("teamEntity.status", "active");
+		
+		
 		listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
 
 		

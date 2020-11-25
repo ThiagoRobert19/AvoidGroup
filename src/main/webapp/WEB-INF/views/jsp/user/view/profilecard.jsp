@@ -49,23 +49,28 @@
 		<!--user_profile end-->
 		<div class="suggestions full-width">
 			<div class="sd-title">
-				<h3>People Viewed Profile</h3>
+				<h3>Teams</h3>
 				<i class="la la-ellipsis-v"></i>
 			</div>
 			<!--sd-title end-->
+
 			<div class="suggestions-list">
-				<div class="suggestion-usd">
+				<c:forEach var="listTeamUser" items="${listTeamUser}">
+					<div class="suggestion-usd">
 
 
-					<img src="<c:url value='/resources/images/resources/s1.png'/>"
-						alt="">
-					<div class="sgt-text">
-						<h4>Jessica William</h4>
-						<span>Graphic Designer</span>
+						<img src="<c:url value='${listTeamUser.teamEntity.photo}'/>"
+							alt="" style="width: 50px">
+						<div class="sgt-text">
+							<h4>
+								<a
+									href="<c:url value='/team/view/${listTeamUser.teamEntity.id}'/>"><c:out value="${listTeamUser.teamEntity.name}" /></a>
+							</h4>
+							<!--span>${listTeamUser.teamEntity.about}</span-->
+						</div>
+
 					</div>
-					<span><i class="la la-plus"></i></span>
-				</div>
-
+				</c:forEach>
 
 				<div class="view-more">
 					<a href="#" title="">View More</a>

@@ -93,6 +93,7 @@ public class TeamController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", Integer.parseInt(id));
+		map.put("status", "active");
 		if (daoTeam.exist(TeamEntity.class, map, "and")) {
 			teamEntity = daoTeam.buscaId(TeamEntity.class, Integer.parseInt(id));
 			Map<String, Object> mapUserTeam = new HashMap<String, Object>();
@@ -344,6 +345,7 @@ public class TeamController {
 					team.setBackPhotoName("");
 
 				}
+				team.setStatus("active");
 				daoTeam.saveUpdate(team);
 
 				Map<String, Object> mapUuid = new HashMap<String, Object>();
@@ -413,8 +415,9 @@ public class TeamController {
 
 	@RequestMapping(value = { "/data" }, method = RequestMethod.GET)
 	public ModelAndView look(HttpServletRequest request, ModelAndView model) {
-
-		listTeam = daoTeam.list(TeamEntity.class);
+		Map<String, Object> mapTeam = new HashMap<String, Object>();
+		mapTeam.put("status", "active");
+		listTeam = daoTeam.listarProperty(TeamEntity.class, mapTeam, "and");
 
 		PagedListHolder<TeamEntity> pagedListHolder = new PagedListHolder<TeamEntity>(listTeam);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);

@@ -3,40 +3,33 @@
 <div class="tab-pane fade" id="nav-deactivate" role="tabpanel"
 	aria-labelledby="nav-deactivate-tab">
 	<div class="acc-setting">
-		<h3>Deactivate Account</h3>
-		<form>
+		<h3>Deactivate Team</h3>
+		<form class="radio-form"
+			action="<c:url value='/teamsetting/deleteteam'/>" method="post">
+			<input type="hidden" name="teamID" value="${teamEntity.id }" />
 			<div class="cp-field">
-				<h5>Email</h5>
+				<h5>Owner Email</h5>
 				<div class="cpp-fiel">
-					<input type="text" name="email" placeholder="Email"> <i
+					<input type="text" name="owner_email" placeholder="Email"> <i
 						class="fa fa-envelope"></i>
 				</div>
 			</div>
 			<div class="cp-field">
-				<h5>Password</h5>
+				<h5>Owner Password</h5>
 				<div class="cpp-fiel">
-					<input type="password" name="password" placeholder="Password">
+					<input type="password" name="owner_password" placeholder="Password">
 					<i class="fa fa-lock"></i>
 				</div>
 			</div>
+			
 			<div class="cp-field">
-				<h5>Please Explain Further</h5>
-				<textarea></textarea>
-			</div>
-			<div class="cp-field">
-				<div class="fgt-sec">
-					<input type="checkbox" name="cc" id="c4"> <label for="c4">
-						<span></span>
-					</label> <small>Email option out</small>
-				</div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Vivamus pretium nulla quis erat dapibus, varius hendrerit neque
-					suscipit. Integer in ex euismod, posuere lectus id,</p>
+				
+				<p>If you delete the team it will be permanently!</p>
 			</div>
 			<div class="save-stngs pd3">
 				<ul>
-					<li><button type="submit">Save Setting</button></li>
-					<li><button type="submit">Restore Setting</button></li>
+					<li><button type="submit">Delete</button></li>
+					
 				</ul>
 			</div>
 			<!--save-stngs end-->

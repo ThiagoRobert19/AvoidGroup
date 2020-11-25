@@ -46,6 +46,17 @@ public class TeamEntity implements Serializable, EntidadeBase {
 	@OneToOne
 	@JoinColumn(name = "game_id")
 	private GameEntity game;
+	
+	private String status;//active, disable
+
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Integer getId() {
 		return id;
