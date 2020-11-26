@@ -29,6 +29,10 @@ public class ErrorController {
 			errorMsg = "Http Error Code: 404. Resource not found";
 			break;
 		}
+		case 405: {
+			errorMsg = "Http Error Code: 405. Page not working";
+			break;
+		}
 		case 500: {
 			errorMsg = "Http Error Code: 500. Internal Server Error";
 			break;

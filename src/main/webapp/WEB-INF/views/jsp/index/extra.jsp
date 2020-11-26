@@ -3,7 +3,7 @@
 <div class="col-lg-3 pd-right-none no-pd">
 	<div class="right-sidebar">
 		<div class="widget widget-about">
-			<img src="<c:url value='/resources/_img/_favicon/mstile-150x150.png'/>" alt="">
+			<img src="<c:url value='/resources/_img/_favicon/mstile-144x144.png'/>" alt="">
 			<h3>
 			<c:out value="AvoidGroup - Seja bem vindo(a) ${clienteLogado.name}" />
 			</h3>

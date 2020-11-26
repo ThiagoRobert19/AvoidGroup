@@ -18,6 +18,7 @@
 								    <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
 								    <a class="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab" href="#privcy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-group"></i>Follow Requests</a>
 								    <a class="nav-item nav-link" id="nav-team-tab" data-toggle="tab" href="#team" role="tab" aria-controls="team" aria-selected="false"><i class="fa fa-group"></i>Team Request</a>
+								    <a class="nav-item nav-link" id="nav-deactivated-tab" data-toggle="tab" href="#deactivated" role="tab" aria-controls="deactivated" aria-selected="false"><i class="fa fa-group"></i>Deactivated Teams</a>
 								    <a class="nav-item nav-link" id="security" data-toggle="tab" href="#security-login" role="tab" aria-controls="security-login" aria-selected="false"><i class="fa fa-user-secret"></i>Security and Login</a>
 								    
 								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
@@ -42,8 +43,8 @@
 								<c:import url="/WEB-INF/views/jsp/user/settings/password.jsp" />    	
 								<c:import url="/WEB-INF/views/jsp/user/settings/request.jsp" />  
 								<c:import url="/WEB-INF/views/jsp/user/settings/security.jsp" /> 
-							
 								<c:import url="/WEB-INF/views/jsp/user/settings/deactivate.jsp" /> 	
+								<c:import url="/WEB-INF/views/jsp/user/settings/deactivated.jsp" /> 	
 								<c:import url="/WEB-INF/views/jsp/user/settings/team.jsp" />
 							</div>
 						</div>

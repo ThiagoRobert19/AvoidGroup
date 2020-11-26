@@ -10,7 +10,7 @@
 						<div class="cm-logo">
 
 
-							<img src="<c:url value='/resources/_img/_favicon/mstile-150x150.png'/>" alt="">
+							<img src="<c:url value='/resources/_img/_favicon/mstile-144x144.png'/>" alt="">
 							<p>AvoidGroup, is a global Social Network focused in the Gaming
 								world!</p>
 							<p>We focus in bringing the best gaming content related,
@@ -31,8 +31,8 @@
 								<li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
 							</c:if>
 							<c:if test="${in!='yes'}">
-								<li data-tab="tab-1"><a href="#" title="">Sign in</a></li>
-								<li data-tab="tab-2" class="current"><a href="#" title="">Sign
+								<li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
+								<li data-tab="tab-2" ><a href="#" title="">Sign
 										up</a></li>
 							</c:if>
 

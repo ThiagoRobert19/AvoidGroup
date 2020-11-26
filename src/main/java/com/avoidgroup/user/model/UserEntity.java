@@ -2,6 +2,7 @@ package com.avoidgroup.user.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +46,20 @@ public class UserEntity implements Serializable, EntidadeBase {
 	private String twitter;
 	private String youtube;
 	
+	
+	@Column(length = 500)
+	private String about;
+	
+	
+	
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
 	public String getFacebook() {
 		return facebook;
 	}

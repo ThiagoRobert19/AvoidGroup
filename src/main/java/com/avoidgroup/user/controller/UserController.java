@@ -30,14 +30,15 @@ import com.avoidgroup.dao.GenericDao;
 import com.avoidgroup.friendship.model.FollowEntity;
 import com.avoidgroup.friendship.model.FollowRequestEntity;
 import com.avoidgroup.publication.model.GeneralPublicationEntity;
+import com.avoidgroup.team.model.TeamAlbumEntity;
 import com.avoidgroup.team.model.TeamEntity;
 import com.avoidgroup.team.model.TeamUserEntity;
+import com.avoidgroup.user.model.UserAlbumEntity;
 import com.avoidgroup.user.model.UserEntity;
 import com.avoidgroup.user.model.UserNotificationEntity;
 import com.avoidgroup.util.AWSAPI;
 import com.avoidgroup.util.Common;
 import com.avoidgroup.util.Criptografia;
-
 
 @Controller
 @RequestMapping(value = "/user")
@@ -79,7 +80,30 @@ public class UserController {
 	@Autowired
 	private GenericDao<TeamUserEntity> daoTeamUser;
 
-	
+	@Autowired
+	private List<UserAlbumEntity> listUserAlbumPrivate;
+
+	@Autowired
+	private List<UserAlbumEntity> listUserAlbumPublic;
+
+	@Autowired
+	private GenericDao<UserAlbumEntity> daoUserAlbum;
+
+	@RequestMapping(value = "/about/edit", method = RequestMethod.POST)
+	public ModelAndView changeAbout(String changeAbout, HttpServletRequest request, HttpSession session,
+			ModelAndView model) throws IllegalStateException, IOException {
+		userEntity = (UserEntity) request.getSession().getAttribute("clienteLogado");
+		Integer id = userEntity.getId();
+		userEntity.setAbout(changeAbout);
+		daoUser.saveUpdate(userEntity);
+		userEntity = daoUser.buscaId(UserEntity.class, id);
+
+		session.setAttribute("clienteLogado", userEntity);
+
+		model.setViewName("redirect:/user/myprofile");
+		return model;
+
+	}
 
 	@RequestMapping(value = { "/changeback" }, method = RequestMethod.POST)
 	public ModelAndView changeback(ModelAndView model, HttpServletRequest request, HttpSession session,
@@ -303,15 +327,27 @@ public class UserController {
 				Map<String, Object> mapTeamUser = new HashMap<String, Object>();
 				mapTeamUser.put("userEntity.id", user.getId());
 				mapTeamUser.put("teamEntity.status", "active");
-				
-				
+
 				listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
 
-				
-				
+				Map<String, Object> mapAlbumPrivate = new HashMap<String, Object>();
+				mapAlbumPrivate.put("userEntity.id", user.getId());
+				mapAlbumPrivate.put("privacy", "private");
+
+				Map<String, Object> mapAlbumPublic = new HashMap<String, Object>();
+				mapAlbumPublic.put("userEntity.id", user.getId());
+				mapAlbumPublic.put("privacy", "public");
+
+				listUserAlbumPrivate = null;
+				listUserAlbumPublic = null;
+				listUserAlbumPrivate = daoUserAlbum.listarProperty(UserAlbumEntity.class, mapAlbumPrivate, "and");
+				listUserAlbumPublic = daoUserAlbum.listarProperty(UserAlbumEntity.class, mapAlbumPublic, "and");
+
+				model.addObject("listUserAlbumPrivate", listUserAlbumPrivate);
+				model.addObject("listUserAlbumPublic", listUserAlbumPublic);
+
 				model.addObject("listTeamUser", listTeamUser);
-				
-				
+
 				model.addObject("pagedListHolder", pagedListHolder);
 				model.addObject("userEntity", user);
 
@@ -367,12 +403,24 @@ public class UserController {
 		Map<String, Object> mapTeamUser = new HashMap<String, Object>();
 		mapTeamUser.put("userEntity.id", userEntity.getId());
 		mapTeamUser.put("teamEntity.status", "active");
-		
-		
+
 		listTeamUser = daoTeamUser.listarProperty(TeamUserEntity.class, mapTeamUser, "and");
 
-		
-		
+		Map<String, Object> mapAlbumPrivate = new HashMap<String, Object>();
+		mapAlbumPrivate.put("userEntity.id", Integer.parseInt(id));
+		mapAlbumPrivate.put("privacy", "private");
+
+		Map<String, Object> mapAlbumPublic = new HashMap<String, Object>();
+		mapAlbumPublic.put("userEntity.id", Integer.parseInt(id));
+		mapAlbumPublic.put("privacy", "public");
+
+		listUserAlbumPrivate = null;
+		listUserAlbumPublic = null;
+		listUserAlbumPrivate = daoUserAlbum.listarProperty(UserAlbumEntity.class, mapAlbumPrivate, "and");
+		listUserAlbumPublic = daoUserAlbum.listarProperty(UserAlbumEntity.class, mapAlbumPublic, "and");
+
+		model.addObject("listUserAlbumPrivate", listUserAlbumPrivate);
+		model.addObject("listUserAlbumPublic", listUserAlbumPublic);
 		model.addObject("listTeamUser", listTeamUser);
 		model.addObject("pagedListHolder", pagedListHolder);
 		model.addObject("countfollowers", countfollowers);

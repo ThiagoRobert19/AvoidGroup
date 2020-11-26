@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.avoidgroup.dao.GenericDao;
 import com.avoidgroup.friendship.model.FollowEntity;
 import com.avoidgroup.friendship.model.FollowRequestEntity;
+import com.avoidgroup.team.model.TeamEntity;
 import com.avoidgroup.team.model.TeamInviteEntity;
 import com.avoidgroup.user.model.UserEntity;
 import com.avoidgroup.user.model.UserNotificationEntity;
@@ -68,6 +69,12 @@ public class SettingController {
 	private UserNotificationEntity notificationEntity;
 	@Autowired
 	private GenericDao<UserNotificationEntity> daoNotification;
+	
+	@Autowired
+	private List<TeamEntity> listDeactivated;
+	
+	@Autowired
+	private GenericDao<TeamEntity> daoTeam;
 	
 	
 	@RequestMapping(value = { "/request/deny/{id}" }, method = RequestMethod.GET)
@@ -224,8 +231,14 @@ public class SettingController {
 		mapTeamInvite.put("teamEntity.status", "active");
 		listTeamInvite=daoTeamInvite.listarProperty(TeamInviteEntity.class, mapTeamInvite, "and");
 		
+		Map<String, Object> mapTeamDeactivated = new HashMap<String, Object>();
+		mapTeamDeactivated.put("status", "disable");
+		mapTeamDeactivated.put("owner.id", userEntity.getId());
 		
 		
+		listDeactivated = daoTeam.listarProperty(TeamEntity.class, mapTeamDeactivated, "and");
+		
+		model.addObject("listDeactivated", listDeactivated);
 		model.addObject("listTeamInvite", listTeamInvite);
 		model.addObject("listRequest", listRequest);
 		model.addObject("userEntity", userEntity);

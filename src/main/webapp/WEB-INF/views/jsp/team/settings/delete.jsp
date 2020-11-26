@@ -24,11 +24,11 @@
 			
 			<div class="cp-field">
 				
-				<p>If you delete the team it will be permanently!</p>
+				<p>You can reactivate your team in the future by going to your setting account!</p>
 			</div>
 			<div class="save-stngs pd3">
 				<ul>
-					<li><button type="submit">Delete</button></li>
+					<li><button type="submit">Deactivate</button></li>
 					
 				</ul>
 			</div>
