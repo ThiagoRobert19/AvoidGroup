@@ -7,7 +7,7 @@
 
 		<div class="row">
 			<h3>
-				<b>Invinted for <c:out value="${teamEntity.name}" />}</b>
+				<b>Invinted for <c:out value="${teamEntity.name}" /></b>
 			</h3>
 
 		</div>
