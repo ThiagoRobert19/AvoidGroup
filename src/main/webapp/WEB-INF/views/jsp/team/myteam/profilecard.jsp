@@ -49,8 +49,7 @@
 		<div class="suggestions full-width">
 			<div class="sd-title">
 				<h3>Players</h3>
-				<c:if
-					test="${(teamEntity.owner.id == clienteLogado.id) || (teamEntity.admin.id == clienteLogado.id)}">
+				<c:if test="${(teamEntity.owner.id == clienteLogado.id) || (teamEntity.admin.id == clienteLogado.id)}">
 					<a href="#" title="" class="ed-opts-open"><i
 						class="la la-ellipsis-v"></i></a>
 					<ul class="ed-options">
@@ -82,9 +81,7 @@
 
 
 						<div class="sgt-text">
-							<h4>
-								<a
-									href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>"><c:out value="${listTeamUser.userEntity.userName}" /></a>
+							<h4> <a href="<c:url value='/user/view/${listTeamUser.userEntity.id}'/>"><c:out value="${listTeamUser.userEntity.userName}" /></a>
 							</h4>
 							<!--span>${listTeamUser.teamEntity.about}</span-->
 						</div>

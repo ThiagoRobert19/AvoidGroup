@@ -20,7 +20,7 @@
 								  	 <a class="nav-item nav-link" id="nav-adminchoose-tab" data-toggle="tab" href="#adminchoose" role="tab" aria-controls="adminchoose" aria-selected="false"><i class="fas fa-user-shield"></i>Choose an Admin</a>
 								  	 </c:if>
 								  	 <c:if test="${not empty teamEntity.admin.id && teamEntity.owner.id==clienteLogado.id}">
-								  	 <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fas fa-user-shield"></i>Change Admin</a>
+								  	 <a class="nav-item nav-link" id="nav-adminchange-tab" data-toggle="tab" href="#adminchange" role="tab" aria-controls="adminchange" aria-selected="false"><i class="fas fa-user-shield"></i>Change Admin</a>
 								  	 </c:if>
 								   <c:if test="${teamEntity.owner.id == clienteLogado.id}">
 								     <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fas fa-minus-circle"></i>Deactivate Team</a>
@@ -40,6 +40,7 @@
 							  
 								<c:import url="/WEB-INF/views/jsp/team/settings/invitation.jsp" />  
 								<c:import url="/WEB-INF/views/jsp/team/settings/adminchoose.jsp" /> 
+								<c:import url="/WEB-INF/views/jsp/team/settings/adminchange.jsp" />
 								<c:import url="/WEB-INF/views/jsp/team/settings/players.jsp" />
 								
 								<c:import url="/WEB-INF/views/jsp/team/settings/delete.jsp" /> 	
