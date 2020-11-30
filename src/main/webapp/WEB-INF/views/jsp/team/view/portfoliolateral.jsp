@@ -17,7 +17,7 @@
 			</div>
 			<div class="pf-gallery">
 				<ul>
-					<c:forEach var="listTeamAlbum" items="${listTeamAlbumPublic}">
+					<c:forEach var="listTeamAlbumPublic" items="${listTeamAlbumPublic}">
 						<li><a href="#" title=""><img
 								src="<c:url value='${listTeamAlbumPublic.image}'/>" alt=""></a></li>
 					</c:forEach>

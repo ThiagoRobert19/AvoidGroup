@@ -105,7 +105,7 @@ public class TeamController {
 				model.setViewName("team/myteam/myteam");
 				System.out.println("aqui faz parte");
 
-			}else{
+			} else {
 				model.addObject("teamUser", "no");
 				model.setViewName("team/view/view");
 				System.out.println("aqui nao faz parte");
@@ -152,7 +152,7 @@ public class TeamController {
 			model.addObject("listTeamUser", listTeamUser);
 			model.addObject("pagedListHolder", pagedListHolder);
 			model.addObject("teamEntity", teamEntity);
-			
+
 			return model;
 
 		} else {
@@ -352,7 +352,7 @@ public class TeamController {
 				mapUuid.put("uuid", uuid);
 
 				teamEntity = daoTeam.findByProperty(TeamEntity.class, mapUuid, "and");
-
+				Integer teamID = teamEntity.getId();
 				teamUserEntity.setTeamEntity(teamEntity);
 				teamUserEntity.setUserEntity(userEntity);
 				daoTeamUser.saveUpdate(teamUserEntity);
@@ -386,8 +386,7 @@ public class TeamController {
 					daoTeamLink.saveUpdate(teamLinkEntity);
 				}
 
-				model.addObject("teamEntity", teamEntity);
-				model.setViewName("team/myteam");
+				model.setViewName("redirect:team/view/" + teamID);
 				return model;
 
 			} else {

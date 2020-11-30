@@ -154,7 +154,7 @@
 												<div class="fgt-sec">
 													<input type="checkbox" name="cc" id="c2"
 														required="required"> <label for="c2"> <span></span>
-													</label> <small>Yes, I understand and agree to the InAvonts
+													</label> <small>Yes, I understand and agree to the AvoidGroup
 														Terms & Conditions.</small>
 												</div>
 												<!--fgt-sec end-->
